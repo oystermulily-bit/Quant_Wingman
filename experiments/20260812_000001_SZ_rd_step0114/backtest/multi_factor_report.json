@@ -1,0 +1,31 @@
+{
+  "mode": "multi_factor",
+  "cost_rates": {
+    "000001.SZ": 0.0003
+  },
+  "symbols": {
+    "000001.SZ": {
+      "formula": [
+        36,
+        71,
+        77,
+        69
+      ],
+      "readable": "RET_ACCEL -> SIGN -> TS_MEAN_5 -> NEG",
+      "cost_rate": 0.0003,
+      "total_return": 1.54153,
+      "sharpe": 0.1388,
+      "sortino": 0.1636,
+      "n_trades": 1293,
+      "win_rate": 0.5855,
+      "avg_hold_bars": 6.34,
+      "profit_loss_ratio": 0.7697
+    }
+  },
+  "portfolio": {
+    "total_return": 1.54153,
+    "sharpe": 0.1388,
+    "sortino": 0.1636,
+    "profit_loss_ratio": 0.7697
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "vocab_version": "v9217a2c0d91a",
+  "symbol": "000001.SZ",
+  "formula": [
+    36,
+    71,
+    77,
+    69
+  ],
+  "best_score": 0.6327410340309143,
+  "formula_decoded": "RET_ACCEL → SIGN → TS_MEAN_5 → NEG",
+  "train_step": 0,
+  "timeframe": "D1",
+  "data_file": "C:\\Users\\Administrator\\Downloads\\000001.SZ_D1.parquet",
+  "mode": "parquet_file",
+  "train_steps": 200,
+  "generator_backend": "rd_agent"
+}
