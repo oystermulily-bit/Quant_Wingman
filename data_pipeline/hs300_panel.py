@@ -85,6 +85,18 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _snapshot_file(root: Path, rel: str) -> Path:
+    """Resolve a snapshot-relative path without treating directory junctions as escapes.
+
+    Windows junctions (v2/raw -> v1/raw) resolve to another tree. The logical
+    path must still live under the snapshot root and must not contain '..'.
+    """
+    relative = Path(str(rel))
+    if relative.is_absolute() or any(part == ".." for part in relative.parts):
+        raise ValueError(f"path escapes snapshot: {rel}")
+    return root / relative
+
+
 class SnapshotManifestValidator:
     """Validate paths, hashes and row counts without changing source files."""
 
@@ -204,9 +216,8 @@ class SnapshotManifestValidator:
                         f"{table_name}: row_count/rows 无法比较",
                     )
                     continue
-            path = (self.root / str(rel)).resolve()
             try:
-                path.relative_to(self.root)
+                path = _snapshot_file(self.root, str(rel))
             except ValueError:
                 report.add("PATH_ESCAPES_SNAPSHOT", f"{table_name}: {rel}")
                 continue
@@ -304,9 +315,8 @@ class SnapshotManifestValidator:
                 continue
             rel = row.get("response_path")
             expected = str(row.get("response_sha256", "")).lower()
-            response = (self.root / str(rel)).resolve()
             try:
-                response.relative_to(self.root)
+                response = _snapshot_file(self.root, str(rel))
             except ValueError:
                 report.add("RAW_RESPONSE_PATH_ESCAPE", f"请求#{index}: {rel}")
                 continue
@@ -318,9 +328,7 @@ class SnapshotManifestValidator:
 
     def table_path(self, manifest: dict[str, Any], table_name: str) -> Path:
         entry = manifest["files"][table_name]
-        path = (self.root / str(entry["path"])).resolve()
-        path.relative_to(self.root)
-        return path
+        return _snapshot_file(self.root, str(entry["path"]))
 
 
 def _normalise_date(series: pd.Series) -> pd.Series:
