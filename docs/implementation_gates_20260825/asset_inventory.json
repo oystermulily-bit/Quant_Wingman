@@ -1,0 +1,83 @@
+{
+  "schema_version": "w1ngman_asset_inventory_v1",
+  "captured_at": "2026-08-25T09:45:00+08:00",
+  "scope": "pre_stage_0_2_output_snapshot",
+  "repository": {
+    "root": "C:/Users/Administrator/Documents/Codex/2026-07-31/yue-2/quant_w1ngman",
+    "branch": "main",
+    "commit": "a010326564156f0ce6eae77d29f1e366d1c1eede",
+    "tracked_files": 243,
+    "discovered_project_files": 246,
+    "worktree_clean": false,
+    "preexisting_modified": [
+      "docs/01_研究原则.md",
+      "docs/02_第一期实验协议.md",
+      "docs/03_产品待办.md"
+    ],
+    "preexisting_untracked": [
+      "docs/.Rhistory",
+      "experiments/phase1_preflight_20260820/",
+      "experiments/phase2_hs300_db_design_20260821/",
+      "experiments/phase2_hs300_live_audit_20260825/"
+    ]
+  },
+  "runtime_assets": {
+    "data": {"files": 45, "bytes": 3320337, "parquet_files": 3},
+    "checkpoints": {"files": 425, "bytes": 1372971147, "symbols": {"000001.SZ": 335, "601899.SH": 90}},
+    "strategies": {"files": 3, "bytes": 1731},
+    "factor_research_store": {"files": 1, "bytes": 81920},
+    "experiments": {"files": 34, "bytes": 963822},
+    "logs": {"files": 48, "bytes": 6700912},
+    "backtest_output": {"files": 3, "bytes": 154778}
+  },
+  "local_parquet": [
+    {"path": "data/000001.SZ_D1.parquet", "rows": 8446, "columns": ["time", "open", "high", "low", "close", "volume"], "bytes": 213189},
+    {"path": "data/zijin_mining_601899/qfq/601899_qfq_daily.parquet", "rows": 4395, "bytes": 197606, "formal_research_eligible": false},
+    {"path": "data/zijin_mining_601899/raw/601899_raw_daily.parquet", "rows": 4395, "bytes": 199611, "formal_research_eligible": false}
+  ],
+  "factor_database": {
+    "path": "factor_research_store/multi_symbol/research.sqlite3",
+    "tables": {
+      "analysis_reports": 0,
+      "experiments": 0,
+      "factor_relations": 0,
+      "factors": 0,
+      "failures": 0,
+      "formulas": 0,
+      "hypotheses": 0,
+      "tasks": 0,
+      "validation_results": 0
+    },
+    "accepted_sota_factors": 0
+  },
+  "legacy_strategy_assets": [
+    "strategies/best_000001.SZ.json",
+    "strategies/best_601899.SH.json",
+    "strategies/holdout_000001.SZ.json"
+  ],
+  "external_mcp": {
+    "server": "D:/Hulucoding/AmAzing_Data/xysz/xysz/WealthManager/ad_mcp/server.py",
+    "sha256": "3BC7F1ADA17436BBDB2CA28FCA91AE7206BA6A2DC5F20158EBB0C1310C370EAD",
+    "sdk_version_from_prior_audit": "1.1.9",
+    "manual": "D:/Hulucoding/AmAzing_Data/AmazingData开发手册.pdf",
+    "formal_snapshot_present": false,
+    "requested_coverage": "2010-01-01 to latest_completed_trading_day",
+    "documented_stock_daily_start": "2013-present"
+  },
+  "configuration": {
+    "files": ["config.py", "model_core/config.py", "factor_research/config.py", ".env.example", "web_settings.example.json"],
+    "environment_variable_names": ["SILICONFLOW_API_KEY", "SILICONFLOW_MODEL", "W1NGMAN_GENERATOR_BACKEND", "RD_AGENT_ROUNDS", "AD_USERNAME", "AD_PASSWORD", "AD_HOST", "AD_PORT"],
+    "secret_values_recorded": false,
+    "local_secret_bearing_file_present": true,
+    "local_secret_bearing_file": "web_settings.json"
+  },
+  "dependencies": {
+    "manifest": "requirements.txt",
+    "language": "Python 3.10+",
+    "core": ["torch", "numpy", "pandas", "pyarrow", "scipy", "lightgbm"],
+    "web": ["fastapi", "uvicorn", "pydantic", "python-multipart"],
+    "data_sources": ["MetaTrader5", "tushare", "pytdx", "tvdatafeed", "requests"],
+    "test": ["pytest", "hypothesis", "playwright"]
+  },
+  "status": "MODEL_NOT_VALIDATED"
+}

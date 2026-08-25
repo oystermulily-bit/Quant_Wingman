@@ -1,0 +1,57 @@
+{
+  "schema_version": "w1ngman_baseline_reproduction_v1",
+  "reproduced_at": "2026-08-25T09:49:39+08:00",
+  "status": "LEGACY_EXPLORATORY_BASELINE",
+  "formal_statistical_baseline": false,
+  "description": "000001.SZ单票RD-Agent第114轮冠军的旧全历史1日回测工程复现",
+  "input": {
+    "data": "experiments/20260812_000001_SZ_rd_step0114/data/000001.SZ_D1.parquet",
+    "data_sha256": "361C4C16D4CFC08705754FD021F131AB41A52AB40F2FA3030044677E4AA60032",
+    "rows": 8446,
+    "strategy": "experiments/20260812_000001_SZ_rd_step0114/training/strategy_000001_SZ_step0114_score0.6327.json",
+    "strategy_sha256": "18AAFEA21AAC96212DF0DFE6957E51EEDBA65B7F12FA1EF0758FB656F158C1B6",
+    "formula_tokens": [36, 71, 77, 69],
+    "formula": "RET_ACCEL -> SIGN -> TS_MEAN_5 -> NEG",
+    "commission_one_way": 0.0002,
+    "slippage_one_way": 0.0001
+  },
+  "execution": {
+    "script": "run_backtest.py",
+    "working_directory": "C:/Users/Administrator/AppData/Local/Temp/w1ngman_stage1_baseline_20260825",
+    "network_used": false,
+    "mt5_used": false,
+    "holdout_only": false,
+    "evaluation_range": "full_history"
+  },
+  "result": {
+    "total_log_pnl": 1.54153,
+    "sharpe": 0.1388,
+    "sortino": 0.1636,
+    "trades": 1293,
+    "win_rate": 0.5855,
+    "average_holding_bars": 6.34,
+    "profit_loss_ratio": 0.7697,
+    "periods_per_year": 239
+  },
+  "output": {
+    "report_sha256": "12F7C4E92E2A085F6041C63A1A51A513B2806719D12F0BAFC94C5BA522558332",
+    "equity_curve_sha256": "187E940D361C20345A1349CC3BB753E477DC5833228DB01163CF7E74F9A2E229",
+    "archived_report_sha256": "12F7C4E92E2A085F6041C63A1A51A513B2806719D12F0BAFC94C5BA522558332",
+    "matches_archived_report": true
+  },
+  "test_suite": {
+    "command": ".venv/Scripts/python.exe -m pytest -q",
+    "passed": 281,
+    "skipped": 17,
+    "warnings": 2,
+    "duration_seconds": 56.12
+  },
+  "limitations": [
+    "单只股票，不是沪深300点时横截面",
+    "全历史回测包含研发阶段尾部，不是独立Holdout",
+    "使用tanh因子连续多空仓位，不是A股长仓白名单组合",
+    "使用对称固定成本，没有方向性印花税和不可交易执行",
+    "只用于工程回归，不支持1日优于3日或5日的统计结论"
+  ],
+  "system_status": "MODEL_NOT_VALIDATED"
+}

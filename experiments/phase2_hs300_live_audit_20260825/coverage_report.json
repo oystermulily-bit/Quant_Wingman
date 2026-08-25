@@ -1,0 +1,861 @@
+{
+  "audited_at": "2026-08-25T10:44:18.603320+08:00",
+  "sdk_version": "1.1.9",
+  "python": "D:\\anaconda\\python.exe",
+  "raw_values_emitted": false,
+  "login": {
+    "success": true,
+    "variant": "stripped",
+    "password_had_trailing_whitespace": true,
+    "host": "101.230.159.234",
+    "port": 8600,
+    "username_len": 12
+  },
+  "sdk_methods": {
+    "InfoData": [
+      "get_announcement_bond",
+      "get_announcement_bond_list",
+      "get_announcement_fund",
+      "get_announcement_fund_list",
+      "get_announcement_stock",
+      "get_announcement_stock_list",
+      "get_balance_sheet",
+      "get_bj_code_mapping",
+      "get_block_trading",
+      "get_cash_flow",
+      "get_dividend",
+      "get_equity_pledge_freeze",
+      "get_equity_restricted",
+      "get_equity_structure",
+      "get_fund_iopv",
+      "get_fund_nav",
+      "get_fund_share",
+      "get_history_stock_status",
+      "get_holder_num",
+      "get_income",
+      "get_index_constituent",
+      "get_index_weight",
+      "get_industry_base_info",
+      "get_industry_constituent",
+      "get_industry_daily",
+      "get_industry_weight",
+      "get_kzz_call",
+      "get_kzz_call_explanation",
+      "get_kzz_conv",
+      "get_kzz_conv_change",
+      "get_kzz_corr",
+      "get_kzz_issuance",
+      "get_kzz_put",
+      "get_kzz_put_call_item",
+      "get_kzz_put_explanation",
+      "get_kzz_share",
+      "get_kzz_suspend",
+      "get_long_hu_bang",
+      "get_margin_detail",
+      "get_margin_summary",
+      "get_option_basic_info",
+      "get_option_mon_ctr_specs",
+      "get_option_std_ctr_specs",
+      "get_profit_express",
+      "get_profit_notice",
+      "get_right_issue",
+      "get_share_holder",
+      "get_stock_basic",
+      "get_treasury_yield"
+    ],
+    "BaseData": [
+      "get_adj_factor",
+      "get_backward_factor",
+      "get_calendar",
+      "get_code_info",
+      "get_code_list",
+      "get_etf_pcf",
+      "get_future_code_info",
+      "get_future_code_list",
+      "get_hist_code_list",
+      "get_option_code_list"
+    ],
+    "has_get_industry_base_info": true,
+    "has_get_industry_index_info": false,
+    "has_get_index_weight": true,
+    "has_get_index_constituent": true,
+    "industry_base_signature": "(local_path='D://AmazingData_local_data//', is_local=True)",
+    "industry_index_info_signature": "MISSING"
+  },
+  "queries": {
+    "calendar": {
+      "success": true,
+      "rows": 8711,
+      "min": 19901219,
+      "max": 20260825
+    },
+    "industry_index_info_broken_name": {
+      "success": false,
+      "error_type": "AttributeError",
+      "error": "SDK has no get_industry_index_info"
+    },
+    "industry_base_info": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:27.162305+08:00",
+      "completed_at": "2026-08-25T10:44:28.429286+08:00",
+      "kind": "DataFrame",
+      "rows": 511,
+      "columns": [
+        "INDEX_CODE",
+        "INDUSTRY_CODE",
+        "LEVEL_TYPE",
+        "LEVEL1_NAME",
+        "LEVEL2_NAME",
+        "LEVEL3_NAME",
+        "IS_PUB",
+        "CHANGE_REASON"
+      ],
+      "dict_keys_sample": null,
+      "date_bounds": {}
+    },
+    "index_constituent": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:28.429775+08:00",
+      "completed_at": "2026-08-25T10:44:38.138816+08:00",
+      "kind": "dict",
+      "rows": 1226,
+      "columns": [
+        "INDEX_CODE",
+        "CON_CODE",
+        "INDATE",
+        "OUTDATE",
+        "INDEX_NAME"
+      ],
+      "dict_keys_sample": [
+        "000300.SH"
+      ],
+      "date_bounds": {
+        "INDATE": {
+          "field": "INDATE",
+          "min": "2005-04-08",
+          "max": "2026-06-15",
+          "non_null": 1226
+        },
+        "OUTDATE": {
+          "field": "OUTDATE",
+          "min": "2005-06-30",
+          "max": "2026-06-12",
+          "non_null": 926
+        }
+      }
+    },
+    "kline_2010_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:44.479750+08:00",
+      "completed_at": "2026-08-25T10:44:44.703904+08:00",
+      "kind": "dict",
+      "rows": 0,
+      "columns": [],
+      "dict_keys_sample": [
+        "000001.SZ",
+        "000300.SH"
+      ]
+    },
+    "status_2010_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:44.704056+08:00",
+      "completed_at": "2026-08-25T10:44:45.948022+08:00",
+      "kind": "dict",
+      "rows": 0,
+      "columns": [],
+      "dict_keys_sample": [
+        "000001.SZ"
+      ]
+    },
+    "weight_2010_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:45.948311+08:00",
+      "completed_at": "2026-08-25T10:44:47.786971+08:00",
+      "kind": "dict",
+      "rows": 6000,
+      "columns": [
+        "INDEX_CODE",
+        "CON_CODE",
+        "TRADE_DATE",
+        "TOTAL_SHARE",
+        "FREE_SHARE_RATIO",
+        "CALC_SHARE",
+        "WEIGHT_FACTOR",
+        "WEIGHT",
+        "CLOSE"
+      ],
+      "dict_keys_sample": [
+        "000300.SH"
+      ],
+      "date_bounds": {
+        "TRADE_DATE": {
+          "field": "TRADE_DATE",
+          "min": "2010-01-04",
+          "max": "2010-01-29",
+          "non_null": 6000
+        }
+      }
+    },
+    "kline_2012_dec": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:47.792523+08:00",
+      "completed_at": "2026-08-25T10:44:49.029717+08:00",
+      "kind": "dict",
+      "rows": 0,
+      "columns": [],
+      "dict_keys_sample": [
+        "000001.SZ",
+        "000300.SH"
+      ]
+    },
+    "status_2012_dec": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:49.029868+08:00",
+      "completed_at": "2026-08-25T10:44:49.871305+08:00",
+      "kind": "dict",
+      "rows": 0,
+      "columns": [],
+      "dict_keys_sample": [
+        "000001.SZ"
+      ]
+    },
+    "weight_2012_dec": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:49.871419+08:00",
+      "completed_at": "2026-08-25T10:44:51.396950+08:00",
+      "kind": "dict",
+      "rows": 6300,
+      "columns": [
+        "INDEX_CODE",
+        "CON_CODE",
+        "TRADE_DATE",
+        "TOTAL_SHARE",
+        "FREE_SHARE_RATIO",
+        "CALC_SHARE",
+        "WEIGHT_FACTOR",
+        "WEIGHT",
+        "CLOSE"
+      ],
+      "dict_keys_sample": [
+        "000300.SH"
+      ],
+      "date_bounds": {
+        "TRADE_DATE": {
+          "field": "TRADE_DATE",
+          "min": "2012-12-03",
+          "max": "2012-12-31",
+          "non_null": 6300
+        }
+      }
+    },
+    "kline_2013_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:51.402990+08:00",
+      "completed_at": "2026-08-25T10:44:52.404513+08:00",
+      "kind": "dict",
+      "rows": 40,
+      "columns": [
+        "code",
+        "kline_time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "amount"
+      ],
+      "dict_keys_sample": [
+        "000001.SZ",
+        "000300.SH"
+      ],
+      "date_bounds": {
+        "KLINE_TIME": {
+          "field": "kline_time",
+          "min": "2013-01-04",
+          "max": "2013-01-31",
+          "non_null": 40
+        }
+      }
+    },
+    "status_2013_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:52.407201+08:00",
+      "completed_at": "2026-08-25T10:44:53.099031+08:00",
+      "kind": "dict",
+      "rows": 0,
+      "columns": [],
+      "dict_keys_sample": [
+        "000001.SZ"
+      ]
+    },
+    "weight_2013_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:53.099176+08:00",
+      "completed_at": "2026-08-25T10:44:54.188823+08:00",
+      "kind": "dict",
+      "rows": 6000,
+      "columns": [
+        "INDEX_CODE",
+        "CON_CODE",
+        "TRADE_DATE",
+        "TOTAL_SHARE",
+        "FREE_SHARE_RATIO",
+        "CALC_SHARE",
+        "WEIGHT_FACTOR",
+        "WEIGHT",
+        "CLOSE"
+      ],
+      "dict_keys_sample": [
+        "000300.SH"
+      ],
+      "date_bounds": {
+        "TRADE_DATE": {
+          "field": "TRADE_DATE",
+          "min": "2013-01-04",
+          "max": "2013-01-31",
+          "non_null": 6000
+        }
+      }
+    },
+    "kline_2016_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:54.193696+08:00",
+      "completed_at": "2026-08-25T10:44:54.703554+08:00",
+      "kind": "dict",
+      "rows": 40,
+      "columns": [
+        "code",
+        "kline_time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "amount"
+      ],
+      "dict_keys_sample": [
+        "000001.SZ",
+        "000300.SH"
+      ],
+      "date_bounds": {
+        "KLINE_TIME": {
+          "field": "kline_time",
+          "min": "2016-01-04",
+          "max": "2016-01-29",
+          "non_null": 40
+        }
+      }
+    },
+    "status_2016_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:54.705448+08:00",
+      "completed_at": "2026-08-25T10:44:56.812077+08:00",
+      "kind": "dict",
+      "rows": 20,
+      "columns": [
+        "MARKET_CODE",
+        "TRADE_DATE",
+        "PRECLOSE",
+        "HIGH_LIMITED",
+        "LOW_LIMITED",
+        "PRICE_HIGH_LMT_RATE",
+        "PRICE_LOW_LMT_RATE",
+        "IS_ST_SEC",
+        "IS_SUSP_SEC",
+        "IS_WD_SEC",
+        "IS_XR_SEC"
+      ],
+      "dict_keys_sample": [
+        "000001.SZ"
+      ],
+      "date_bounds": {
+        "TRADE_DATE": {
+          "field": "TRADE_DATE",
+          "min": "2016-01-04",
+          "max": "2016-01-29",
+          "non_null": 20
+        }
+      }
+    },
+    "weight_2016_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:44:56.814176+08:00",
+      "completed_at": "2026-08-25T10:45:01.714919+08:00",
+      "kind": "dict",
+      "rows": 6000,
+      "columns": [
+        "INDEX_CODE",
+        "CON_CODE",
+        "TRADE_DATE",
+        "TOTAL_SHARE",
+        "FREE_SHARE_RATIO",
+        "CALC_SHARE",
+        "WEIGHT_FACTOR",
+        "WEIGHT",
+        "CLOSE"
+      ],
+      "dict_keys_sample": [
+        "000300.SH"
+      ],
+      "date_bounds": {
+        "TRADE_DATE": {
+          "field": "TRADE_DATE",
+          "min": "2016-01-04",
+          "max": "2016-01-29",
+          "non_null": 6000
+        }
+      }
+    },
+    "weight_latest_month": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:01.721988+08:00",
+      "completed_at": "2026-08-25T10:45:08.280356+08:00",
+      "kind": "dict",
+      "rows": 4800,
+      "columns": [
+        "INDEX_CODE",
+        "CON_CODE",
+        "TRADE_DATE",
+        "TOTAL_SHARE",
+        "FREE_SHARE_RATIO",
+        "CALC_SHARE",
+        "WEIGHT_FACTOR",
+        "WEIGHT",
+        "CLOSE"
+      ],
+      "dict_keys_sample": [
+        "000300.SH"
+      ],
+      "date_bounds": {
+        "TRADE_DATE": {
+          "field": "TRADE_DATE",
+          "min": "2026-08-03",
+          "max": "2026-08-24",
+          "non_null": 4800
+        }
+      }
+    },
+    "kline_latest_month": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:08.284065+08:00",
+      "completed_at": "2026-08-25T10:45:08.661643+08:00",
+      "kind": "dict",
+      "rows": 16,
+      "columns": [
+        "code",
+        "kline_time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "amount"
+      ],
+      "dict_keys_sample": [
+        "000001.SZ"
+      ],
+      "date_bounds": {
+        "KLINE_TIME": {
+          "field": "kline_time",
+          "min": "2026-08-03",
+          "max": "2026-08-24",
+          "non_null": 16
+        }
+      }
+    },
+    "stock_basic_sample": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:08.662741+08:00",
+      "completed_at": "2026-08-25T10:45:08.870286+08:00",
+      "kind": "DataFrame",
+      "rows": 1,
+      "columns": [
+        "MARKET_CODE",
+        "SECURITY_NAME",
+        "COMP_NAME",
+        "PINYIN",
+        "COMP_NAME_ENG",
+        "LISTDATE",
+        "DELISTDATE",
+        "LISTPLATE_NAME",
+        "COMP_SNAME_ENG",
+        "IS_LISTED"
+      ],
+      "dict_keys_sample": null,
+      "date_bounds": {
+        "LISTDATE": {
+          "field": "LISTDATE",
+          "min": "1991-04-03",
+          "max": "1991-04-03",
+          "non_null": 1
+        },
+        "DELISTDATE": {
+          "field": "DELISTDATE",
+          "min": null,
+          "max": null,
+          "non_null": 0
+        }
+      }
+    },
+    "dividend_sample": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:08.910037+08:00",
+      "completed_at": "2026-08-25T10:45:09.186860+08:00",
+      "kind": "DataFrame",
+      "rows": 28,
+      "columns": [
+        "MARKET_CODE",
+        "DIV_PROGRESS",
+        "DVD_PER_SHARE_STK",
+        "DVD_PER_SHARE_PRE_TAX_CASH",
+        "DVD_PER_SHARE_AFTER_TAX_CASH",
+        "DATE_EQY_RECORD",
+        "DATE_EX",
+        "DATE_DVD_PAYOUT",
+        "LISTINGDATE_OF_DVD_SHR",
+        "DIV_PRELANDATE",
+        "DIV_SMTGDATE",
+        "DATE_DVD_ANN",
+        "DIV_BASEDATE",
+        "DIV_BASESHARE",
+        "CURRENCY_CODE",
+        "ANN_DATE",
+        "IS_CHANGED",
+        "REPORT_PERIOD",
+        "DIV_CHANGE",
+        "DIV_BONUSRATE",
+        "DIV_CONVERSEDRATE",
+        "REMARK",
+        "DIV_PREANN_DATE",
+        "DIV_TARGET"
+      ],
+      "dict_keys_sample": null,
+      "date_bounds": {
+        "DATE_EX": {
+          "field": "DATE_EX",
+          "min": "2013-06-20",
+          "max": "2026-06-12",
+          "non_null": 16
+        },
+        "DATE_DVD_ANN": {
+          "field": "DATE_DVD_ANN",
+          "min": "2013-06-14",
+          "max": "2026-06-05",
+          "non_null": 16
+        },
+        "ANN_DATE": {
+          "field": "ANN_DATE",
+          "min": "2013-06-14",
+          "max": "2026-08-15",
+          "non_null": 28
+        }
+      }
+    },
+    "right_issue_sample": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:09.193796+08:00",
+      "completed_at": "2026-08-25T10:45:09.761745+08:00",
+      "kind": "DataFrame",
+      "rows": 0,
+      "columns": [
+        "MARKET_CODE",
+        "PROGRESS",
+        "PRICE",
+        "RATIO",
+        "AMT_PLAN",
+        "AMT_REAL",
+        "COLLECTION_FUND",
+        "SHAREB_REG_DATE",
+        "EX_DIVIDEND_DATE",
+        "LISTED_DATE",
+        "PAY_START_DATE",
+        "PAY_END_DATE",
+        "PREPLAN_DATE",
+        "SMTG_ANN_DATE",
+        "PASS_DATE",
+        "APPROVED_DATE",
+        "EXECUTE_DATE",
+        "RESULT_DATE",
+        "LIST_ANN_DATE",
+        "GUARANTOR",
+        "GUARTYPE",
+        "RIGHTSISSUE_CODE",
+        "ANN_DATE",
+        "RIGHTSISSUE_YEAR",
+        "RIGHTSISSUE_DESC",
+        "RIGHTSISSUE_NAME",
+        "RATIO_DENOMINATOR",
+        "RATIO_MOLECULAR",
+        "SUBS_METHOD",
+        "EXPECTED_FUND_RAISING"
+      ],
+      "dict_keys_sample": null
+    },
+    "equity_sample": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:09.761975+08:00",
+      "completed_at": "2026-08-25T10:45:10.381743+08:00",
+      "kind": "DataFrame",
+      "rows": 29,
+      "columns": [
+        "MARKET_CODE",
+        "ANN_DATE",
+        "CHANGE_DATE",
+        "SHARE_CHANGE_REASON_STR",
+        "EX_CHANGE_DATE",
+        "CURRENT_SIGN",
+        "IS_VALID",
+        "TOT_SHARE",
+        "FLOAT_SHARE",
+        "FLOAT_A_SHARE",
+        "FLOAT_B_SHARE",
+        "FLOAT_HK_SHARE",
+        "FLOAT_OS_SHARE",
+        "TOT_TRADABLE_SHARE",
+        "RTD_A_SHARE_INST",
+        "RTD_A_SHARE_DOMESNP",
+        "RTD_SHARE_SENIOR",
+        "RTD_A_SHARE_FOREIGN",
+        "RTD_A_SHARE_FORJUR",
+        "RTD_A_SHARE_FORNP",
+        "RESTRICTED_B_SHARE",
+        "OTHER_RTD_SHARE",
+        "NON_TRADABLE_SHARE",
+        "NTRD_SHARE_STATE_PCT",
+        "NTRD_SHARE_STATE",
+        "NTRD_SHARE_STATEJUR",
+        "NTRD_SHARE_DOMESJUR",
+        "NTRD_SHARE_DOMES_INITIATOR",
+        "NTRD_SHARE_IPOJURIS",
+        "NTRD_SHARE_GENJURIS",
+        "NTRD_SHARE_STRA_INVESTOR",
+        "NTRD_SHARE_FUND",
+        "NTRD_SHARE_NAT",
+        "TRAN_SHARE",
+        "FLOAT_SHARE_SENIOR",
+        "SHARE_INEMP",
+        "PREFERRED_SHARE",
+        "NTRD_SHARE_NLIST_FRGN",
+        "STAQ_SHARE",
+        "NET_SHARE",
+        "SHARE_CHANGE_REASON",
+        "TOT_A_SHARE",
+        "TOT_B_SHARE",
+        "OTCA_SHARE",
+        "OTCB_SHARE",
+        "TOT_OTC_SHARE",
+        "SHARE_HK",
+        "PRE_NON_TRADABLE_SHARE",
+        "RESTRICTED_A_SHARE",
+        "RTD_A_SHARE_STATE",
+        "RTD_A_SHARE_STATEJUR",
+        "RTD_A_SHARE_OTHER_DOMES",
+        "RTD_A_SHARE_OTHER_DOMESJUR",
+        "TOT_RESTRICTED_SHARE"
+      ],
+      "dict_keys_sample": null,
+      "date_bounds": {
+        "ANN_DATE": {
+          "field": "ANN_DATE",
+          "min": "2013-06-14",
+          "max": "2026-08-15",
+          "non_null": 29
+        }
+      }
+    },
+    "announcement_2020": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:10.386198+08:00",
+      "completed_at": "2026-08-25T10:45:12.583124+08:00",
+      "kind": "DataFrame",
+      "rows": 0,
+      "columns": [
+        "MARKET_CODE",
+        "SOURCE_ID",
+        "TITLE",
+        "TAG_ID",
+        "TAG_NAME",
+        "ONLINE_STATUS",
+        "PUBLISH_TIME",
+        "DATA_STATUS",
+        "COMPANY"
+      ],
+      "dict_keys_sample": null
+    },
+    "industry_constituent_l1_sample": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:13.182773+08:00",
+      "completed_at": "2026-08-25T10:45:13.708674+08:00",
+      "kind": "dict",
+      "rows": 252,
+      "columns": [
+        "INDEX_CODE",
+        "CON_CODE",
+        "INDATE",
+        "OUTDATE",
+        "INDEX_NAME"
+      ],
+      "dict_keys_sample": [
+        "801180.SI"
+      ],
+      "date_bounds": {
+        "INDATE": {
+          "field": "INDATE",
+          "min": "1990-12-10",
+          "max": "2025-09-15",
+          "non_null": 252
+        },
+        "OUTDATE": {
+          "field": "OUTDATE",
+          "min": "2004-06-29",
+          "max": "2026-07-01",
+          "non_null": 157
+        }
+      }
+    },
+    "industry_daily_2010_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:13.715082+08:00",
+      "completed_at": "2026-08-25T10:45:13.898572+08:00",
+      "kind": "dict",
+      "rows": 20,
+      "columns": [
+        "OPEN",
+        "HIGH",
+        "CLOSE",
+        "LOW",
+        "AMOUNT",
+        "VOLUME",
+        "PB",
+        "PE",
+        "TOTAL_CAP",
+        "INDEX_CODE",
+        "A_FLOAT_CAP",
+        "PRE_CLOSE"
+      ],
+      "dict_keys_sample": [
+        "801180.SI"
+      ],
+      "date_bounds": {}
+    },
+    "industry_daily_2013_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:13.899349+08:00",
+      "completed_at": "2026-08-25T10:45:14.358064+08:00",
+      "kind": "dict",
+      "rows": 20,
+      "columns": [
+        "OPEN",
+        "HIGH",
+        "CLOSE",
+        "LOW",
+        "AMOUNT",
+        "VOLUME",
+        "PB",
+        "PE",
+        "TOTAL_CAP",
+        "INDEX_CODE",
+        "A_FLOAT_CAP",
+        "PRE_CLOSE"
+      ],
+      "dict_keys_sample": [
+        "801180.SI"
+      ],
+      "date_bounds": {}
+    },
+    "industry_weight_2013_jan": {
+      "success": true,
+      "started_at": "2026-08-25T10:45:14.358946+08:00",
+      "completed_at": "2026-08-25T10:45:16.097000+08:00",
+      "kind": "dict",
+      "rows": 3000,
+      "columns": [
+        "WEIGHT",
+        "CON_CODE",
+        "TRADE_DATE",
+        "INDEX_CODE"
+      ],
+      "dict_keys_sample": [
+        "801180.SI"
+      ],
+      "date_bounds": {
+        "TRADE_DATE": {
+          "field": "TRADE_DATE",
+          "min": "2013-01-04",
+          "max": "2013-01-31",
+          "non_null": 3000
+        }
+      }
+    }
+  },
+  "coverage": {
+    "requested_start": "2010-01-01",
+    "vendor_manual_bar_start": "2013-present",
+    "kline_2010_jan_rows": 0,
+    "kline_2012_dec_rows": 0,
+    "kline_2013_jan_rows": 40,
+    "weight_2010_jan_rows": 6000,
+    "weight_2012_dec_rows": 6300,
+    "weight_2013_jan_rows": 6000,
+    "status_2010_jan_rows": 0,
+    "status_2013_jan_rows": 0,
+    "industry_daily_2010_jan_rows": 20,
+    "industry_daily_2013_jan_rows": 20,
+    "silent_shortening_allowed": false,
+    "first_kline_window_with_rows": "kline_2013_jan",
+    "first_weight_window_with_rows": "weight_2010_jan"
+  },
+  "end_date_policy": {
+    "now_asia_shanghai": "2026-08-25T10:44:27.159793+08:00",
+    "today": 20260825,
+    "calendar_min": 19901219,
+    "calendar_max": 20260825,
+    "calendar_len": 8711,
+    "today_is_trading_day": true,
+    "session_complete": false,
+    "latest_completed_trading_day": 20260824,
+    "reason": "today_is_trading_day_before_15:00_Asia/Shanghai"
+  },
+  "industry_summary": {
+    "rows": 511,
+    "columns": [
+      "INDEX_CODE",
+      "INDUSTRY_CODE",
+      "LEVEL_TYPE",
+      "LEVEL1_NAME",
+      "LEVEL2_NAME",
+      "LEVEL3_NAME",
+      "IS_PUB",
+      "CHANGE_REASON"
+    ],
+    "level_type_counts": {
+      "3": 346,
+      "2": 134,
+      "1": 31
+    },
+    "index_code_suffix_counts": {
+      ".SI": 511
+    },
+    "index_code_prefix_sample": [
+      "801",
+      "850",
+      "851",
+      "852",
+      "857",
+      "858",
+      "859"
+    ],
+    "level1_count": 31
+  },
+  "weight_unit": {
+    "source_query": "weight_2013_jan",
+    "detected_unit": "percent_0_100",
+    "daily_sum_min": 99.9991,
+    "daily_sum_median": 99.9998,
+    "daily_sum_max": 100.0006,
+    "trading_days": 20,
+    "unique_codes": 300,
+    "rows_per_day_min": 300,
+    "rows_per_day_max": 300
+  }
+}

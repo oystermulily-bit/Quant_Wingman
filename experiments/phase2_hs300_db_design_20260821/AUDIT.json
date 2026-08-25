@@ -1,0 +1,48 @@
+{
+  "schema_version": "hs300_db_design_audit_v1",
+  "audited_at": "2026-08-21T11:39:00+08:00",
+  "status": "STAGE_2_COMPLETE_AWAITING_CONFIRMATION",
+  "formal_download_started": false,
+  "rd_agent_started": false,
+  "holdout_performance_read": false,
+  "mcp": {
+    "server_path": "D:/Hulucoding/AmAzing_Data/xysz/xysz/WealthManager/ad_mcp/server.py",
+    "server_sha256": "3BC7F1ADA17436BBDB2CA28FCA91AE7206BA6A2DC5F20158EBB0C1310C370EAD",
+    "sdk_version": "1.1.9",
+    "tool_count": 58,
+    "registered_in_current_cursor_session": false,
+    "ad_env_in_audit_shell": false
+  },
+  "vendor_bar_start": {
+    "stocks_and_indexes": "2013-present",
+    "futures_cffex_only": "2010-04-present",
+    "requested_start": "2010-01-01",
+    "silent_shortening_allowed": false
+  },
+  "quarantined_reference": {
+    "path": "D:/Hulucoding/AmAzing_Data/output/hs300_daily_2013_present/",
+    "exists_at_audit": false,
+    "build_log": "D:/Hulucoding/AmAzing_Data/tmp/hs300_build.stdout.log",
+    "build_script": "D:/Hulucoding/AmAzing_Data/build_hs300_dataset.py",
+    "known_defects": [
+      "adj_factor groupby ffill().bfill()",
+      "single is_tradeable treats limit-up/down as tradeable",
+      "start 2013 not 2010",
+      "no known_at/available_at/corporate_actions/Open_tr/manifest"
+    ]
+  },
+  "disk": {
+    "C_free_gb": 34.0,
+    "D_free_gb": 179.8
+  },
+  "wingman": {
+    "HS300PanelDataManager": false,
+    "current_managers": [
+      "ParquetDataManager",
+      "MT5DataManager",
+      "SingleSymbolDataManager"
+    ],
+    "holdout_code": "chronological_holdout_10_v1",
+    "label_code": "y_1 on raw open only"
+  }
+}

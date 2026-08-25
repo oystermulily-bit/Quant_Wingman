@@ -1,0 +1,129 @@
+{
+  "schema_version": "phase1_preflight_v1",
+  "experiment": "quant_w1ngman_phase1_horizon_feasibility",
+  "checked_at": "2026-08-20T11:01:08.7313858+08:00",
+  "status": "MODEL_NOT_VALIDATED",
+  "formal_experiment_started": false,
+  "holdout_accessed": false,
+  "performance_metrics_computed": false,
+  "repository": {
+    "commit": "a010326564156f0ce6eae77d29f1e366d1c1eede",
+    "worktree_note": "研究原则与实验协议文档存在尚未提交的修改；另有用户现存 docs/.Rhistory，未修改。"
+  },
+  "protocol": {
+    "research_principles": "docs/01_研究原则.md",
+    "phase1_protocol": "docs/02_第一期实验协议.md",
+    "product_backlog": "docs/03_产品待办.md"
+  },
+  "mcp_discovery": {
+    "resources": 0,
+    "resource_templates": 0,
+    "selected_market_data_mcp": "AmazingData local FastMCP server",
+    "server_path": "D:/Hulucoding/AmAzing_Data/xysz/xysz/WealthManager/ad_mcp/server.py",
+    "registered_in_current_codex_session": false,
+    "sdk_login_check": "passed",
+    "sdk_version": "1.1.9",
+    "pass": false,
+    "reason": "已定位本地 AmazingData FastMCP 服务器并通过底层 SDK 登录，但它没有注册到当前 Codex 会话；服务器现有字段和序列化实现也尚未满足第一期时态合同。"
+  },
+  "mcp_capability_audit": {
+    "live_query_completed": true,
+    "raw_values_emitted": false,
+    "known_at": {
+      "native_field": false,
+      "finding": "指数成分股只有 INDATE/OUTDATE；没有调整公告时间或系统可知时间。"
+    },
+    "available_at": {
+      "native_field": false,
+      "finding": "日线和历史证券状态只有交易日期；可以在本地协议中保守派生可用时间，但数据源未直接返回。"
+    },
+    "corporate_action_temporality": {
+      "available": "partial",
+      "fields": [
+        "DIV_PREANN_DATE",
+        "DIV_PRELANDATE",
+        "DIV_SMTGDATE",
+        "DATE_DVD_ANN",
+        "ANN_DATE",
+        "DATE_EX",
+        "EX_DIVIDEND_DATE",
+        "CHANGE_DATE",
+        "EX_CHANGE_DATE",
+        "PUBLISH_TIME",
+        "IS_XR_SEC",
+        "IS_WD_SEC",
+        "PRECLOSE"
+      ],
+      "finding": "分红、配股、股本结构和公告接口具备公告日与生效日字段，可建立事件时态；当前沪深300快照尚未保存这些表。"
+    },
+    "open_tr": {
+      "native_field": false,
+      "derivable": true,
+      "finding": "可由未复权开盘价、分红/配股事件、交易所 PRECLOSE 和单次复权因子构建，但必须实现并通过前缀不变性与事件现金流测试，不能继续使用全序列 bfill。"
+    },
+    "delisting": {
+      "delist_date_available": true,
+      "disposition_price_available": false,
+      "cash_compensation_available": false,
+      "finding": "证券基础信息只有 DELISTDATE/IS_LISTED；未发现退市处置价格或现金补偿字段，仍需补充来源或冻结保守损失规则。"
+    },
+    "mcp_server_implementation_findings": [
+      "服务器启动代码读取 USER/PASSWORD/HOST/PORT，而项目和用户配置使用 AD_USERNAME/AD_PASSWORD/AD_HOST/AD_PORT。",
+      "mcp_index_constituent 的 date 参数被忽略，且 SDK 返回 dict 时错误调用 serialize_dataframe。",
+      "mcp_history_stock_status 同样可能把 dict 交给 serialize_dataframe，得到空结果或序列化失败。",
+      "mcp_backward_factor 的序列化不会保留日期索引。",
+      "MCP 服务器没有暴露底层已存在的 get_announcement_stock_list 工具。"
+    ],
+    "audit_script": "experiments/phase1_preflight_20260820/inspect_amazingdata_capabilities.py"
+  },
+  "local_candidate_snapshot": {
+    "path": "D:/Hulucoding/AmAzing_Data/output/hs300_daily_2013_present",
+    "source": "AmazingData Python SDK",
+    "generated_at_utc": "2026-08-12T08:09:53.060054+00:00",
+    "actual_start": "2013-01-04",
+    "actual_end": "2026-08-12",
+    "trading_days": 3304,
+    "historical_securities": 724,
+    "rows": 991200,
+    "files": {
+      "hs300_daily_long.parquet": {
+        "sha256": "AC467EDFF778816ECB6284D639AE326CC57E906D2401F57E084BE2F5582C94A5",
+        "rows": 991200
+      },
+      "hs300_constituent_history.parquet": {
+        "sha256": "EBB2B27B697BEDCA410285120AE6E8786D82933A907834D9B53592F315127F5F",
+        "rows": 1226
+      },
+      "hs300_tradeable_mask.parquet": {
+        "sha256": "B38D7DE8A8060AED9B19EF24270F333084C2281EC6AE694EDE81A3449CB7BB62",
+        "rows": 991200
+      },
+      "validation_report.json": {
+        "sha256": "122D38FE3CF4497399AC1CF66C7DCA9B4A176B0856BD168D35458CF73612E6D1"
+      }
+    },
+    "accepted_as_formal_snapshot": false,
+    "blocking_findings": [
+      "已定位 AmazingData MCP 源码，但它未注册到当前会话，现有本地快照也没有完整的 MCP 原始响应与版本清单。",
+      "成分股表只有 in_date/out_date，没有协议要求的 known_at。",
+      "行情和可交易状态没有 available_at，无法证明信息在信号时点已经可知。",
+      "数据源可以查询部分公司行动公告日和生效日，但当前冻结快照没有保存公司行动事件表，也没有实现并验证可审计 Open_tr。",
+      "构建脚本对复权因子执行按股票 ffill().bfill()，存在用未来因子回填早期缺失值的前缀不变性风险。",
+      "is_tradeable 明确把涨跌停仍视为可交易，未按买卖方向实现执行阻塞。",
+      "没有退市处置价格、现金补偿或已冻结的保守退市损失规则。",
+      "目录没有协议要求的 MCP 标识、接口版本、原始响应清单和整体数据指纹 manifest。"
+    ]
+  },
+  "unconfirmed_freeze_items": [
+    "MCP 名称与版本",
+    "原始快照目录、标准化格式、manifest 和版本命名",
+    "点时复权/总回报算法及公司行动来源",
+    "退市、延迟退出和无法成交规则",
+    "Development 与封存 Holdout 的确切日期",
+    "成本、滑点、流动性门槛和历史费率版本表",
+    "SIMPLE_ENSEMBLE_V1、Top 20 等权、单股 5%",
+    "净夏普、年化、回撤、相位和折稳定性门槛",
+    "20 日移动块、2000 次 Bootstrap 和 Holm 5%"
+  ],
+  "required_next_action": "修复并注册本地 AmazingData MCP，补建成分调整可知时间、公司行动事件账本、Open_tr、方向性成交和退市处置规则后重新冻结快照；随后冻结九项实验选择，才能实现并运行 Development OOF 比较。"
+}

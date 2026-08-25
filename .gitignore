@@ -47,10 +47,14 @@ ENV/
 # Testing
 .pytest_cache/
 .pytest_tmp/
+.pytest-tmp/
 .hypothesis/
 .coverage
 htmlcov/
 .tox/
+
+# Local interactive history
+.Rhistory
 
 # Incomplete git rewrite leftovers
 .git-rewrite/

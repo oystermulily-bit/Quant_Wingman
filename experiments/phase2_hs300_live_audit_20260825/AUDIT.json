@@ -1,0 +1,98 @@
+{
+  "schema_version": "hs300_db_design_audit_v2",
+  "audited_at": "2026-08-25T10:44:18+08:00",
+  "status": "STAGE_2_COMPLETE_AWAITING_CONFIRMATION",
+  "supersedes": "experiments/phase2_hs300_db_design_20260821/AUDIT.json",
+  "formal_download_started": false,
+  "rd_agent_started": false,
+  "holdout_performance_read": false,
+  "live_coverage_probe": {
+    "requested": true,
+    "success": true,
+    "audited_at": "2026-08-25T10:44:18+08:00",
+    "credentials_injected_into_files": false,
+    "bulk_download": false,
+    "password_must_strip": true,
+    "report_path": "experiments/phase2_hs300_live_audit_20260825/coverage_report.json",
+    "end_date": 20260824,
+    "kline_2010_jan_rows": 0,
+    "kline_2012_dec_rows": 0,
+    "kline_2013_jan_first": "2013-01-04",
+    "weight_2010_jan_rows": 6000,
+    "weight_unit": "percent_0_100",
+    "weight_2013_jan_daily_n": 300,
+    "status_000001_2013_jan_rows": 0,
+    "status_000001_2016_jan_rows": 20,
+    "industry_base_rows": 511,
+    "industry_level1_count": 31,
+    "index_constituent_rows": 1226,
+    "index_constituent_indate_min": "2005-04-08"
+  },
+  "mcp": {
+    "server_path": "D:/Hulucoding/AmAzing_Data/xysz/xysz/WealthManager/ad_mcp/server.py",
+    "server_sha256": "3BC7F1ADA17436BBDB2CA28FCA91AE7206BA6A2DC5F20158EBB0C1310C370EAD",
+    "mtime_local": "2026-08-20T13:21:54",
+    "line_count": 4136,
+    "bytes": 172824,
+    "sdk_version": "1.1.9",
+    "tool_count": 58,
+    "changed_since_2026_08_21": false,
+    "registered_in_current_cursor_session": false,
+    "user_mcp_json": "C:/Users/Administrator/.cursor/mcp.json",
+    "server_cwd": "D:/Hulucoding/AmAzing_Data/xysz/xysz/WealthManager/ad_mcp",
+    "pythonpath_src_is_for": "tech_cross_section only, not MCP",
+    "industry_base_tool_still_broken": true,
+    "ad_mcp_tests_present": false
+  },
+  "vendor_bar_start": {
+    "stocks_and_indexes": "2013-present",
+    "futures_cffex_only": "2010-04-present",
+    "requested_start": "2010-01-01",
+    "silent_shortening_allowed": false,
+    "gap_label": "UNAVAILABLE_FROM_VENDOR"
+  },
+  "index_weight": {
+    "sdk": "InfoData.get_index_weight",
+    "codes": ["000016.SH", "000300.SH", "000905.SH", "000906.SH", "000852.SH"],
+    "weight_unit_documented": "percent_0_100",
+    "fields": ["INDEX_CODE", "CON_CODE", "TRADE_DATE", "TOTAL_SHARE", "FREE_SHARE_RATIO", "CALC_SHARE", "WEIGHT_FACTOR", "WEIGHT", "CLOSE"]
+  },
+  "missing_native_fields": [
+    "index_rebalance_announcement_known_at",
+    "bar_available_at",
+    "status_available_at",
+    "delisting_disposition_price",
+    "delisting_cash_compensation",
+    "industry_sw_zx_filter_parameter"
+  ],
+  "quarantined_reference": {
+    "path": "D:/Hulucoding/AmAzing_Data/output/hs300_daily_2013_present/",
+    "exists_at_audit": false,
+    "status": "QUARANTINED_REFERENCE_ONLY",
+    "build_script": "D:/Hulucoding/AmAzing_Data/build_hs300_dataset.py",
+    "known_defects": [
+      "adj_factor groupby ffill().bfill()",
+      "single is_tradeable treats limit-up/down as tradeable",
+      "start 2013 not 2010",
+      "no known_at/available_at/corporate_actions/OpenTR/manifest"
+    ]
+  },
+  "disk": {
+    "C_free_gb": 33.3,
+    "D_free_gb": 179.1,
+    "snapshot_root_exists": false
+  },
+  "wingman": {
+    "HS300PanelDataManager": false,
+    "current_managers": ["ParquetDataManager", "MT5DataManager", "SingleSymbolDataManager"],
+    "holdout_code": "chronological_holdout_10_v1",
+    "label_code": "y_1 on raw open only",
+    "bfill_in_times_py": true,
+    "fillna_zero_in_mt5_union_path": true
+  },
+  "research_protocol_conflicts": [
+    "HOLDOUT_RATIO=0.10 vs docs/02 section 6 calendar holdout >=480 days",
+    "three-layer scores in v1 vs phase-1 stock cross-section only",
+    "START 2010 vs vendor bars 2013"
+  ]
+}

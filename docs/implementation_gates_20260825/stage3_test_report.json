@@ -1,0 +1,32 @@
+{
+  "tested_on": "2026-08-25",
+  "python": "3.13.9",
+  "command": ".venv\\Scripts\\python.exe -m pytest -q",
+  "result": {
+    "passed": 290,
+    "skipped": 17,
+    "warnings": 2,
+    "duration_seconds": 73.81
+  },
+  "stage3_targeted_tests": {
+    "file": "tests/unit/test_stage3_research.py",
+    "passed": 9,
+    "coverage_intent": [
+      "snapshot hash tamper detection",
+      "fail-closed missing snapshot",
+      "member preservation and historical industry join",
+      "1/3/5 label indexing",
+      "prefix invariance and future sentinel",
+      "industry leave-one-out",
+      "whole-date split, purge and holdout boundary",
+      "directional cost and blocked execution",
+      "development-only end-to-end artifacts"
+    ]
+  },
+  "warnings_detail": [
+    "Existing FastAPI on_event startup hook is deprecated; unrelated to stage3."
+  ],
+  "formal_market_data_used": false,
+  "research_conclusion": "NOT_RUN",
+  "system_status": "MODEL_NOT_VALIDATED"
+}

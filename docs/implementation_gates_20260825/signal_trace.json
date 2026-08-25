@@ -1,0 +1,92 @@
+{
+  "schema_version": "w1ngman_signal_trace_v1",
+  "captured_at": "2026-08-25T09:50:00+08:00",
+  "system_status": "MODEL_NOT_VALIDATED",
+  "trace_kind": "current_runtime_vs_required_hs300_path",
+  "nodes": [
+    {
+      "order": 1,
+      "name": "MCP原始响应",
+      "current": "AmazingData MCP位于项目外；项目训练时未读取不可变raw快照",
+      "evidence": "experiments/phase1_preflight_20260820/mcp_repair_report.json",
+      "required": "raw响应+请求参数+时间+SDK/MCP版本+SHA256",
+      "status": "MISSING_FORMAL_PATH"
+    },
+    {
+      "order": 2,
+      "name": "标准化数据",
+      "current": "ParquetDataManager单票或MT5DataManager多品种",
+      "evidence": "data_pipeline/parquet_manager.py:241; data_pipeline/data_manager.py:19",
+      "required": "点时HS300成员、行业、公司行动、交易状态和完整日期轴",
+      "status": "INCOMPATIBLE_WITH_FORMAL_PANEL"
+    },
+    {
+      "order": 3,
+      "name": "Wingman特征",
+      "current": "OHLCV派生65特征，形状[N,65,T]",
+      "evidence": "model_core/features.py:1365-1373; model_core/vocab.py",
+      "required": "价格+简单市场/行业/残差特征，全部因果并保留mask",
+      "status": "PARTIAL"
+    },
+    {
+      "order": 4,
+      "name": "RD-Agent公式提案",
+      "current": "只允许rd_agent，硅基流动DeepSeek，远程不接收行情",
+      "evidence": "model_core/engine.py:166-178,221-232; model_core/rd_agent_generator.py",
+      "required": "阶段5才允许启动，搜索预算预注册",
+      "status": "ENGINEERING_READY_RESEARCH_DEFERRED"
+    },
+    {
+      "order": 5,
+      "name": "StackVM公式执行",
+      "current": "执行RPN并输出values与invalid_mask，形状[N,T]",
+      "evidence": "model_core/vm.py:213-259",
+      "required": "在正式面板上通过前缀/未来哨兵测试",
+      "status": "PARTIAL"
+    },
+    {
+      "order": 6,
+      "name": "验证分数",
+      "current": "旧reward/val加ValidationUnit、固定LightGBM",
+      "evidence": "model_core/engine.py:300-404; factor_research/validation_unit.py:149-237",
+      "required": "统一1/3/5标签、OOF、Purge、2000次块Bootstrap和多重检验",
+      "status": "PROTOCOL_MISMATCH"
+    },
+    {
+      "order": 7,
+      "name": "SOTA筛选",
+      "current": "逐步前向接纳；SQLite/NPZ实现存在，当前库0条",
+      "evidence": "factor_research/research_loop.py:233-304; factor_research_store/multi_symbol/research.sqlite3",
+      "required": "阶段4通过后才启用，绑定完整数据/协议/搜索指纹",
+      "status": "EMPTY_AND_DEFERRED"
+    },
+    {
+      "order": 8,
+      "name": "组合回测",
+      "current": "tanh因子连续多空、对称固定成本",
+      "evidence": "strategy_manager/signal.py:35-52; model_core/backtest.py:424-429",
+      "required": "A股长仓+现金+白名单/参考Top20+方向成本+不可交易事件",
+      "status": "INCOMPATIBLE"
+    },
+    {
+      "order": 9,
+      "name": "目标仓位",
+      "current": "旧单品种目标方向/MT5持仓",
+      "evidence": "strategy_manager/portfolio.py; strategy_manager/runner.py",
+      "required": "个股目标权重、现金、当前权重差异、回退和原因码",
+      "status": "MISSING"
+    },
+    {
+      "order": 10,
+      "name": "网页/API",
+      "current": "训练、回测、实时监控研究工具",
+      "evidence": "web/app.py:307-1130",
+      "required": "阶段9版本化建议API；模型未验证时拒绝正式建议",
+      "status": "PARTIAL_PRODUCT_GATE"
+    }
+  ],
+  "terminal": {
+    "formal_recommendation_available": false,
+    "allowed_response": "MODEL_NOT_VALIDATED"
+  }
+}

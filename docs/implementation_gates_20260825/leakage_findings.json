@@ -1,0 +1,116 @@
+{
+  "schema_version": "w1ngman_leakage_findings_v1",
+  "captured_at": "2026-08-25T09:50:00+08:00",
+  "formal_hs300_holdout_accessed": false,
+  "preexisting_single_stock_holdout_artifact_inspected": true,
+  "findings": [
+    {
+      "id": "L-001",
+      "severity": "P0",
+      "type": "future_to_past_fill",
+      "location": "D:/Hulucoding/AmAzing_Data/build_hs300_dataset.py:344",
+      "evidence": "adj_factor按股票执行ffill().bfill()",
+      "scope": "quarantined external builder",
+      "status": "OPEN_BLOCKER",
+      "required_action": "正式构建不得调用该脚本或旧输出；只从冻结raw重新构建"
+    },
+    {
+      "id": "L-002",
+      "severity": "P0",
+      "type": "point_in_time_membership_missing",
+      "location": "formal dataset absent",
+      "evidence": "项目没有每日HS300成员raw快照及公告known_at",
+      "scope": "formal panel",
+      "status": "OPEN_BLOCKER",
+      "required_action": "每日权重重建成员，保留effective_at/known_at状态，不用当前名单回填"
+    },
+    {
+      "id": "L-003",
+      "severity": "P0",
+      "type": "label_alignment",
+      "location": "data_pipeline/data_manager.py:305-331; model_core/engine.py:408-431",
+      "evidence": "target_ret本身已表示未来Open-to-Open，legacy IC又额外移动一位",
+      "scope": "legacy score/log",
+      "status": "OPEN",
+      "required_action": "所有指标统一使用label_registry的同索引配对"
+    },
+    {
+      "id": "L-004",
+      "severity": "P0",
+      "type": "holdout_governance",
+      "location": "train_file.py:112-129",
+      "evidence": "训练完成或已达轮数时自动触发Holdout release audit",
+      "scope": "legacy single-symbol entry",
+      "status": "OPEN_FOR_FORMAL_PATH",
+      "required_action": "训练与一次性Holdout命令物理分开；阶段7冻结后才允许访问"
+    },
+    {
+      "id": "L-005",
+      "severity": "P1",
+      "type": "synthetic_quote_fill",
+      "location": "data_pipeline/data_manager.py:235-252",
+      "evidence": "交集过短时OHLCV union+ffill并将前导NaN填0",
+      "scope": "legacy MT5 multi-symbol",
+      "status": "OPEN_BUT_EXCLUDED_FROM_FORMAL_PATH",
+      "required_action": "正式HS300 loader保留缺失和状态，不填价格"
+    },
+    {
+      "id": "L-006",
+      "severity": "P1",
+      "type": "legacy_future_fill",
+      "location": "times.py:127",
+      "evidence": "独立脚本OHLC执行ffill().bfill()",
+      "scope": "unreferenced legacy script",
+      "status": "QUARANTINED_COMPATIBILITY",
+      "required_action": "不导入正式路径；后续明确deprecated"
+    },
+    {
+      "id": "L-007",
+      "severity": "P1",
+      "type": "row_deletion_hides_events",
+      "location": "data_pipeline/parquet_manager.py:259-271",
+      "evidence": "非法/缺失行情被drop，重复时间只保留最后一条",
+      "scope": "legacy single-symbol loader",
+      "status": "OPEN_FOR_FORMAL_PATH",
+      "required_action": "formal standardized层保留异常表、修订版本和原因码"
+    },
+    {
+      "id": "L-008",
+      "severity": "P1",
+      "type": "incomplete_data_fingerprint",
+      "location": "factor_research/factor_artifact.py:94-109",
+      "evidence": "只哈希OHLCVT，不哈希成员/行业/状态/symbol顺序",
+      "scope": "factor identity",
+      "status": "OPEN",
+      "required_action": "正式fingerprint覆盖全部输入表、schema、split和顺序"
+    },
+    {
+      "id": "L-009",
+      "severity": "PASS",
+      "type": "vm_prefix_invariance",
+      "location": "model_core/vm.py:164-211; tests/unit/test_vm_causality.py",
+      "evidence": "不再用全序列std决定历史归一化路径；测试通过",
+      "scope": "current StackVM",
+      "status": "FIXED_AND_TESTED"
+    },
+    {
+      "id": "L-010",
+      "severity": "PASS",
+      "type": "walk_forward_gap",
+      "location": "model_core/engine.py:90-134; tests/unit/test_walk_forward_gap.py",
+      "evidence": "请求gap不再静默缩成0；测试通过",
+      "scope": "legacy splitter",
+      "status": "FIXED_BUT_NEW_DATE_SPLITTER_STILL_REQUIRED"
+    },
+    {
+      "id": "L-011",
+      "severity": "PASS",
+      "type": "invalid_mask",
+      "location": "model_core/vm.py:213-252; factor_research/validation_unit.py:164-172",
+      "evidence": "数值清洗前保存并消费invalid_mask",
+      "scope": "formula validation",
+      "status": "FIXED_AND_TESTED"
+    }
+  ],
+  "status": "DATA_NOT_FORMALLY_VALIDATED"
+}

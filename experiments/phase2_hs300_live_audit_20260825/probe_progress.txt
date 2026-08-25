@@ -1,0 +1,31 @@
+2026-08-25T10:44:18.608345+08:00 main_start
+2026-08-25T10:44:18.608826+08:00 imported_AmazingData
+2026-08-25T10:44:18.609207+08:00 login_try_as_provided
+2026-08-25T10:44:20.701176+08:00 login_systemexit_as_provided_code=0
+2026-08-25T10:44:20.702009+08:00 login_try_stripped
+2026-08-25T10:44:25.923617+08:00 login_ok
+2026-08-25T10:44:27.162713+08:00 call InfoData.get_industry_base_info
+2026-08-25T10:44:28.430182+08:00 call InfoData.get_index_constituent
+2026-08-25T10:44:44.480462+08:00 call MarketData.query_kline
+2026-08-25T10:44:44.704458+08:00 call InfoData.get_history_stock_status
+2026-08-25T10:44:45.948788+08:00 call InfoData.get_index_weight
+2026-08-25T10:44:47.792917+08:00 call MarketData.query_kline
+2026-08-25T10:44:49.030314+08:00 call InfoData.get_history_stock_status
+2026-08-25T10:44:49.871930+08:00 call InfoData.get_index_weight
+2026-08-25T10:44:51.403463+08:00 call MarketData.query_kline
+2026-08-25T10:44:52.407792+08:00 call InfoData.get_history_stock_status
+2026-08-25T10:44:53.099648+08:00 call InfoData.get_index_weight
+2026-08-25T10:44:54.194129+08:00 call MarketData.query_kline
+2026-08-25T10:44:54.705920+08:00 call InfoData.get_history_stock_status
+2026-08-25T10:44:56.814650+08:00 call InfoData.get_index_weight
+2026-08-25T10:45:01.722757+08:00 call InfoData.get_index_weight
+2026-08-25T10:45:08.284471+08:00 call MarketData.query_kline
+2026-08-25T10:45:08.663236+08:00 call InfoData.get_stock_basic
+2026-08-25T10:45:08.910541+08:00 call InfoData.get_dividend
+2026-08-25T10:45:09.194259+08:00 call InfoData.get_right_issue
+2026-08-25T10:45:09.762388+08:00 call InfoData.get_equity_structure
+2026-08-25T10:45:10.386585+08:00 call InfoData.get_announcement_stock_list
+2026-08-25T10:45:13.183149+08:00 call InfoData.get_industry_constituent
+2026-08-25T10:45:13.715589+08:00 call InfoData.get_industry_daily
+2026-08-25T10:45:13.899730+08:00 call InfoData.get_industry_daily
+2026-08-25T10:45:14.359468+08:00 call InfoData.get_industry_weight

@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-08-20T13:20:00+08:00",
+  "status": "MCP_REPAIRED_WITH_RESEARCH_BLOCKERS",
+  "experiment_status": "MODEL_NOT_VALIDATED",
+  "manual": "D:/Hulucoding/AmAzing_Data/AmazingData开发手册.pdf",
+  "sdk_version": "AmazingData 1.1.9",
+  "fastmcp_version": "3.4.4",
+  "server_file": "D:/Hulucoding/AmAzing_Data/xysz/xysz/WealthManager/ad_mcp/server.py",
+  "server_sha256": "3BC7F1ADA17436BBDB2CA28FCA91AE7206BA6A2DC5F20158EBB0C1310C370EAD",
+  "registered": {
+    "tool_count": 58,
+    "resource_count": 2,
+    "resource_uris": [
+      "amazingdata://doc/api-summary",
+      "amazingdata://doc/manual"
+    ],
+    "required_tools": [
+      "mcp_index_constituent",
+      "mcp_index_constituent_weight",
+      "mcp_announcement_stock_list",
+      "mcp_corporate_action_timeline",
+      "mcp_total_return_open"
+    ],
+    "missing_required_tools": []
+  },
+  "repairs": [
+    "启动环境变量优先使用 AD_USERNAME/AD_PASSWORD/AD_HOST/AD_PORT，同时保留旧名称兼容。",
+    "按 SDK 真实返回类型序列化 DataFrame 与 dict[str, DataFrame]，并保留日期索引。",
+    "指数日权重改用手册定义的 get_index_weight。",
+    "历史成分股 date 参数按 INDATE/OUTDATE 生效区间过滤，并正确处理 20201231.0 形式日期。",
+    "新增公告清单、公司行动时态和因果 OPEN_TR/CLOSE_TR 工具。",
+    "公司行动保留原始公告日、生效日及派生 KNOWN_AT，OPEN_TR 保留 PRECLOSE 与除权除息/可交易审计字段。",
+    "FastMCP 资源 URI 改为合法 amazingdata:// scheme。",
+    "stderr 承载日志并屏蔽关键 SDK 控制台输出，避免污染 stdio JSON-RPC。"
+  ],
+  "tests": {
+    "offline_unit": {
+      "passed": 8,
+      "failed": 0,
+      "includes": [
+        "日期索引保留",
+        "字典序列化",
+        "历史成分区间过滤",
+        "日期浮点格式兼容",
+        "公司行动 KNOWN_AT 派生与原字段保留",
+        "OPEN_TR 前缀不变性与除权审计"
+      ]
+    },
+    "live_read_only": {
+      "success": true,
+      "raw_market_values_emitted": false,
+      "index_constituent_count_as_of_20200115": 300,
+      "index_weight_rows_202001": 4800,
+      "corporate_action_rows_sample": 12,
+      "open_tr_full_rows_sample": 16,
+      "open_tr_prefix_rows_sample": 13,
+      "open_tr_prefix_invariant_observed": true
+    }
+  },
+  "unresolved_research_blockers": [
+    "INDATE/OUTDATE 和 TRADE_DATE 是生效时间，不是指数调整公告的原生 known_at；仍缺中证指数调整公告时间源。",
+    "日线与历史状态没有原生 available_at；必须在快照层冻结抓取时间和收盘后可用规则，不能伪造历史可得时间。",
+    "OPEN_TR 已可因果构造并审计，但正式快照仍需完整公司行动账本、版本与哈希。",
+    "基础信息只有 DELISTDATE/IS_LISTED，没有退市处置价格或现金补偿；需要补充来源或在看结果前预注册保守损失规则。"
+  ],
+  "decision": "MCP 工程接口已可加载和查询，但第一期正式实验仍不得启动；先补齐或冻结上述研究时态与退市规则。"
+}
