@@ -1,0 +1,715 @@
+{
+  "protocol": "w1ngman_stage4_feasibility_oof_only_v2",
+  "status": "KEEP_1D_BASELINE",
+  "stage3_protocol": "w1ngman_stage3_minimum_loop_v1",
+  "snapshot_id": "csi300_2014_present_v2",
+  "snapshot_dir": "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2",
+  "config_hash": "5a25efafe5c095009383e1d510c8bca2e47990afb249de2815b2e089075ee7cd",
+  "thresholds": {
+    "min_sharpe_improvement": 0.15,
+    "min_annualized_improvement": 0.02,
+    "family_alpha": 0.05,
+    "bootstrap_block_days": 20,
+    "bootstrap_samples": 2000,
+    "random_seed": 20260812
+  },
+  "baseline_1d": {
+    "horizon": 1,
+    "median_sharpe": -0.6552700653865917,
+    "median_annualized_return": -0.10988260841274733,
+    "median_max_drawdown": 0.5539403161793353,
+    "worst_phase_sharpe": -0.6552700653865917,
+    "phases_agreeing": 1,
+    "phases": [
+      {
+        "phase": 0,
+        "observations": 1525,
+        "total_return": -0.5241877539899764,
+        "annualized_return": -0.10988260841274733,
+        "sharpe": -0.6552700653865917,
+        "sortino": -0.9104863716057348,
+        "max_drawdown": 0.5539403161793353,
+        "calmar": -0.19836542891594375
+      }
+    ],
+    "cost_attribution": {
+      "available": true,
+      "source": "development_oof_portfolio_daily.parquet cost x1",
+      "median_gross_sharpe": 0.46100433641655497,
+      "median_net_sharpe": -0.6552700653865917,
+      "median_gross_annualized_return": 0.062237628082040475,
+      "median_net_annualized_return": -0.10988260841274733,
+      "median_cost_drag_annualized": 0.1721202364947878,
+      "median_cost_drag_sharpe": 1.1162744018031467,
+      "phases": [
+        {
+          "phase": 0,
+          "gross_sharpe": 0.46100433641655497,
+          "net_sharpe": -0.6552700653865917,
+          "gross_annualized_return": 0.062237628082040475,
+          "net_annualized_return": -0.10988260841274733,
+          "cost_drag_annualized": 0.1721202364947878,
+          "cost_drag_sharpe": 1.1162744018031467
+        }
+      ],
+      "enters_go": false,
+      "note": "Disclosure only. GO uses net Sharpe and net annualized return at cost x1. Thresholds are not changed by this split.",
+      "median_mean_daily_turnover": 0.7328270723710028
+    }
+  },
+  "horizons": {
+    "3": {
+      "horizon": 3,
+      "phases": [
+        {
+          "phase": 0,
+          "observations": 1525,
+          "total_return": -0.2589232058522746,
+          "annualized_return": -0.045876061446194716,
+          "sharpe": -0.2055390566654848,
+          "sortino": -0.2864699479497803,
+          "max_drawdown": 0.41552424962434986,
+          "calmar": -0.11040525670323324
+        },
+        {
+          "phase": 1,
+          "observations": 1525,
+          "total_return": -0.3752916779979709,
+          "annualized_return": -0.07108007777040459,
+          "sharpe": -0.3845237589035292,
+          "sortino": -0.532305192444635,
+          "max_drawdown": 0.4568792045955211,
+          "calmar": -0.15557739782298116
+        },
+        {
+          "phase": 2,
+          "observations": 1525,
+          "total_return": -0.37693452864309984,
+          "annualized_return": -0.07146335162367135,
+          "sharpe": -0.3827819210423569,
+          "sortino": -0.5241479633265378,
+          "max_drawdown": 0.4149444405571533,
+          "calmar": -0.17222390430804718
+        }
+      ],
+      "median_sharpe": -0.3827819210423569,
+      "median_annualized_return": -0.07108007777040459,
+      "median_max_drawdown": 0.41552424962434986,
+      "worst_phase_sharpe": -0.3845237589035292,
+      "phases_agreeing": 3,
+      "folds_agreeing": 1,
+      "signals_agreeing": 1,
+      "signal_rank_ic_deltas": {
+        "MOM_20": -0.0035574828669802418,
+        "REV_5": -0.007924013569943125,
+        "LOW_VOL_20": 0.009912049188414915
+      },
+      "concentration_ok": true,
+      "concentration_detail": {
+        "year_deltas": {
+          "2018": 0.3636799583727419,
+          "2019": 0.33423891947337636,
+          "2020": 0.49105072327978655,
+          "2021": 0.33148200250230286,
+          "2022": 0.30950405153257377,
+          "2023": 0.34360359019603354,
+          "2024": 0.331425374024248
+        },
+        "years_agreeing": 7,
+        "industry_leave_one_out": {
+          "801780.SI": -0.0018329379392365772,
+          "801180.SI": -0.000919587297523252,
+          "801890.SI": 1.6701204979922835e-06,
+          "801050.SI": -0.0003275693131424562,
+          "801770.SI": 0.0001733038614536407,
+          "801110.SI": 8.844355250450797e-05,
+          "801790.SI": -0.0016499723700481445,
+          "801880.SI": -0.0003141224958082972,
+          "801080.SI": 0.0019369264690585475,
+          "801150.SI": -0.0007291341209459054,
+          "801120.SI": 0.0006820937633807006,
+          "801040.SI": 0.00031661938827349037,
+          "801950.SI": 0.0002325782539665637,
+          "801740.SI": 0.00034559768838511237,
+          "801030.SI": -0.00019730766887371062,
+          "801970.SI": 3.832091185817371e-05,
+          "801230.SI": 0.00014055936769851937,
+          "801010.SI": -6.050465083064574e-05,
+          "801750.SI": 0.0007555678135919112,
+          "801200.SI": 0.00013598899838178705,
+          "801760.SI": 0.0003399903872255,
+          "801730.SI": 0.0009693612210579274,
+          "801720.SI": 1.7920827090133623e-05,
+          "801170.SI": 0.00013975263954720332,
+          "801140.SI": 4.619360200569869e-05,
+          "801160.SI": -0.0002497926824699924,
+          "801210.SI": 0.00012966113975768773,
+          "801960.SI": 0.0002230033365737301,
+          "801130.SI": 5.548119786792302e-05,
+          "801710.SI": -0.00011420182529927464,
+          "801980.SI": -6.986642464039752e-05
+        },
+        "stock_drop_top5pct_ok": "True"
+      },
+      "cost_sensitivity": {
+        "by_multiplier": {
+          "0.0": {
+            "median_sharpe": 0.30794202841054386,
+            "median_annualized_return": 0.04111038424112867
+          },
+          "1.0": {
+            "median_sharpe": -0.26827709506274017,
+            "median_annualized_return": -0.05662718692098179
+          },
+          "1.5": {
+            "median_sharpe": -0.6296866452717468,
+            "median_annualized_return": -0.10185198722945754
+          }
+        },
+        "gross_minus_net_hint": "gross/net split is disclosed per fold in stage3_report; medians use cost x1",
+        "median_net_sharpe_x1": -0.26827709506274017
+      },
+      "cost_attribution": {
+        "available": true,
+        "source": "development_oof_portfolio_daily.parquet cost x1",
+        "median_gross_sharpe": 0.22277602205944882,
+        "median_net_sharpe": -0.3827819210423569,
+        "median_gross_annualized_return": 0.022945963783096435,
+        "median_net_annualized_return": -0.07108007777040459,
+        "median_cost_drag_annualized": 0.09402604155350103,
+        "median_cost_drag_sharpe": 0.6055579431018058,
+        "phases": [
+          {
+            "phase": 0,
+            "gross_sharpe": 0.39404549703282565,
+            "net_sharpe": -0.2055390566654848,
+            "gross_annualized_return": 0.05218397535307284,
+            "net_annualized_return": -0.045876061446194716,
+            "cost_drag_annualized": 0.09806003679926756,
+            "cost_drag_sharpe": 0.5995845536983104
+          },
+          {
+            "phase": 1,
+            "gross_sharpe": 0.22277602205944882,
+            "net_sharpe": -0.3845237589035292,
+            "gross_annualized_return": 0.022945963783096435,
+            "net_annualized_return": -0.07108007777040459,
+            "cost_drag_annualized": 0.09402604155350103,
+            "cost_drag_sharpe": 0.607299780962978
+          },
+          {
+            "phase": 2,
+            "gross_sharpe": 0.214184769353776,
+            "net_sharpe": -0.3827819210423569,
+            "gross_annualized_return": 0.021623118447406053,
+            "net_annualized_return": -0.07146335162367135,
+            "cost_drag_annualized": 0.0930864700710774,
+            "cost_drag_sharpe": 0.5969666903961329
+          }
+        ],
+        "enters_go": false,
+        "note": "Disclosure only. GO uses net Sharpe and net annualized return at cost x1. Thresholds are not changed by this split.",
+        "median_mean_daily_turnover": 0.39999249437622625,
+        "vs_1d": {
+          "gross_alpha_annualized": -0.03929166429894404,
+          "cost_reduction_annualized": 0.07809419494128678,
+          "net_annualized": 0.038802530642342736,
+          "identity_residual": 0.0,
+          "note": "net = gross_alpha + cost_reduction; positive cost_reduction means lower cost drag than 1d"
+        }
+      }
+    },
+    "5": {
+      "horizon": 5,
+      "phases": [
+        {
+          "phase": 0,
+          "observations": 1525,
+          "total_return": -0.2319247303515587,
+          "annualized_return": -0.040510270341485244,
+          "sharpe": -0.17432595050899,
+          "sortino": -0.24267544993891854,
+          "max_drawdown": 0.3419774544222537,
+          "calmar": -0.11845889200480901
+        },
+        {
+          "phase": 1,
+          "observations": 1525,
+          "total_return": -0.1965768000425716,
+          "annualized_return": -0.03372052036100137,
+          "sharpe": -0.12232249038046168,
+          "sortino": -0.16887694651670432,
+          "max_drawdown": 0.32641248579298,
+          "calmar": -0.103306465986071
+        },
+        {
+          "phase": 2,
+          "observations": 1525,
+          "total_return": -0.31540864581698846,
+          "annualized_return": -0.05765789848126002,
+          "sharpe": -0.29260945172081004,
+          "sortino": -0.3867856372453559,
+          "max_drawdown": 0.3596073650875844,
+          "calmar": -0.16033569965180527
+        },
+        {
+          "phase": 3,
+          "observations": 1525,
+          "total_return": -0.2818157515462425,
+          "annualized_return": -0.05055656056926072,
+          "sharpe": -0.2443552097003266,
+          "sortino": -0.3294310325927681,
+          "max_drawdown": 0.3749889881961592,
+          "calmar": -0.13482145385777103
+        },
+        {
+          "phase": 4,
+          "observations": 1525,
+          "total_return": -0.14796751576884792,
+          "annualized_return": -0.02478359785152673,
+          "sharpe": -0.07793773349457399,
+          "sortino": -0.11074128250661616,
+          "max_drawdown": 0.32669298037194994,
+          "calmar": -0.0758620458367665
+        }
+      ],
+      "median_sharpe": -0.17432595050899,
+      "median_annualized_return": -0.040510270341485244,
+      "median_max_drawdown": 0.3419774544222537,
+      "worst_phase_sharpe": -0.29260945172081004,
+      "phases_agreeing": 5,
+      "folds_agreeing": 1,
+      "signals_agreeing": 1,
+      "signal_rank_ic_deltas": {
+        "MOM_20": -0.004322278932749491,
+        "REV_5": -0.011428098812756093,
+        "LOW_VOL_20": 0.012775451295275922
+      },
+      "concentration_ok": false,
+      "concentration_detail": {
+        "year_deltas": {
+          "2018": 0.5386753565638085,
+          "2019": 0.47813365572297367,
+          "2020": 0.7074155219932288,
+          "2021": 0.5284943385154734,
+          "2022": 0.5360321712719622,
+          "2023": 0.5458488629470056,
+          "2024": 0.5281752719547282
+        },
+        "years_agreeing": 7,
+        "industry_leave_one_out": {
+          "801780.SI": -0.0036721063947803244,
+          "801180.SI": -0.0021241370121613395,
+          "801890.SI": -0.0013764556529420914,
+          "801050.SI": -0.0017186176274075898,
+          "801770.SI": -0.0006730326548960996,
+          "801110.SI": -0.0007383043263882692,
+          "801790.SI": -0.0032816043327905664,
+          "801880.SI": -0.0012867090851324883,
+          "801080.SI": 0.0015305784606358189,
+          "801150.SI": -0.00274817068027643,
+          "801120.SI": -0.0002695243035661099,
+          "801040.SI": -0.0006731606241899071,
+          "801950.SI": -0.0008109474115139993,
+          "801740.SI": -0.0005461352844248583,
+          "801030.SI": -0.0016637045501824849,
+          "801970.SI": -0.0010708130181577222,
+          "801230.SI": -0.0009044208176312851,
+          "801010.SI": -0.00136890157456631,
+          "801750.SI": -1.1258804698256047e-05,
+          "801200.SI": -0.0008632361351194988,
+          "801760.SI": -0.0006733066530667312,
+          "801730.SI": 0.0005093509193649579,
+          "801720.SI": -0.0011860628546659785,
+          "801170.SI": -0.001228176412886084,
+          "801140.SI": -0.0010975945985022585,
+          "801160.SI": -0.0013378374877248238,
+          "801210.SI": -0.000942121236161754,
+          "801960.SI": -0.0008667428770276174,
+          "801130.SI": -0.0009895565018380494,
+          "801710.SI": -0.0012555171957215304,
+          "801980.SI": -0.0012254393531127283
+        },
+        "stock_drop_top5pct_ok": false
+      },
+      "cost_sensitivity": {
+        "by_multiplier": {
+          "0.0": {
+            "median_sharpe": 0.27781382043895797,
+            "median_annualized_return": 0.02714314739703627
+          },
+          "1.0": {
+            "median_sharpe": -0.21085402942343948,
+            "median_annualized_return": -0.04071620170218837
+          },
+          "1.5": {
+            "median_sharpe": -0.4672213160394756,
+            "median_annualized_return": -0.0730973917360147
+          }
+        },
+        "gross_minus_net_hint": "gross/net split is disclosed per fold in stage3_report; medians use cost x1",
+        "median_net_sharpe_x1": -0.21085402942343948
+      },
+      "cost_attribution": {
+        "available": true,
+        "source": "development_oof_portfolio_daily.parquet cost x1",
+        "median_gross_sharpe": 0.2667265959804495,
+        "median_net_sharpe": -0.17432595050899,
+        "median_gross_annualized_return": 0.030474032555518837,
+        "median_net_annualized_return": -0.040510270341485244,
+        "median_cost_drag_annualized": 0.07098430289700408,
+        "median_cost_drag_sharpe": 0.4410525464894395,
+        "phases": [
+          {
+            "phase": 0,
+            "gross_sharpe": 0.2667265959804495,
+            "net_sharpe": -0.17432595050899,
+            "gross_annualized_return": 0.030474032555518837,
+            "net_annualized_return": -0.040510270341485244,
+            "cost_drag_annualized": 0.07098430289700408,
+            "cost_drag_sharpe": 0.4410525464894395
+          },
+          {
+            "phase": 1,
+            "gross_sharpe": 0.30217679159565275,
+            "net_sharpe": -0.12232249038046168,
+            "gross_annualized_return": 0.03698827960494677,
+            "net_annualized_return": -0.03372052036100137,
+            "cost_drag_annualized": 0.07070879996594814,
+            "cost_drag_sharpe": 0.4244992819761144
+          },
+          {
+            "phase": 2,
+            "gross_sharpe": 0.13172320881155952,
+            "net_sharpe": -0.29260945172081004,
+            "gross_annualized_return": 0.008235450609198613,
+            "net_annualized_return": -0.05765789848126002,
+            "cost_drag_annualized": 0.06589334909045863,
+            "cost_drag_sharpe": 0.42433266053236957
+          },
+          {
+            "phase": 3,
+            "gross_sharpe": 0.19066387399218948,
+            "net_sharpe": -0.2443552097003266,
+            "gross_annualized_return": 0.017764767809885562,
+            "net_annualized_return": -0.05055656056926072,
+            "cost_drag_annualized": 0.06832132837914628,
+            "cost_drag_sharpe": 0.4350190836925161
+          },
+          {
+            "phase": 4,
+            "gross_sharpe": 0.3647881511731709,
+            "net_sharpe": -0.07793773349457399,
+            "gross_annualized_return": 0.04623607610425484,
+            "net_annualized_return": -0.02478359785152673,
+            "cost_drag_annualized": 0.07101967395578157,
+            "cost_drag_sharpe": 0.44272588466774493
+          }
+        ],
+        "enters_go": false,
+        "note": "Disclosure only. GO uses net Sharpe and net annualized return at cost x1. Thresholds are not changed by this split.",
+        "median_mean_daily_turnover": 0.2915714687126621,
+        "vs_1d": {
+          "gross_alpha_annualized": -0.03176359552652164,
+          "cost_reduction_annualized": 0.10113593359778372,
+          "net_annualized": 0.06937233807126209,
+          "identity_residual": 0.0,
+          "note": "net = gross_alpha + cost_reduction; positive cost_reduction means lower cost drag than 1d"
+        }
+      }
+    }
+  },
+  "bootstrap": {
+    "3d_vs_1d": {
+      "observed": 0.2724881443442348,
+      "ci_low": 0.09300258273663067,
+      "ci_high": 0.5443858725452723,
+      "p_value": 0.0009995002498750624,
+      "samples": 2000,
+      "seed": 20260812,
+      "block_days": 20
+    },
+    "5d_vs_1d": {
+      "observed": 0.4809441148776017,
+      "ci_low": 0.1985200482158031,
+      "ci_high": 0.7586375717204771,
+      "p_value": 0.0009995002498750624,
+      "samples": 2000,
+      "seed": 20260812,
+      "block_days": 20
+    }
+  },
+  "holm": {
+    "3d_vs_1d": {
+      "p_value": 0.0009995002498750624,
+      "p_holm": 0.001999000499750125,
+      "reject": true,
+      "alpha": 0.05
+    },
+    "5d_vs_1d": {
+      "p_value": 0.0009995002498750624,
+      "p_holm": 0.001999000499750125,
+      "reject": true,
+      "alpha": 0.05
+    }
+  },
+  "oof_scope": {
+    "oof_only": true,
+    "oof_date_count": 1525,
+    "oof_start": "2018-04-03",
+    "oof_end": "2024-08-22",
+    "feature_rows_used": 457500,
+    "feature_rows_excluded_non_oof": 319800,
+    "label_rows_used": 4117500,
+    "label_rows_excluded_non_oof": 2878200
+  },
+  "go": {
+    "3": {
+      "horizon": 3,
+      "passed": false,
+      "sharpe_delta": 0.2724881443442348,
+      "annualized_delta": 0.038802530642342736,
+      "checks": {
+        "sharpe_improvement": {
+          "passed": true,
+          "observed": 0.2724881443442348,
+          "threshold": 0.15
+        },
+        "annualized_improvement": {
+          "passed": true,
+          "observed": 0.038802530642342736,
+          "threshold": 0.02
+        },
+        "bootstrap_ci_lower_positive": {
+          "passed": true,
+          "observed": 0.09300258273663067,
+          "threshold": 0.0
+        },
+        "holm_family": {
+          "passed": true,
+          "observed": 0.001999000499750125,
+          "threshold": 0.05
+        },
+        "phase_direction": {
+          "passed": true,
+          "observed": 3,
+          "threshold": 2
+        },
+        "worst_phase_floor": {
+          "passed": true,
+          "observed": 0.2707463064830625,
+          "threshold": -0.25
+        },
+        "fold_direction": {
+          "passed": false,
+          "observed": 1,
+          "threshold": 3
+        },
+        "drawdown_bound": {
+          "passed": true,
+          "observed": 0.41552424962434986,
+          "threshold": 0.6647283794152022
+        },
+        "signal_direction": {
+          "passed": false,
+          "observed": 1,
+          "threshold": 2
+        },
+        "not_single_year_or_group": {
+          "passed": true,
+          "observed": {
+            "year_deltas": {
+              "2018": 0.3636799583727419,
+              "2019": 0.33423891947337636,
+              "2020": 0.49105072327978655,
+              "2021": 0.33148200250230286,
+              "2022": 0.30950405153257377,
+              "2023": 0.34360359019603354,
+              "2024": 0.331425374024248
+            },
+            "years_agreeing": 7,
+            "industry_leave_one_out": {
+              "801780.SI": -0.0018329379392365772,
+              "801180.SI": -0.000919587297523252,
+              "801890.SI": 1.6701204979922835e-06,
+              "801050.SI": -0.0003275693131424562,
+              "801770.SI": 0.0001733038614536407,
+              "801110.SI": 8.844355250450797e-05,
+              "801790.SI": -0.0016499723700481445,
+              "801880.SI": -0.0003141224958082972,
+              "801080.SI": 0.0019369264690585475,
+              "801150.SI": -0.0007291341209459054,
+              "801120.SI": 0.0006820937633807006,
+              "801040.SI": 0.00031661938827349037,
+              "801950.SI": 0.0002325782539665637,
+              "801740.SI": 0.00034559768838511237,
+              "801030.SI": -0.00019730766887371062,
+              "801970.SI": 3.832091185817371e-05,
+              "801230.SI": 0.00014055936769851937,
+              "801010.SI": -6.050465083064574e-05,
+              "801750.SI": 0.0007555678135919112,
+              "801200.SI": 0.00013598899838178705,
+              "801760.SI": 0.0003399903872255,
+              "801730.SI": 0.0009693612210579274,
+              "801720.SI": 1.7920827090133623e-05,
+              "801170.SI": 0.00013975263954720332,
+              "801140.SI": 4.619360200569869e-05,
+              "801160.SI": -0.0002497926824699924,
+              "801210.SI": 0.00012966113975768773,
+              "801960.SI": 0.0002230033365737301,
+              "801130.SI": 5.548119786792302e-05,
+              "801710.SI": -0.00011420182529927464,
+              "801980.SI": -6.986642464039752e-05
+            },
+            "stock_drop_top5pct_ok": "True"
+          },
+          "threshold": "year/industry/stock leave-one-group"
+        }
+      },
+      "thresholds": {
+        "min_sharpe_improvement": 0.15,
+        "min_annualized_improvement": 0.02,
+        "family_alpha": 0.05,
+        "worst_phase_sharpe_gap": 0.25,
+        "max_drawdown_ratio": 1.2,
+        "min_phase_agree_3": 2,
+        "min_phase_agree_5": 3,
+        "min_fold_agree": 3,
+        "min_signal_agree": 2,
+        "min_year_agree": 2
+      }
+    },
+    "5": {
+      "horizon": 5,
+      "passed": false,
+      "sharpe_delta": 0.4809441148776017,
+      "annualized_delta": 0.06937233807126209,
+      "checks": {
+        "sharpe_improvement": {
+          "passed": true,
+          "observed": 0.4809441148776017,
+          "threshold": 0.15
+        },
+        "annualized_improvement": {
+          "passed": true,
+          "observed": 0.06937233807126209,
+          "threshold": 0.02
+        },
+        "bootstrap_ci_lower_positive": {
+          "passed": true,
+          "observed": 0.1985200482158031,
+          "threshold": 0.0
+        },
+        "holm_family": {
+          "passed": true,
+          "observed": 0.001999000499750125,
+          "threshold": 0.05
+        },
+        "phase_direction": {
+          "passed": true,
+          "observed": 5,
+          "threshold": 3
+        },
+        "worst_phase_floor": {
+          "passed": true,
+          "observed": 0.3626606136657817,
+          "threshold": -0.25
+        },
+        "fold_direction": {
+          "passed": false,
+          "observed": 1,
+          "threshold": 3
+        },
+        "drawdown_bound": {
+          "passed": true,
+          "observed": 0.3419774544222537,
+          "threshold": 0.6647283794152022
+        },
+        "signal_direction": {
+          "passed": false,
+          "observed": 1,
+          "threshold": 2
+        },
+        "not_single_year_or_group": {
+          "passed": false,
+          "observed": {
+            "year_deltas": {
+              "2018": 0.5386753565638085,
+              "2019": 0.47813365572297367,
+              "2020": 0.7074155219932288,
+              "2021": 0.5284943385154734,
+              "2022": 0.5360321712719622,
+              "2023": 0.5458488629470056,
+              "2024": 0.5281752719547282
+            },
+            "years_agreeing": 7,
+            "industry_leave_one_out": {
+              "801780.SI": -0.0036721063947803244,
+              "801180.SI": -0.0021241370121613395,
+              "801890.SI": -0.0013764556529420914,
+              "801050.SI": -0.0017186176274075898,
+              "801770.SI": -0.0006730326548960996,
+              "801110.SI": -0.0007383043263882692,
+              "801790.SI": -0.0032816043327905664,
+              "801880.SI": -0.0012867090851324883,
+              "801080.SI": 0.0015305784606358189,
+              "801150.SI": -0.00274817068027643,
+              "801120.SI": -0.0002695243035661099,
+              "801040.SI": -0.0006731606241899071,
+              "801950.SI": -0.0008109474115139993,
+              "801740.SI": -0.0005461352844248583,
+              "801030.SI": -0.0016637045501824849,
+              "801970.SI": -0.0010708130181577222,
+              "801230.SI": -0.0009044208176312851,
+              "801010.SI": -0.00136890157456631,
+              "801750.SI": -1.1258804698256047e-05,
+              "801200.SI": -0.0008632361351194988,
+              "801760.SI": -0.0006733066530667312,
+              "801730.SI": 0.0005093509193649579,
+              "801720.SI": -0.0011860628546659785,
+              "801170.SI": -0.001228176412886084,
+              "801140.SI": -0.0010975945985022585,
+              "801160.SI": -0.0013378374877248238,
+              "801210.SI": -0.000942121236161754,
+              "801960.SI": -0.0008667428770276174,
+              "801130.SI": -0.0009895565018380494,
+              "801710.SI": -0.0012555171957215304,
+              "801980.SI": -0.0012254393531127283
+            },
+            "stock_drop_top5pct_ok": false
+          },
+          "threshold": "year/industry/stock leave-one-group"
+        }
+      },
+      "thresholds": {
+        "min_sharpe_improvement": 0.15,
+        "min_annualized_improvement": 0.02,
+        "family_alpha": 0.05,
+        "worst_phase_sharpe_gap": 0.25,
+        "max_drawdown_ratio": 1.2,
+        "min_phase_agree_3": 2,
+        "min_phase_agree_5": 3,
+        "min_fold_agree": 3,
+        "min_signal_agree": 2,
+        "min_year_agree": 2
+      }
+    }
+  },
+  "restrictions": [
+    "Holdout未读取、未计算表现",
+    "所有稳健性、集中度与信号一致性统计仅使用Development OOF日期",
+    "毛Alpha/成本节约/净改善仅为披露，不进入GO判定、不修改预注册阈值",
+    "阶段4不自动重跑阶段3；缺失产物时失败关闭",
+    "RD-Agent仅在 RESEARCH_GATE_PASSED 后才允许启动",
+    "不得根据本报告修改预注册GO阈值",
+    "本门禁不等于 PRODUCTION_ELIGIBLE"
+  ],
+  "statistical_gate": "KEEP_1D_BASELINE",
+  "horizon_conclusion": "KEEP_1D_BASELINE",
+  "allowed_horizons": [
+    1
+  ],
+  "system_status": "MODEL_NOT_VALIDATED",
+  "rd_agent_allowed": false,
+  "holdout_read": false
+}

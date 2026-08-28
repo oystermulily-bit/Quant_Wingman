@@ -29,10 +29,10 @@
     "snapshot_id": "csi300_2014_present_v2",
     "output": "experiments/stage3_hs300_v2",
     "status": "STAGE3_MINIMUM_LOOP_COMPLETED",
-    "statistical_gate": "PENDING_STAGE4_FEASIBILITY_DECISION",
+    "statistical_gate": "KEEP_1D_BASELINE",
     "holdout_rows_in_outputs": 0
   },
   "formal_market_data_used": true,
-  "research_conclusion": "PENDING_STAGE4_FEASIBILITY_DECISION",
+  "research_conclusion": "STAGE3_MINIMUM_LOOP_COMPLETED",
   "system_status": "MODEL_NOT_VALIDATED"
 }

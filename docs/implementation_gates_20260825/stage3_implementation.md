@@ -2,7 +2,7 @@
 
 状态：`STAGE3_MINIMUM_LOOP_COMPLETED`  
 系统状态：`MODEL_NOT_VALIDATED`  
-统计门禁：`PENDING_STAGE4_FEASIBILITY_DECISION`
+统计门禁：`KEEP_1D_BASELINE`（见 `stage4_implementation.md`）
 
 ## 已实现
 
@@ -45,7 +45,7 @@ development_oof_portfolio_daily.parquet
 stage3_report.json
 ```
 
-输出目录不会产生 Holdout Parquet。阶段4完成配对移动块 Bootstrap、Holm 校正和预注册 GO 判断前，统计状态保持 `PENDING_STAGE4_FEASIBILITY_DECISION`。
+输出目录不会产生 Holdout Parquet。阶段4已完成，统计结论为 `KEEP_1D_BASELINE`；详见 `stage4_implementation.md`。
 
 ## 正式 Development OOF（已跑）
 

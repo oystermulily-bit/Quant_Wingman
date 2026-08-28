@@ -10,13 +10,18 @@ import numpy as np
 import pandas as pd
 
 from research_stage3.protocol import Stage3Config
-from research_stage3.runner import Stage3ResearchRunner
 
 from .gate import Stage4Thresholds, classify_gate, evaluate_horizon_go
 from .stats import holm_adjust, paired_horizon_bootstrap, performance_from_returns
 
 STAGE4_PROTOCOL_VERSION = "w1ngman_stage4_feasibility_oof_only_v2"
 SIGNAL_COLUMNS = ("MOM_20", "REV_5", "LOW_VOL_20")
+REQUIRED_STAGE3_FILES = (
+    "development_oof_portfolio_daily.parquet",
+    "stage3_report.json",
+    "development_features.parquet",
+    "development_labels.parquet",
+)
 
 
 def _atomic_json(path: Path, payload: Any) -> None:
@@ -45,6 +50,14 @@ def _rank_ic(frame: pd.DataFrame, score: str, value: str = "value") -> float | N
 
 def _median_phase(rows: list[dict[str, Any]], field: str) -> float:
     return float(np.median([float(row[field]) for row in rows]))
+
+
+def _signed_direction(value: float, eps: float = 1e-12) -> int:
+    if value > eps:
+        return 1
+    if value < -eps:
+        return -1
+    return 0
 
 
 def _restrict_to_oof(
@@ -129,14 +142,20 @@ def _restrict_to_oof(
     }
 
 
-def _series_by_phase(daily: pd.DataFrame, horizon: int) -> tuple[np.ndarray, dict[int, np.ndarray]]:
+def _series_by_phase(
+    daily: pd.DataFrame,
+    horizon: int,
+    field: str = "net_return",
+) -> tuple[np.ndarray, dict[int, np.ndarray]]:
     subset = daily.loc[daily["horizon"] == horizon].copy()
+    if field not in subset.columns:
+        raise ValueError(f"OOF daily artifact missing column: {field}")
     subset["date"] = pd.to_datetime(subset["date"]).dt.normalize()
     dates = None
     phases: dict[int, np.ndarray] = {}
     for phase, block in subset.groupby("phase", observed=True):
         folded = (
-            block.groupby("date", sort=True)["net_return"]
+            block.groupby("date", sort=True)[field]
             .mean()
             .sort_index()
         )
@@ -163,13 +182,15 @@ def _horizon_metrics(
         perf = performance_from_returns(series, annual_days=annual_days)
         phase_rows.append({"phase": phase, **perf})
     median_sharpe = _median_phase(phase_rows, "sharpe")
-    direction = np.sign(median_sharpe - baseline_sharpe) if horizon != 1 else 1.0
-    agreeing = sum(
-        1
-        for row in phase_rows
-        if horizon == 1 or np.sign(row["sharpe"] - baseline_sharpe) == np.sign(direction)
-        or abs(median_sharpe - baseline_sharpe) < 1e-12
-    )
+    median_sign = _signed_direction(median_sharpe - baseline_sharpe)
+    if horizon == 1:
+        agreeing = len(phase_rows)
+    else:
+        agreeing = sum(
+            1
+            for row in phase_rows
+            if _signed_direction(row["sharpe"] - baseline_sharpe) == median_sign
+        )
     return {
         "horizon": horizon,
         "phases": phase_rows,
@@ -177,8 +198,79 @@ def _horizon_metrics(
         "median_annualized_return": _median_phase(phase_rows, "annualized_return"),
         "median_max_drawdown": _median_phase(phase_rows, "max_drawdown"),
         "worst_phase_sharpe": min(row["sharpe"] for row in phase_rows),
-        "phases_agreeing": agreeing if horizon != 1 else len(phase_rows),
+        "phases_agreeing": agreeing,
     }
+
+
+def _oof_cost_attribution(
+    daily: pd.DataFrame,
+    horizon: int,
+    *,
+    annual_days: int,
+    baseline: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Disclose gross alpha vs cost reduction vs net. Does not enter GO checks."""
+    if "gross_return" not in daily.columns:
+        return {"available": False, "reason": "OOF daily artifact has no gross_return"}
+    _dates, net_phases = _series_by_phase(daily, horizon, field="net_return")
+    _gross_dates, gross_phases = _series_by_phase(daily, horizon, field="gross_return")
+    del _dates, _gross_dates
+    phase_rows: list[dict[str, Any]] = []
+    for phase in sorted(net_phases):
+        net = performance_from_returns(net_phases[phase], annual_days=annual_days)
+        gross = performance_from_returns(gross_phases[phase], annual_days=annual_days)
+        phase_rows.append(
+            {
+                "phase": phase,
+                "gross_sharpe": gross["sharpe"],
+                "net_sharpe": net["sharpe"],
+                "gross_annualized_return": gross["annualized_return"],
+                "net_annualized_return": net["annualized_return"],
+                "cost_drag_annualized": gross["annualized_return"] - net["annualized_return"],
+                "cost_drag_sharpe": gross["sharpe"] - net["sharpe"],
+            }
+        )
+    median_gross_ann = _median_phase(phase_rows, "gross_annualized_return")
+    median_net_ann = _median_phase(phase_rows, "net_annualized_return")
+    median_gross_sharpe = _median_phase(phase_rows, "gross_sharpe")
+    median_net_sharpe = _median_phase(phase_rows, "net_sharpe")
+    cost_drag_ann = median_gross_ann - median_net_ann
+    payload: dict[str, Any] = {
+        "available": True,
+        "source": "development_oof_portfolio_daily.parquet cost x1",
+        "median_gross_sharpe": median_gross_sharpe,
+        "median_net_sharpe": median_net_sharpe,
+        "median_gross_annualized_return": median_gross_ann,
+        "median_net_annualized_return": median_net_ann,
+        "median_cost_drag_annualized": cost_drag_ann,
+        "median_cost_drag_sharpe": median_gross_sharpe - median_net_sharpe,
+        "phases": phase_rows,
+        "enters_go": False,
+        "note": (
+            "Disclosure only. GO uses net Sharpe and net annualized return at cost x1. "
+            "Thresholds are not changed by this split."
+        ),
+    }
+    turnover_field = "turnover" if "turnover" in daily.columns else None
+    if turnover_field:
+        subset = daily.loc[daily["horizon"] == horizon]
+        phase_turnover = [
+            float(block[turnover_field].mean())
+            for _, block in subset.groupby("phase", observed=True)
+        ]
+        payload["median_mean_daily_turnover"] = float(np.median(phase_turnover)) if phase_turnover else None
+    if baseline is not None:
+        gross_delta = median_gross_ann - float(baseline["median_gross_annualized_return"])
+        net_delta = median_net_ann - float(baseline["median_net_annualized_return"])
+        cost_reduction = float(baseline["median_cost_drag_annualized"]) - cost_drag_ann
+        payload["vs_1d"] = {
+            "gross_alpha_annualized": gross_delta,
+            "cost_reduction_annualized": cost_reduction,
+            "net_annualized": net_delta,
+            "identity_residual": abs((gross_delta + cost_reduction) - net_delta),
+            "note": "net = gross_alpha + cost_reduction; positive cost_reduction means lower cost drag than 1d",
+        }
+    return payload
 
 
 def _fold_agreement(
@@ -392,7 +484,10 @@ def _concentration_ok(
         sub_h = _rank_ic(joined[~joined["code"].isin(drop)], "simple_ensemble")
         sub_1 = _rank_ic(joined_1[~joined_1["code"].isin(drop)], "simple_ensemble")
         if sub_h is not None and sub_1 is not None:
-            stock_ok = np.sign(float(sub_h - sub_1)) == ensemble_sign or abs(float(sub_h - sub_1)) < 1e-12
+            stock_ok = bool(
+                np.sign(float(sub_h - sub_1)) == ensemble_sign
+                or abs(float(sub_h - sub_1)) < 1e-12
+            )
 
     detail = {
         "year_deltas": year_deltas,
@@ -429,13 +524,23 @@ class Stage4FeasibilityRunner:
         report_path = stage3_path / "stage3_report.json"
         feature_path = stage3_path / "development_features.parquet"
         label_path = stage3_path / "development_labels.parquet"
-        if not daily_path.is_file() or not report_path.is_file() or not feature_path.is_file():
-            Stage3ResearchRunner(self.config).run(
-                snapshot_dir,
-                stage3_path,
-                expected_members=expected_members,
-                required_start=required_start,
-            )
+        missing = [
+            name
+            for name in REQUIRED_STAGE3_FILES
+            if not (stage3_path / name).is_file()
+        ]
+        if missing:
+            payload = {
+                "protocol": STAGE4_PROTOCOL_VERSION,
+                "status": "STAGE3_ARTIFACTS_MISSING",
+                "statistical_gate": "INSUFFICIENT_EVIDENCE",
+                "reason": f"missing Stage-3 artifacts: {missing}",
+                "system_status": "MODEL_NOT_VALIDATED",
+                "rd_agent_allowed": False,
+                "holdout_read": False,
+            }
+            _atomic_json(output / "stage4_report.json", payload)
+            return payload
         stage3 = json.loads(report_path.read_text(encoding="utf-8"))
         if stage3.get("status") != "STAGE3_MINIMUM_LOOP_COMPLETED":
             payload = {
@@ -481,6 +586,7 @@ class Stage4FeasibilityRunner:
         samples = int(bootstrap_samples or self.config.bootstrap_samples)
         annual = self.config.annual_trading_days
         baseline = _horizon_metrics(daily, 1, annual_days=annual, baseline_sharpe=0.0)
+        baseline_cost = _oof_cost_attribution(daily, 1, annual_days=annual)
         horizon_payloads: dict[int, dict[str, Any]] = {}
         bootstrap_payloads: dict[str, Any] = {}
         p_values: dict[str, float] = {}
@@ -538,6 +644,12 @@ class Stage4FeasibilityRunner:
             metrics["concentration_ok"] = concentration_ok
             metrics["concentration_detail"] = concentration_detail
             metrics["cost_sensitivity"] = _cost_breakdown(stage3, horizon)
+            metrics["cost_attribution"] = _oof_cost_attribution(
+                daily,
+                horizon,
+                annual_days=annual,
+                baseline=baseline_cost if baseline_cost.get("available") else None,
+            )
             horizon_payloads[horizon] = metrics
             horizon_payloads[horizon]["_bootstrap"] = boot
 
@@ -560,6 +672,7 @@ class Stage4FeasibilityRunner:
             "status": gate["statistical_gate"],
             "stage3_protocol": stage3.get("protocol"),
             "snapshot_id": stage3.get("snapshot_id"),
+            "snapshot_dir": str(snapshot_dir),
             "config_hash": self.config.fingerprint(),
             "thresholds": {
                 "min_sharpe_improvement": self.thresholds.min_sharpe_improvement,
@@ -570,7 +683,7 @@ class Stage4FeasibilityRunner:
                 "random_seed": self.config.random_seed,
             },
             "baseline_1d": {key: value for key, value in baseline.items() if key != "phases"}
-            | {"phases": baseline["phases"]},
+            | {"phases": baseline["phases"], "cost_attribution": baseline_cost},
             "horizons": {str(key): value for key, value in horizon_payloads.items()},
             "bootstrap": bootstrap_payloads,
             "holm": holm,
@@ -579,6 +692,8 @@ class Stage4FeasibilityRunner:
             "restrictions": [
                 "Holdout未读取、未计算表现",
                 "所有稳健性、集中度与信号一致性统计仅使用Development OOF日期",
+                "毛Alpha/成本节约/净改善仅为披露，不进入GO判定、不修改预注册阈值",
+                "阶段4不自动重跑阶段3；缺失产物时失败关闭",
                 "RD-Agent仅在 RESEARCH_GATE_PASSED 后才允许启动",
                 "不得根据本报告修改预注册GO阈值",
                 "本门禁不等于 PRODUCTION_ELIGIBLE",

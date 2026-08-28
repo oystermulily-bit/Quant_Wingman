@@ -9,7 +9,7 @@ import pytest
 
 from research_stage3.protocol import Stage3Config
 from research_stage4.gate import Stage4Thresholds, classify_gate, evaluate_horizon_go
-from research_stage4.runner import Stage4FeasibilityRunner
+from research_stage4.runner import Stage4FeasibilityRunner, _horizon_metrics, _oof_cost_attribution
 from research_stage4.stats import BootstrapResult, holm_adjust, moving_block_bootstrap
 
 
@@ -246,6 +246,7 @@ def test_stage4_keep_1d_when_horizons_do_not_clear_go(tmp_path: Path) -> None:
     assert report["allowed_horizons"] == [1]
     assert report["rd_agent_allowed"] is False
     assert report["go"]["3"]["checks"]["sharpe_improvement"]["threshold"] == 0.15
+    assert report["horizons"]["3"]["cost_attribution"]["enters_go"] is False
     assert Path(tmp_path / "stage4" / "stage4_report.json").is_file()
 
 
@@ -313,3 +314,100 @@ def test_stage4_fails_closed_when_oof_fold_provenance_is_invalid(tmp_path: Path)
 
     assert report["status"] == "RESEARCH_GATE_FAILED"
     assert "OOF provenance validation failed" in report["reason"]
+
+
+def test_stage4_fails_closed_when_labels_missing(tmp_path: Path) -> None:
+    stage3 = tmp_path / "stage3"
+    stage3.mkdir()
+    _write_stage3_artifacts(stage3)
+    (stage3 / "development_labels.parquet").unlink()
+    report = Stage4FeasibilityRunner(Stage3Config(bootstrap_samples=20)).run(
+        snapshot_dir=tmp_path / "unused",
+        stage3_dir=stage3,
+        output_dir=tmp_path / "stage4",
+        bootstrap_samples=20,
+    )
+    assert report["status"] == "STAGE3_ARTIFACTS_MISSING"
+    assert report["statistical_gate"] == "INSUFFICIENT_EVIDENCE"
+    assert "development_labels.parquet" in report["reason"]
+    assert report["rd_agent_allowed"] is False
+
+
+def test_phase_agreement_does_not_count_all_phases_when_median_delta_is_zero() -> None:
+    rng = np.random.default_rng(20260812)
+    dates = pd.bdate_range("2018-01-02", periods=240)
+    rows = []
+    for phase, mean in ((0, -0.003), (1, 0.0), (2, 0.003)):
+        noise = rng.normal(0.0, 0.01, size=len(dates))
+        for date, shock in zip(dates, noise):
+            rows.append(
+                {
+                    "date": date,
+                    "horizon": 3,
+                    "phase": phase,
+                    "net_return": mean + shock,
+                    "fold_id": 0,
+                }
+            )
+    daily = pd.DataFrame(rows)
+    metrics = _horizon_metrics(daily, 3, annual_days=239, baseline_sharpe=0.0)
+    median = metrics["median_sharpe"]
+    # Force the historical bug path: median ≈ baseline must not mark every phase agreeing.
+    forced = _horizon_metrics(daily, 3, annual_days=239, baseline_sharpe=median)
+    assert forced["phases_agreeing"] < len(forced["phases"])
+    assert forced["phases_agreeing"] == 1
+
+
+def test_phase_agreement_counts_majority_when_median_beats_baseline() -> None:
+    rng = np.random.default_rng(7)
+    dates = pd.bdate_range("2018-01-02", periods=240)
+    rows = []
+    for phase, mean in ((0, 0.002), (1, 0.0022), (2, -0.0002)):
+        noise = rng.normal(0.0, 0.008, size=len(dates))
+        for date, shock in zip(dates, noise):
+            rows.append(
+                {
+                    "date": date,
+                    "horizon": 3,
+                    "phase": phase,
+                    "net_return": mean + shock,
+                    "fold_id": 0,
+                }
+            )
+    daily = pd.DataFrame(rows)
+    metrics = _horizon_metrics(daily, 3, annual_days=239, baseline_sharpe=0.0)
+    assert metrics["phases_agreeing"] == 2
+    assert metrics["median_sharpe"] > 0
+
+
+def test_oof_cost_attribution_identity_holds() -> None:
+    rng = np.random.default_rng(11)
+    dates = pd.bdate_range("2018-01-02", periods=180)
+    rows = []
+    for horizon, gross_mean, cost in ((1, 0.0004, 0.00035), (3, 0.0005, 0.00010)):
+        for phase in range(horizon):
+            noise = rng.normal(0.0, 0.006, size=len(dates))
+            for date, shock in zip(dates, noise):
+                gross = gross_mean + shock
+                rows.append(
+                    {
+                        "date": date,
+                        "horizon": horizon,
+                        "phase": phase,
+                        "gross_return": gross,
+                        "net_return": gross - cost,
+                        "turnover": 0.04 if horizon == 1 else 0.015,
+                        "fold_id": 0,
+                    }
+                )
+    daily = pd.DataFrame(rows)
+    baseline = _oof_cost_attribution(daily, 1, annual_days=239)
+    candidate = _oof_cost_attribution(
+        daily, 3, annual_days=239, baseline=baseline
+    )
+    assert candidate["available"] is True
+    assert candidate["enters_go"] is False
+    vs_1d = candidate["vs_1d"]
+    reconstructed = vs_1d["gross_alpha_annualized"] + vs_1d["cost_reduction_annualized"]
+    assert reconstructed == pytest.approx(vs_1d["net_annualized"], abs=1e-12)
+    assert vs_1d["cost_reduction_annualized"] > 0

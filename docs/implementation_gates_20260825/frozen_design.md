@@ -1,7 +1,8 @@
 # 阶段 2：冻结设计（已确认）
 
 状态：`CONFIRMED_FREEZE_20260825`  
-当前系统：`MODEL_NOT_VALIDATED`
+当前系统：`MODEL_NOT_VALIDATED`  
+阶段4研究结论：`KEEP_1D_BASELINE`（2026-08-28；见 `stage4_implementation.md`）
 
 本文件把数据、统计、组合和产品职责拆成独立合同。用户已确认推荐方案；这些值现为阶段3以后不可随结果修改的预注册口径，确认记录见 `confirmation_record.json`。
 
@@ -165,4 +166,4 @@ Holdout 在阶段7冻结前物理不可读；阶段8只运行一次，之后该�
 7. Data Gate 与 Statistical Gate 报告；
 8. 前缀、未来哨兵、成员/行业、标签、切分和成本测试。
 
-不写网页、不写正式建议 API、不启动 RD-Agent。阶段4报告出来后再决定是否继续。
+不写网页、不写正式建议 API、不启动 RD-Agent。阶段4已给出 `KEEP_1D_BASELINE`；在用户提出并重新冻结新的研究假设之前，不得进入阶段5。

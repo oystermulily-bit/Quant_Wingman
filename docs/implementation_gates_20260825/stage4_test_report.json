@@ -1,0 +1,44 @@
+{
+  "tested_on": "2026-08-28",
+  "python": "3.13.9",
+  "command": "D:\\anaconda\\python.exe -m pytest tests/unit/test_stage4_feasibility.py --basetemp C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\.pytest-tmp-stage4 -q",
+  "result": {
+    "passed": 12,
+    "skipped": 0,
+    "warnings": 0,
+    "duration_seconds": 180.58
+  },
+  "stage4_targeted_tests": {
+    "file": "tests/unit/test_stage4_feasibility.py",
+    "passed": 12,
+    "coverage_intent": [
+      "Holm family ordering",
+      "moving-block bootstrap seed determinism",
+      "frozen Sharpe GO threshold",
+      "KEEP_1D when both horizons fail",
+      "Holdout leak fail-closed",
+      "invalid OOF fold provenance fail-closed",
+      "non-OOF Development rows excluded from robustness",
+      "missing labels fail-closed without rerunning Stage 3",
+      "phase agreement does not count all phases when median delta is zero",
+      "majority phase agreement when median beats baseline",
+      "gross alpha + cost reduction identity"
+    ]
+  },
+  "formal_oof": {
+    "snapshot_id": "csi300_2014_present_v2",
+    "stage3": "experiments/stage3_hs300_v2",
+    "output": "experiments/stage4_hs300_v2",
+    "protocol": "w1ngman_stage4_feasibility_oof_only_v2",
+    "status": "KEEP_1D_BASELINE",
+    "statistical_gate": "KEEP_1D_BASELINE",
+    "rd_agent_allowed": false,
+    "holdout_read": false,
+    "bootstrap_samples": 2000,
+    "random_seed": 20260812,
+    "elapsed_ms": 1085012
+  },
+  "formal_market_data_used": true,
+  "research_conclusion": "KEEP_1D_BASELINE",
+  "system_status": "MODEL_NOT_VALIDATED"
+}
