@@ -21,6 +21,54 @@ from .signals import SIGNAL_VERSION, SimpleSignalBuilder
 STAGE3_PROTOCOL_VERSION = "w1ngman_stage3_minimum_loop_v1"
 
 
+def _research_trading_dates(snapshot_dir: Path, manager: HS300PanelDataManager) -> pd.DatetimeIndex:
+    """Build splits on the full research calendar, including sealed Holdout dates.
+
+    v2 panels drop Holdout prices from standardized tables. Using only
+    manager.calendar would silently carve a second Holdout out of Development.
+    The calendar file still lists every research session and does not contain
+    prices.
+    """
+    for relative in (
+        Path("standardized") / "trading_calendar.parquet",
+        Path("trading_calendar.parquet"),
+    ):
+        path = snapshot_dir / relative
+        if not path.is_file():
+            continue
+        calendar = pd.read_parquet(path)
+        if "date" not in calendar.columns:
+            continue
+        trading = calendar.loc[
+            calendar.get("is_trading_day", True).fillna(False).astype(bool)
+            & calendar.get("is_complete_session", True).fillna(False).astype(bool),
+            "date",
+        ]
+        dates = pd.DatetimeIndex(pd.to_datetime(trading).dt.normalize().unique()).sort_values()
+        if len(dates):
+            return dates
+    if manager.calendar is None:
+        raise RuntimeError("no research trading calendar")
+    return pd.DatetimeIndex(manager.calendar)
+
+
+def _assert_frozen_holdout(snapshot_dir: Path, split: SplitPlan) -> None:
+    lock_path = snapshot_dir / "splits" / "holdout.lock.json"
+    if not lock_path.is_file():
+        return
+    lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    expected_hash = lock.get("holdout_date_hash")
+    expected_start = lock.get("holdout_start")
+    if expected_hash and expected_hash != split.holdout_date_hash:
+        raise PermissionError(
+            "rebuilt split Holdout hash does not match frozen holdout.lock.json"
+        )
+    if expected_start and str(expected_start) != split.holdout_start.date().isoformat():
+        raise PermissionError(
+            "rebuilt split Holdout start does not match frozen holdout.lock.json"
+        )
+
+
 def _atomic_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
@@ -95,8 +143,30 @@ class Stage3ResearchRunner:
         assert manager.daily_bars is not None
         assert manager.trading_status is not None
         assert manager.calendar is not None
-        split: SplitPlan = DateSplitProtocol(self.config).build(manager.calendar)
+        snapshot = Path(snapshot_dir)
+        split: SplitPlan = DateSplitProtocol(self.config).build(
+            _research_trading_dates(snapshot, manager)
+        )
+        try:
+            _assert_frozen_holdout(snapshot, split)
+        except PermissionError as exc:
+            report = {
+                "protocol": STAGE3_PROTOCOL_VERSION,
+                "status": "SPLIT_PROTOCOL_MISMATCH",
+                "statistical_gate": "NOT_RUN",
+                "portfolio_gate": "NOT_RUN",
+                "product_gate": "NOT_RUN",
+                "reason": str(exc),
+            }
+            _atomic_json(output / "stage3_report.json", report)
+            return report
         _atomic_json(output / "split_plan.json", split.to_dict())
+        print(
+            f"[stage3] data_gate={manager.report.status} "
+            f"development_dates={len(split.development_dates)} "
+            f"holdout_start={split.holdout_start.date().isoformat()}",
+            flush=True,
+        )
 
         dev_panel = manager.development_panel(split.development_dates)
         dev_bars = manager.bars_for_dates(split.development_dates)
@@ -107,12 +177,15 @@ class Stage3ResearchRunner:
         split.assert_panel_dates(dev_bars)
         split.assert_panel_dates(dev_status)
 
+        print("[stage3] building development features", flush=True)
         features = SimpleSignalBuilder().build(dev_panel, dev_bars)
+        print("[stage3] building development labels", flush=True)
         labels = LabelRegistry(
             horizons=self.config.horizons,
             execution_lag_bars=self.config.execution_lag_bars,
         ).build(dev_panel, dev_bars, pd.DatetimeIndex(split.development_dates), dev_status)
         # Persist only Development artifacts. No Holdout row is materialised here.
+        print("[stage3] writing development parquet", flush=True)
         features.to_parquet(output / "development_features.parquet", index=False)
         labels.to_parquet(output / "development_labels.parquet", index=False)
 
@@ -132,6 +205,12 @@ class Stage3ResearchRunner:
         daily_outputs: list[pd.DataFrame] = []
         for fold in split.folds:
             validation_dates = pd.DatetimeIndex(fold.validation_dates)
+            print(
+                f"[stage3] fold={fold.fold_id} "
+                f"{validation_dates[0].date().isoformat()}->"
+                f"{validation_dates[-1].date().isoformat()}",
+                flush=True,
+            )
             fold_payload: dict[str, Any] = {
                 "fold_id": fold.fold_id,
                 "validation_start": validation_dates[0].date().isoformat(),

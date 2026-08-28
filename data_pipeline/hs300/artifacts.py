@@ -42,7 +42,7 @@ SCHEMA_DOCUMENT = {
         "industry_id": {"shape": ["N", "T"], "unmapped": -1},
         "features": {
             "shape": ["N", 65, "T"],
-            "note": "Wingman FEATURE_NAMES order; stored NaN; adapter may zero-fill at read",
+            "note": "Wingman FEATURE_NAMES order; unavailable/suspended values remain NaN",
             "file": "panel/hs300_features.npz",
         },
     },

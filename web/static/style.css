@@ -394,6 +394,17 @@ select:focus { border-color: var(--accent); }
 .field-hint.invalid { color: var(--danger); }
 .field-hint.valid { color: var(--success); }
 
+.scope-warning {
+  margin: 10px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(245, 158, 11, 0.55);
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.08);
+  color: var(--warning);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
 .checkbox-label {
   flex-direction: row !important;
   align-items: center !important;

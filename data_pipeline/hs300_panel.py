@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 
 from data_pipeline.hs300.config import INDUSTRY_COVERAGE_MIN, RESEARCH_START
+from data_pipeline.hs300.lineage import LINEAGE_COLUMNS
 from data_pipeline.hs300.panel_tensors import (
     HS300PanelTensors,
     pack_panel_tensors,
@@ -348,6 +349,11 @@ def _require_columns(frame: pd.DataFrame, table: str, columns: Iterable[str]) ->
         raise SnapshotValidationError(f"{table} 缺少字段: {missing}")
 
 
+def _drop_lineage(frame: pd.DataFrame) -> pd.DataFrame:
+    drop = [column for column in LINEAGE_COLUMNS if column in frame.columns]
+    return frame.drop(columns=drop) if drop else frame
+
+
 class HS300PanelDataManager:
     """Build a point-in-time long panel from a verified frozen snapshot.
 
@@ -421,6 +427,11 @@ class HS300PanelDataManager:
         calendar: pd.DataFrame,
     ) -> None:
         assert self.report is not None
+        bars = _drop_lineage(bars)
+        members = _drop_lineage(members)
+        industries = _drop_lineage(industries)
+        status = _drop_lineage(status)
+        calendar = _drop_lineage(calendar)
         _require_columns(
             bars,
             "daily_bars",
@@ -601,7 +612,9 @@ class HS300PanelDataManager:
                 row_count=len(non_trading_quotes),
             )
 
-        panel = member.merge(quote, on=["date", "code"], how="left", validate="one_to_one")
+        panel = member.merge(
+            quote, on=["date", "code"], how="left", validate="one_to_one", suffixes=("", "_quote")
+        )
         panel = panel.merge(
             status,
             on=["date", "code"],

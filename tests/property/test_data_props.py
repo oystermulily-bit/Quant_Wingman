@@ -228,6 +228,7 @@ def test_property2_timeline_alignment_t_dimension_identical(raw_dfs: dict):
     Validates: Requirements 3.2, 3.3
     """
     from data_pipeline.data_manager import MT5DataManager
+    from config import Config
 
     # We need a minimal MT5DataFetcher stub — no real MT5 needed
     mock_fetcher = MagicMock()
@@ -237,7 +238,11 @@ def test_property2_timeline_alignment_t_dimension_identical(raw_dfs: dict):
     mgr._symbols = list(raw_dfs.keys())
 
     # ── Step 1: align timelines ───────────────────────────────────────────
-    aligned = mgr._align_timelines(raw_dfs)
+    # This property checks shape alignment, not the production minimum-history
+    # gate. Disable that gate so empty/small synthetic intersections stay valid
+    # test cases without invoking the removed union+zero-fill fallback.
+    with patch.object(Config, "MIN_BARS", 0):
+        aligned = mgr._align_timelines(raw_dfs)
 
     # All aligned DataFrames must have the same number of rows
     row_counts = {sym: len(df) for sym, df in aligned.items()}

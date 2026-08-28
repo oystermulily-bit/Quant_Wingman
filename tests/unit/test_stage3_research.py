@@ -301,6 +301,54 @@ def _signal_frames(days: int = 60, symbols: int = 12) -> tuple[pd.DataFrame, pd.
     return pd.DataFrame(panel_rows), pd.DataFrame(bars_rows)
 
 
+def test_industry_loo_allows_singleton_industry() -> None:
+    panel, bars = _signal_frames(days=25, symbols=4)
+    panel.loc[panel["code"] == "000003.SZ", "industry_code"] = "SOLO"
+    out = SimpleSignalBuilder().build(panel, bars)
+    solo = out[out["code"] == "000003.SZ"]
+    assert solo["industry_return_1d_loo"].isna().all()
+    assert solo["industry_member_count_loo"].eq(0).all()
+    shared = out[out["industry_code"] == "A"]
+    assert shared["industry_return_1d_loo"].notna().any()
+
+
+def test_label_registry_allows_singleton_industry() -> None:
+    dates = pd.bdate_range("2024-01-02", periods=12)
+    codes = ["000001.SZ", "000002.SZ", "000003.SZ", "000004.SZ"]
+    panel_rows = []
+    bars_rows = []
+    for t, date in enumerate(dates):
+        for idx, code in enumerate(codes):
+            panel_rows.append(
+                {
+                    "date": date,
+                    "code": code,
+                    "industry_code": "SOLO" if code == "000004.SZ" else "A",
+                }
+            )
+            bars_rows.append(
+                {
+                    "date": date,
+                    "code": code,
+                    "open_tr": 10.0 + idx + 0.1 * t,
+                    "has_quote": True,
+                }
+            )
+    labels = LabelRegistry().build(
+        pd.DataFrame(panel_rows),
+        pd.DataFrame(bars_rows),
+        dates,
+    )
+    solo = labels[
+        (labels["code"] == "000004.SZ") & (labels["label_type"] == "INDUSTRY_EXCESS")
+    ]
+    assert solo["value"].isna().all()
+    shared = labels[
+        (labels["code"] == "000001.SZ") & (labels["label_type"] == "INDUSTRY_EXCESS")
+    ]
+    assert shared["value"].notna().any()
+
+
 def test_simple_signals_are_prefix_invariant_and_future_sentinel_safe() -> None:
     panel, bars = _signal_frames()
     cutoff = panel["date"].drop_duplicates().iloc[44]

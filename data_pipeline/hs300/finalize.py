@@ -14,6 +14,7 @@ from .artifacts import (
     write_holdout_dates,
     write_schema,
 )
+from .config import RESEARCH_START
 from .opentr import build_preclose_chain
 from .raw_store import RawStore, sha256_file
 from .sample_audit import run_sample_audit
@@ -148,7 +149,10 @@ def finalize_snapshot(root: Path) -> dict:
     sample = run_sample_audit(root)
     write_schema(root)
 
-    manager = HS300PanelDataManager(root, required_start="2010-01-01")
+    manager = HS300PanelDataManager(
+        root,
+        required_start=RESEARCH_START.isoformat(),
+    )
     manager.load(raise_on_gate_failure=True)
     tensor_meta = manager.save_tensors()
     labels = manager.load_labels(development_only=True)

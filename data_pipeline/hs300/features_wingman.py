@@ -1,8 +1,8 @@
 """Wingman 65-feature tensors from causal CSI 300 prices.
 
-Stored values keep NaN. The training adapter may zero-fill for engine
-compatibility while exposing a separate validity mask. Cross-section features
-use only that day's members and average ranks for ties.
+Stored values keep NaN. Suspended/non-member rows never become numeric zero
+observations inside rolling operators. Cross-section features use only that
+day's quoted members and average ranks for ties.
 """
 from __future__ import annotations
 
@@ -74,6 +74,13 @@ def _log_return(close: np.ndarray, lag: int) -> np.ndarray:
     return out
 
 
+def _true_runs(mask: np.ndarray) -> list[tuple[int, int]]:
+    """Return half-open intervals for contiguous true values."""
+    padded = np.concatenate(([False], mask.astype(bool, copy=False), [False]))
+    edges = np.flatnonzero(padded[1:] != padded[:-1])
+    return [(int(start), int(end)) for start, end in edges.reshape(-1, 2)]
+
+
 def compute_wingman_feature_tensors(
     tensors: HS300PanelTensors,
     *,
@@ -93,19 +100,56 @@ def compute_wingman_feature_tensors(
     quoted = tensors.quote_valid_mask & member
     for array in (close, high, low, open_tr, volume):
         array[~quoted] = np.nan
+    usable = quoted.copy()
+    for array in (close, high, low, open_tr, volume):
+        usable &= np.isfinite(array)
 
-    raw = {
-        "open": torch.from_numpy(np.nan_to_num(open_tr, nan=0.0)),
-        "high": torch.from_numpy(np.nan_to_num(high, nan=0.0)),
-        "low": torch.from_numpy(np.nan_to_num(low, nan=0.0)),
-        "close": torch.from_numpy(np.nan_to_num(close, nan=0.0)),
-        "volume": torch.from_numpy(np.nan_to_num(volume, nan=0.0)),
-    }
-    stacked = torch.stack(
-        [spec.compute(raw) for spec in FEATURE_REGISTRY.feature_specs],
-        dim=1,
+    # Legacy feature operators intentionally normalise warm-up values to zero.
+    # Feeding an entire panel with suspended bars replaced by zero would make
+    # those synthetic zeros enter future rolling windows. Compute each symbol's
+    # contiguous quoted segment independently instead. A gap resets history and
+    # the configured warm-up, which is conservative and causal.
+    features = np.full(
+        (tensors.n_symbols, len(FEATURE_REGISTRY.feature_specs), tensors.n_dates),
+        np.nan,
+        dtype=np.float32,
     )
-    features = stacked.detach().cpu().numpy().astype(np.float32, copy=False)
+    continuous_ready = np.zeros_like(usable, dtype=bool)
+    arrays = {
+        "open": open_tr,
+        "high": high,
+        "low": low,
+        "close": close,
+        "volume": volume,
+    }
+    for symbol_idx in range(tensors.n_symbols):
+        for start, end in _true_runs(usable[symbol_idx]):
+            ready_start = min(end, start + max(0, int(warmup_bars)))
+            continuous_ready[symbol_idx, ready_start:end] = True
+            if ready_start >= end:
+                continue
+            raw = {
+                key: torch.from_numpy(value[symbol_idx : symbol_idx + 1, start:end])
+                for key, value in arrays.items()
+            }
+            run_length = end - start
+            computed = []
+            for spec in FEATURE_REGISTRY.feature_specs:
+                value = spec.compute(raw)
+                # A few legacy fixed-lag features emit their full padding width
+                # when the contiguous run is shorter than the lag. The causal
+                # prefix is still well-defined (warm-up zeros) and is cropped to
+                # the actual run. A shorter result is never a valid contract.
+                if value.shape[-1] < run_length:
+                    raise ValueError(
+                        f"feature {spec.name} returned {value.shape[-1]} bars "
+                        f"for a {run_length}-bar contiguous quote run"
+                    )
+                computed.append(value[..., :run_length])
+            stacked = torch.stack(computed, dim=1)
+            features[symbol_idx : symbol_idx + 1, :, start:end] = (
+                stacked.detach().cpu().numpy().astype(np.float32, copy=False)
+            )
     name_index = {name: idx for idx, name in enumerate(names)}
     ret5 = _log_return(close, 5)
     ret20 = _log_return(close, 20)
@@ -122,11 +166,7 @@ def compute_wingman_feature_tensors(
             features[:, name_index["RVOL"], :], quoted
         )
 
-    valid = np.isfinite(features) & quoted[:, None, :]
-    for idx in range(tensors.n_symbols):
-        first = np.flatnonzero(quoted[idx])
-        if first.size:
-            valid[idx, :, : int(first[0] + warmup_bars)] = False
+    valid = np.isfinite(features) & continuous_ready[:, None, :]
     features = np.where(valid, features, np.nan).astype(np.float32)
     return features, valid.astype(bool), names
 

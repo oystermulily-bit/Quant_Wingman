@@ -61,8 +61,11 @@ def calc_ic(factor, target_ret):
     N, T = factor.shape
     ic_list = []
     for n in range(N):
-        x = factor[n, :-1]
-        y = target_ret[n, 1:]
+        valid = np.isfinite(factor[n]) & np.isfinite(target_ret[n])
+        x = factor[n, valid]
+        y = target_ret[n, valid]
+        if len(x) < 2:
+            continue
         xm = x - x.mean()
         ym = y - y.mean()
         sx = np.sqrt((xm**2).mean())

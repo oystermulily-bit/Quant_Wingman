@@ -307,8 +307,8 @@ def test_ic_arithmetic_consistency(N: int, T: int) -> None:
     """
     Property 9: IC Calculation Arithmetic Consistency
 
-    _compute_ic now computes time-series IC (per-symbol):
-    for each symbol n, IC_n = Pearson_corr(factor[n, :-1], target_ret[n, 1:])
+    _compute_ic computes same-signal-date time-series IC (per-symbol):
+    for each symbol n, IC_n = Pearson_corr(factor[n], target_ret[n])
     ic_mean = mean across symbols of IC_n values.
 
     **Validates: Requirements T1.3, T1.4**
@@ -321,11 +321,12 @@ def test_ic_arithmetic_consistency(N: int, T: int) -> None:
 
     ic_mean, ic_stability = W1ngmanEngine._compute_ic(factor, target_ret)
 
-    # Manual time-series IC: per symbol, factor[n,:-1] vs target_ret[n,1:]
+    # Manual time-series IC: target_ret[t] already represents the forward
+    # return associated with factor[t], so no additional shift is allowed.
     ic_list = []
     for n in range(N):
-        x = factor[n, :-1]
-        y = target_ret[n, 1:]
+        x = factor[n]
+        y = target_ret[n]
         sx = x.std(unbiased=False)
         sy = y.std(unbiased=False)
         if sx.item() < 1e-6 or sy.item() < 1e-6:

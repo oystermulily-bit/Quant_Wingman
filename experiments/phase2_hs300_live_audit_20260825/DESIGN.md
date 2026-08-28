@@ -431,3 +431,29 @@ MCP：`ad_mcp/server.py` + 新增测试。quant_w1ngman：新增 `data_pipeline/
 | 仍缺外部数据 | 中证调整公告 known_at；退市处置价；2010–2013 完整 PRECLOSE/K 线 |
 | 数据状态 | `DATA_NOT_FORMALLY_VALIDATED`。允许加载 Development 面板/标签/张量。不允许宣布正式研究结论，不允许读 Holdout 表现 |
 | 是否允许 Wingman Development 加载 | **是（数据门禁通过）**。是否允许正式研究结论：**否** |
+
+---
+
+## 21. 正式 v2 快照（2026-08-25）
+
+快照：`D:/Hulucoding/AmAzing_Data/research_snapshots/csi300_2014_present_v2/`  
+Raw：junction 到不可变 v1 `raw/`（未重采）。  
+状态：`RAW_SNAPSHOT_COMPLETE` + `STANDARDIZED_FROZEN` + `DATA_GATE_PASSED` + `RESEARCH_START=2014-01-02`  
+研究状态：`DATA_READY_FOR_DEVELOPMENT`  
+面板门禁：`DATA_GATE_PASSED`（`INDUSTRY_UNMAPPED` 为 WARNING，13,845 行；覆盖率 98.22% ≥ 95%）  
+schema：`hs300_pit_v2` / `w1ngman_raw_snapshot_v2`
+
+| 项 | 结果 |
+|---|---|
+| 正式研究起点 | **2014-01-02**（请求起点仍记 2010-01-01）。研究日历 3,074 日；Development 2,591 日 |
+| 成员 | Development 777,300 行（2,591×300）；Holdout 密封 144,900 行；合计 922,200 = 3,074×300；成员例外 0 |
+| OpenTR | 在含 2013 的全量 K 线上链式计算后切到 2014-01-02，不重置 CloseTR。有效行情 759,681。前缀不变审计 12 只通过 |
+| 申万一级 | 冲突保留一条；区间补到下一 INDATE−1。区间 993 行；无 L1 历史例外 4。覆盖率 0.9822。known_at 同日 21:00 有效，未来行 0 |
+| 特征 | `panel/hs300_features.npz` 与张量 `features` 均为 **[672, 65, 2591]**，词表顺序与 `FEATURE_NAMES` 一致，`VOCAB_VERSION=v9217a2c0d91a`。存储 NaN；适配器读时才 0 填充 |
+| 训练适配器 | `data_pipeline.hs300.adapter.HS300WingmanAdapter`。未接入 Engine / RD-Agent / evaluate_holdout |
+| 标签 | Development 6,995,700 行。Holdout 标签未写 |
+| Holdout | 自 **2024-08-26**，**483** 日，hash 仍为 `e0e47656433a1ae1351e62a150fadf2716175c0246ed6bc21b566ccb459d8c31`。价格在 `sealed/holdout/`，`readable_prices=false`、`readable_metrics=false`。标准化层无 Holdout 日期 |
+| 血缘 | 标准化表含 `schema_version, snapshot_id, data_version, source, fetched_at`。清单 `row_count` 与 `rows` 相等 |
+| 审计 | `temporal_leakage_report.json` 通过；`prefix_invariance_report.json` 通过 |
+
+未做：RD-Agent、公式筛选、策略收益、Holdout 表现。v1 目录未改写。

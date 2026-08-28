@@ -1,7 +1,8 @@
 """Training adapter that exposes a frozen CSI 300 snapshot through the Wingman data surface.
 
-It never fillna(0) in the stored PIT tensors. Engine-compatible views zero-fill
-only at read time and keep feature_valid_mask. Holdout prices stay sealed.
+Missing PIT values remain NaN on every public tensor view. The adapter is not
+wired into the Engine yet; integration must explicitly consume
+``feature_valid_mask``. Holdout prices stay sealed.
 """
 from __future__ import annotations
 
@@ -99,8 +100,8 @@ class HS300WingmanAdapter:
 
     @property
     def feat_tensor(self) -> torch.Tensor:
-        """Engine-compatible view: NaN/Inf -> 0, with a separate validity mask."""
-        return torch.nan_to_num(self.feat_tensor_pit, nan=0.0, posinf=0.0, neginf=0.0)
+        """PIT feature tensor; suspended and unavailable observations stay NaN."""
+        return self.feat_tensor_pit
 
     @property
     def membership_mask(self) -> torch.Tensor:

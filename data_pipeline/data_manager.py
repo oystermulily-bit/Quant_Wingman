@@ -48,7 +48,7 @@ class MT5DataManager:
 
         - 遍历 Config.SYMBOLS，调用 fetcher.fetch() 获取每个品种数据。
         - 排除 bars < Config.MIN_BARS 的品种并记录 WARNING。
-        - 对剩余品种做时间轴对齐（时间戳并集 + forward-fill）。
+        - 对剩余品种只保留共同存在的有效真实报价时间戳。
         - 构建 raw_dict 和 target_ret 并缓存。
 
         Raises:
@@ -224,6 +224,17 @@ class MT5DataManager:
             sub = sub.set_index("time")
             # 去掉同一时间戳重复的行（取最后一条）
             sub = sub[~sub.index.duplicated(keep="last")]
+            sub[fields] = sub[fields].apply(pd.to_numeric, errors="coerce")
+            finite = sub[fields].notna().all(axis=1)
+            positive_prices = sub[["open", "high", "low", "close"]].gt(0).all(axis=1)
+            nonnegative_volume = sub["volume"].ge(0)
+            valid_quote = finite & positive_prices & nonnegative_volume
+            if (~valid_quote).any():
+                logger.warning(
+                    f"Symbol '{symbol}' has {int((~valid_quote).sum())} invalid quote rows; "
+                    "they are excluded before timeline intersection"
+                )
+                sub = sub.loc[valid_quote]
             indexed[symbol] = sub
 
         # 构建时间戳交集索引：只保留所有品种都有报价的 bar
@@ -233,24 +244,14 @@ class MT5DataManager:
         inter_index = inter_index.sort_values()
 
         if len(inter_index) < Config.MIN_BARS:
-            # 交集太小时降级回并集+ffill，并记录警告
-            logger.warning(
-                f"Intersection timeline has only {len(inter_index)} bars "
-                f"(< MIN_BARS={Config.MIN_BARS}). Falling back to union+ffill."
+            # 旧实现会降级到 union+ffill 并把前导缺失填 0，停牌和未上市
+            # 因而变成了可参与滚动特征的合成报价。当前链路没有完整的
+            # quote_valid_mask，无法安全表达这种并集，必须关闭而不是猜值。
+            raise ValueError(
+                "Common real-quote timeline has only "
+                f"{len(inter_index)} bars (< MIN_BARS={Config.MIN_BARS}); "
+                "refusing unsafe union/ffill/zero-fill alignment"
             )
-            union_index: pd.Index = pd.Index([], dtype="int64")
-            for sub in indexed.values():
-                union_index = union_index.union(sub.index)
-            union_index = union_index.sort_values()
-            aligned: dict[str, pd.DataFrame] = {}
-            for symbol, sub in indexed.items():
-                reindexed = sub.reindex(union_index)
-                # 仅使用 ffill（因果填充），禁止 bfill 以避免未来信息泄漏
-                reindexed = reindexed.ffill()
-                # 起始处的 NaN（无历史数据）填充为 0，避免下游 log/divide 出 -inf
-                reindexed = reindexed.fillna(0.0)
-                aligned[symbol] = reindexed[fields]
-            return aligned
 
         logger.info(
             f"Intersection timeline: {len(inter_index)} bars "

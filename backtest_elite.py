@@ -46,12 +46,15 @@ def calc_mdd(cum_pnl):
 
 
 def calc_ic(factor, target_ret):
-    """时序 IC：factor[t] vs target_ret[t+1]，逐品种再取均值。"""
+    """时序 IC：target_ret 已按信号日对齐，使用同索引有限样本。"""
     N, T = factor.shape
     ic_list = []
     for n in range(N):
-        x = factor[n, :-1]
-        y = target_ret[n, 1:]
+        valid = np.isfinite(factor[n]) & np.isfinite(target_ret[n])
+        x = factor[n, valid]
+        y = target_ret[n, valid]
+        if len(x) < 2:
+            continue
         xm = x - x.mean()
         ym = y - y.mean()
         sx = np.sqrt((xm**2).mean())

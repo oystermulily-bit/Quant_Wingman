@@ -107,12 +107,13 @@ class SimpleSignalBuilder:
             [panel["date"], panel["industry_code"]], observed=True
         ).transform("sum")
         panel["industry_member_count_loo"] = (industry_count - 1).clip(lower=0)
+        denom = panel["industry_member_count_loo"].replace(0, np.nan)
         panel["industry_return_1d_loo"] = (
-            (industry_sum - panel["stock_return_1d"]) / (industry_count - 1)
-        ).where(industry_count > 1)
+            industry_sum - panel["stock_return_1d"]
+        ) / denom
         panel["industry_breadth_loo"] = (
-            (positive_sum - positive.astype(float)) / (industry_count - 1)
-        ).where(industry_count > 1)
+            positive_sum - positive.astype(float)
+        ) / denom
         panel["industry_relative_market_1d"] = (
             panel["industry_return_1d_loo"] - panel["market_return_1d"]
         )

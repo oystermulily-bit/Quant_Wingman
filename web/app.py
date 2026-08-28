@@ -43,7 +43,11 @@ from web.strategy_file import (
     strategy_path_for_symbol,
     sync_best_strategy_for_symbol,
 )
-from web.training_manager import training_manager
+from web.training_manager import (
+    CSI300_CONCLUSION_STATUS,
+    WEB_TRAINING_SCOPE,
+    training_manager,
+)
 from web.training_time import get_training_time_summary
 from web.training_package import build_training_export_zip, import_training_package
 from web.backtest_manager import backtest_manager
@@ -60,7 +64,8 @@ logger = get_logger()
 app = FastAPI(title="quant_w1ngman Training", version="1.1.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://127.0.0.1:8765", "http://localhost:8765"],
+    allow_origin_regex=r"^http://(?:127\.0\.0\.1|localhost)(?::\d+)?$",
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -122,6 +127,22 @@ class FeishuSettingsRequest(BaseModel):
 class FeishuTestRequest(BaseModel):
     webhook_url: str | None = None
     secret: str | None = None
+
+
+def _public_settings(settings: dict[str, Any]) -> dict[str, Any]:
+    """Keep response schemas compatible without returning stored credentials."""
+    public = dict(settings)
+    public["has_api_key"] = bool(str(settings.get("ai_api_key") or "").strip())
+    public["has_feishu_webhook"] = bool(
+        str(settings.get("feishu_webhook_url") or "").strip()
+    )
+    public["has_feishu_secret"] = bool(str(settings.get("feishu_secret") or "").strip())
+    # Empty compatibility fields tell old clients not to prefill secrets. New
+    # clients use the has_* flags and leave an existing credential unchanged.
+    public["ai_api_key"] = ""
+    public["feishu_webhook_url"] = ""
+    public["feishu_secret"] = ""
+    return public
 
 
 @app.middleware("http")
@@ -312,6 +333,9 @@ def health() -> dict[str, str]:
         "generator_backend": "rd_agent",
         "custom_rounds_required": "true",
         "project_root": str(ROOT),
+        "training_scope": WEB_TRAINING_SCOPE,
+        "csi300_panel_engine_connected": "false",
+        "csi300_conclusion_status": CSI300_CONCLUSION_STATUS,
     }
 
 
@@ -345,7 +369,7 @@ def api_client_log(req: ClientLogRequest) -> dict[str, bool]:
 
 @app.get("/api/settings")
 def api_get_settings() -> dict[str, Any]:
-    return load_settings()
+    return _public_settings(load_settings())
 
 
 @app.put("/api/settings")
@@ -368,7 +392,7 @@ def api_put_settings(req: SettingsRequest) -> dict[str, Any]:
     saved = save_settings(payload)
     if req.debug_mode is not None:
         set_debug_mode(req.debug_mode)
-    return {"ok": True, **saved}
+    return {"ok": True, **_public_settings(saved)}
 
 
 @app.get("/api/config")
@@ -403,9 +427,13 @@ def api_config() -> dict[str, Any]:
         "strategy_file": strat_ctx["strategy_file"],
         "debug_mode": load_settings().get("debug_mode", False),
         "ai_provider": load_settings().get("ai_provider", "deepseek"),
-        "ai_api_key": load_settings().get("ai_api_key", ""),
+        "ai_api_key": "",
+        "has_api_key": bool(str(settings.get("ai_api_key") or "").strip()),
         "bt_commission_pct": settings.get("bt_commission_pct", 0.02),
         "bt_slippage_pct": settings.get("bt_slippage_pct", 0.01),
+        "training_scope": WEB_TRAINING_SCOPE,
+        "csi300_panel_engine_connected": False,
+        "csi300_conclusion_status": CSI300_CONCLUSION_STATUS,
         "server_log": snap["server_log"],
         "error_log": snap["error_log"],
     }
@@ -700,6 +728,8 @@ async def api_import_training(
 def api_training_status() -> dict[str, Any]:
     status = training_manager.status()
     status["log_tail"] = training_manager.tail_log(150)
+    status["training_scope"] = WEB_TRAINING_SCOPE
+    status["csi300_conclusion_status"] = CSI300_CONCLUSION_STATUS
     return status
 
 
@@ -726,6 +756,8 @@ def api_training_start(req: StartTrainingRequest) -> dict[str, Any]:
         "data_file": info,
         "from_scratch": bool(req.from_scratch),
         "rounds": req.rounds,
+        "training_scope": WEB_TRAINING_SCOPE,
+        "csi300_conclusion_status": CSI300_CONCLUSION_STATUS,
     }
 
 
@@ -1081,8 +1113,10 @@ def api_realtime_feishu_get() -> dict[str, Any]:
     s = load_settings()
     return {
         "enabled": bool(s.get("feishu_enabled")),
-        "webhook_url": s.get("feishu_webhook_url") or "",
-        "secret": s.get("feishu_secret") or "",
+        "webhook_url": "",
+        "secret": "",
+        "has_webhook": bool(str(s.get("feishu_webhook_url") or "").strip()),
+        "has_secret": bool(str(s.get("feishu_secret") or "").strip()),
     }
 
 
@@ -1099,8 +1133,10 @@ def api_realtime_feishu_put(req: FeishuSettingsRequest) -> dict[str, Any]:
     return {
         "ok": True,
         "enabled": bool(saved.get("feishu_enabled")),
-        "webhook_url": saved.get("feishu_webhook_url") or "",
-        "secret": saved.get("feishu_secret") or "",
+        "webhook_url": "",
+        "secret": "",
+        "has_webhook": bool(str(saved.get("feishu_webhook_url") or "").strip()),
+        "has_secret": bool(str(saved.get("feishu_secret") or "").strip()),
     }
 
 

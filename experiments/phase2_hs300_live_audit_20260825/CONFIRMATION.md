@@ -1,8 +1,8 @@
 # 阶段2确认清单（2026-08-25）
 
 当前状态：`CONFIRMED_AND_EXECUTED`  
-快照状态：`DATA_NOT_FORMALLY_VALIDATED`  
-面板门禁：`DATA_GATE_PASSED`
+快照状态：v2 `DATA_READY_FOR_DEVELOPMENT` / `DATA_GATE_PASSED`（`csi300_2014_present_v2`）  
+v1 目录保持只读。面板门禁：`DATA_GATE_PASSED`
 
 用户已启用 MCP 并按推荐口径执行阶段 3–13 数据层。凭证不会写入仓库。密码必须 `strip`。
 

@@ -54,6 +54,89 @@ class ReferenceBacktester:
 
     def __init__(self, config: Stage3Config | None = None) -> None:
         self.config = config or Stage3Config()
+        self._market_key: tuple | None = None
+        self._dates: pd.DatetimeIndex | None = None
+        self._feature_by_date: dict[pd.Timestamp, pd.DataFrame] = {}
+        self._simple_returns: pd.DataFrame | None = None
+        self._can_buy: dict[tuple[pd.Timestamp, str], bool] = {}
+        self._can_sell: dict[tuple[pd.Timestamp, str], bool] = {}
+        self._target_key: tuple | None = None
+        self._targets: dict[pd.Timestamp, list[tuple[str, float]]] = {}
+
+    def _prepare_market(
+        self,
+        features: pd.DataFrame,
+        daily_bars: pd.DataFrame,
+        trading_status: pd.DataFrame,
+        trading_dates: Iterable[pd.Timestamp],
+    ) -> pd.DatetimeIndex:
+        dates = pd.DatetimeIndex(pd.to_datetime(list(trading_dates))).normalize()
+        dates = dates.drop_duplicates().sort_values()
+        key = (id(features), id(daily_bars), id(trading_status), dates[0], dates[-1], len(dates))
+        if key == self._market_key and self._simple_returns is not None:
+            return dates
+
+        feature = features.copy()
+        feature["date"] = pd.to_datetime(feature["date"]).dt.normalize()
+        self._feature_by_date = {
+            date: block for date, block in feature.groupby("date", observed=True)
+        }
+
+        bars = daily_bars[["date", "code", "open_tr", "has_quote"]].copy()
+        bars["date"] = pd.to_datetime(bars["date"]).dt.normalize()
+        bars.loc[~bars["has_quote"].fillna(False).astype(bool), "open_tr"] = np.nan
+        open_prices = bars.pivot(index="date", columns="code", values="open_tr").reindex(dates)
+        self._simple_returns = open_prices.shift(-1) / open_prices - 1.0
+
+        status = trading_status.copy()
+        status["date"] = pd.to_datetime(status["date"]).dt.normalize()
+        status = status.set_index(["date", "code"])
+        self._can_buy = {
+            key: bool(value) for key, value in status["can_buy_open"].items()
+        }
+        self._can_sell = {
+            key: bool(value) for key, value in status["can_sell_open"].items()
+        }
+        self._dates = dates
+        self._market_key = key
+        self._target_key = None
+        return dates
+
+    def _prepare_targets(
+        self,
+        dates: pd.DatetimeIndex,
+        allowed_signals: set[pd.Timestamp],
+        *,
+        horizon: int,
+        phase: int,
+        score_column: str,
+    ) -> dict[pd.Timestamp, list[tuple[str, float]]]:
+        signal_key = (horizon, phase, score_column, frozenset(allowed_signals))
+        if signal_key == self._target_key:
+            return self._targets
+        targets: dict[pd.Timestamp, list[tuple[str, float]]] = {}
+        date_position = {date: idx for idx, date in enumerate(dates)}
+        for signal_date in sorted(allowed_signals):
+            position = date_position.get(signal_date)
+            if position is None or position % horizon != phase or position + 1 >= len(dates):
+                continue
+            block = self._feature_by_date.get(signal_date)
+            if block is None:
+                continue
+            if score_column not in block.columns:
+                raise ValueError(f"features missing score column {score_column}")
+            eligible = block.loc[
+                block["valid_signal"].fillna(False).astype(bool)
+                & block["median_amount_20"].ge(self.config.liquidity_median_amount_20d)
+            ].sort_values([score_column, "code"], ascending=[False, True], kind="stable")
+            selected = eligible.head(self.config.top_n)
+            targets[dates[position + 1]] = [
+                (str(row.code), float(getattr(row, score_column)))
+                for row in selected.itertuples()
+            ]
+        self._targets = targets
+        self._target_key = signal_key
+        return targets
 
     def run(
         self,
@@ -66,45 +149,23 @@ class ReferenceBacktester:
         horizon: int,
         phase: int,
         cost_multiplier: float = 1.0,
+        score_column: str = "simple_ensemble",
     ) -> tuple[BacktestMetrics, pd.DataFrame]:
         if horizon not in self.config.horizons:
             raise ValueError(f"unsupported horizon {horizon}")
         if not 0 <= phase < horizon:
             raise ValueError("phase must be in [0, horizon)")
-        dates = pd.DatetimeIndex(pd.to_datetime(list(trading_dates))).normalize()
-        dates = dates.drop_duplicates().sort_values()
+        dates = self._prepare_market(features, daily_bars, trading_status, trading_dates)
         allowed_signals = set(pd.DatetimeIndex(pd.to_datetime(list(signal_dates))).normalize())
-        feature = features.copy()
-        feature["date"] = pd.to_datetime(feature["date"]).dt.normalize()
-        feature_by_date = {date: block for date, block in feature.groupby("date", observed=True)}
-
-        bars = daily_bars[["date", "code", "open_tr", "has_quote"]].copy()
-        bars["date"] = pd.to_datetime(bars["date"]).dt.normalize()
-        bars.loc[~bars["has_quote"].fillna(False).astype(bool), "open_tr"] = np.nan
-        open_prices = bars.pivot(index="date", columns="code", values="open_tr").reindex(dates)
-        simple_returns = open_prices.shift(-1) / open_prices - 1.0
-
-        status = trading_status.copy()
-        status["date"] = pd.to_datetime(status["date"]).dt.normalize()
-        status = status.set_index(["date", "code"])
-        targets: dict[pd.Timestamp, list[tuple[str, float]]] = {}
-        date_position = {date: idx for idx, date in enumerate(dates)}
-        for signal_date in sorted(allowed_signals):
-            position = date_position.get(signal_date)
-            if position is None or position % horizon != phase or position + 1 >= len(dates):
-                continue
-            block = feature_by_date.get(signal_date)
-            if block is None:
-                continue
-            eligible = block.loc[
-                block["valid_signal"].fillna(False).astype(bool)
-                & block["median_amount_20"].ge(self.config.liquidity_median_amount_20d)
-            ].sort_values(["simple_ensemble", "code"], ascending=[False, True], kind="stable")
-            selected = eligible.head(self.config.top_n)
-            targets[dates[position + 1]] = [
-                (str(row.code), float(row.simple_ensemble))
-                for row in selected.itertuples()
-            ]
+        targets = self._prepare_targets(
+            dates,
+            allowed_signals,
+            horizon=horizon,
+            phase=phase,
+            score_column=score_column,
+        )
+        simple_returns = self._simple_returns
+        assert simple_returns is not None
 
         if not allowed_signals:
             raise ValueError("signal_dates cannot be empty")
@@ -122,15 +183,14 @@ class ReferenceBacktester:
         total_turnover = 0.0
         blocked_buys = blocked_sells = missing_valuation = rebalance_count = 0
         records: list[dict] = []
+        can_buy = self._can_buy
+        can_sell = self._can_sell
 
         def allowed(date: pd.Timestamp, code: str, column: str) -> bool:
-            try:
-                value = status.loc[(date, code), column]
-                if isinstance(value, pd.Series):
-                    return bool(value.iloc[0])
-                return bool(value)
-            except KeyError:
-                return False
+            key = (date, code)
+            if column == "can_sell_open":
+                return can_sell.get(key, False)
+            return can_buy.get(key, False)
 
         for date in active_dates[:-1]:
             nav_before = cash + sum(holdings.values())

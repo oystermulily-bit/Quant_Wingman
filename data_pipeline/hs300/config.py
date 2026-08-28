@@ -14,7 +14,12 @@ MCP_SERVER_PATH = Path(
     "D:/Hulucoding/AmAzing_Data/xysz/xysz/WealthManager/ad_mcp/server.py"
 )
 INDEX_CODE = "000300.SH"
+# 原始抓取曾从2010年发起，用于保留供应商覆盖缺口和来源谱系；
+# 它不是模型允许使用的研究样本起点。
 REQUESTED_START = date(2010, 1, 1)
+
+# 2026-08-28冻结：正式研究、Development切分和数据门禁统一从
+# 第一个具备OpenTR与方向性交易状态的完整交易日开始。
 RESEARCH_START = date(2014, 1, 2)
 TIMEZONE = "Asia/Shanghai"
 FREQUENCY = "D1"

@@ -177,6 +177,21 @@ class TestAllSymbolsBelowMinBarsRaisesError:
                 manager.load()
 
 
+def test_disjoint_timelines_fail_instead_of_synthesizing_zero_quotes() -> None:
+    """交集不足时不得再以 union+ffill+0 伪造停牌/未上市行情。"""
+    from config import Config
+    from data_pipeline.data_manager import MT5DataManager
+
+    first = _make_ohlcv_df(100, start_time=1_000_000)
+    second = _make_ohlcv_df(100, start_time=2_000_000)
+    manager = MT5DataManager(_make_mock_fetcher({"A": first, "B": second}))
+
+    with patch.object(Config, "MIN_BARS", 100), pytest.raises(ValueError) as exc_info:
+        manager.load(["A", "B"])
+
+    assert "refusing unsafe union/ffill/zero-fill alignment" in str(exc_info.value)
+
+
 # ── 测试 3：恰好 100 bars 的品种应被保留（边界值）────────────────────────────
 
 class TestExactlyMinBarsIsAccepted:

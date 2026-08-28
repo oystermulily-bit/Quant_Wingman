@@ -751,8 +751,11 @@ async function initAiPanel(cfg) {
   if (providerSelect && ["deepseek", "siliconflow"].includes(cfg?.ai_provider)) {
     providerSelect.value = cfg.ai_provider;
   }
-  if (cfg?.ai_api_key) keyInput.value = cfg.ai_api_key;
-  else if (cfg?.ai_provider === "openclaw" || cfg?.ai_provider === "openclaw_wb") {
+  window.__aiHasStoredKey = !!cfg?.has_api_key;
+  if (cfg?.has_api_key) {
+    keyInput.value = "";
+    keyInput.placeholder = "已安全保存；留空继续使用，输入新 Key 可替换";
+  } else if (cfg?.ai_provider === "openclaw" || cfg?.ai_provider === "openclaw_wb") {
     keyInput.value = cfg.ai_provider;
   }
 
@@ -814,15 +817,15 @@ async function runAiAnalyze() {
   const resolved = resolveAiFromKey(rawKey);
   if (!view) return;
 
-  if (["deepseek", "siliconflow"].includes(resolved.provider) && !resolved.apiKey) {
+  await refreshAiProviderStatus();
+  const hasStoredKey = !!window.__aiProviderStatus?.has_api_key || !!window.__aiHasStoredKey;
+  if (["deepseek", "siliconflow"].includes(resolved.provider) && !resolved.apiKey && !hasStoredKey) {
     view.className = "ai-answer error";
     view.textContent = resolved.provider === "siliconflow"
       ? "请填写硅基流动 API Key"
       : "请填写 DeepSeek API Key";
     return;
   }
-
-  await refreshAiProviderStatus();
 
   if (btn) btn.disabled = true;
   view.className = "ai-answer loading";
@@ -837,7 +840,7 @@ async function runAiAnalyze() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         provider: resolved.provider,
-        api_key: resolved.apiKey,
+        api_key: resolved.apiKey || null,
         symbol: selectedSymbol || null,
       }),
     });
@@ -2004,8 +2007,14 @@ async function loadRtFeishuSettings() {
     const wh = $("rtFeishuWebhook");
     const sec = $("rtFeishuSecret");
     if (en) en.checked = !!data.enabled;
-    if (wh) wh.value = data.webhook_url || "";
-    if (sec) sec.value = data.secret || "";
+    if (wh) {
+      wh.value = "";
+      wh.placeholder = data.has_webhook ? "已安全保存；留空保持不变" : "填写飞书 Webhook URL";
+    }
+    if (sec) {
+      sec.value = "";
+      sec.placeholder = data.has_secret ? "已安全保存；留空保持不变" : "填写签名密钥（可选）";
+    }
   } catch (e) {
     const hint = $("rtFeishuHint");
     if (hint) {
@@ -2020,14 +2029,15 @@ async function saveRtFeishuSettings() {
   const btn = $("rtFeishuSaveBtn");
   if (btn) btn.disabled = true;
   try {
+    const payload = { enabled: !!$("rtFeishuEnabled")?.checked };
+    const webhook = $("rtFeishuWebhook")?.value?.trim() || "";
+    const secret = $("rtFeishuSecret")?.value?.trim() || "";
+    if (webhook) payload.webhook_url = webhook;
+    if (secret) payload.secret = secret;
     await fetchJSON("/api/realtime/feishu", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        enabled: !!$("rtFeishuEnabled")?.checked,
-        webhook_url: $("rtFeishuWebhook")?.value || "",
-        secret: $("rtFeishuSecret")?.value || "",
-      }),
+      body: JSON.stringify(payload),
     });
     if (hint) {
       hint.textContent = "✓ 已保存，方向转折时会推送到飞书群。";
@@ -2057,13 +2067,15 @@ async function testRtFeishu() {
   const btn = $("rtFeishuTestBtn");
   if (btn) btn.disabled = true;
   try {
+    const payload = {};
+    const webhook = $("rtFeishuWebhook")?.value?.trim() || "";
+    const secret = $("rtFeishuSecret")?.value?.trim() || "";
+    if (webhook) payload.webhook_url = webhook;
+    if (secret) payload.secret = secret;
     await fetchJSON("/api/realtime/feishu/test", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        webhook_url: $("rtFeishuWebhook")?.value || "",
-        secret: $("rtFeishuSecret")?.value || "",
-      }),
+      body: JSON.stringify(payload),
     });
     if (hint) {
       hint.textContent = "✓ 测试消息已发送，请到飞书群查收。";

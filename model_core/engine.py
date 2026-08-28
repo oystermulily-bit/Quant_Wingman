@@ -408,9 +408,11 @@ class W1ngmanEngine:
     @staticmethod
     def _compute_ic(factor: torch.Tensor, target_ret: torch.Tensor
                     ) -> tuple[torch.Tensor, torch.Tensor]:
-        """时序 IC（每品种内部 factor[t] vs ret[t+1]）的均值与稳定性。
+        """时序 IC（每品种内部 factor[t] vs target_ret[t]）的均值与稳定性。
 
-        对 5 品种宇宙，时序 IC 比横截面 IC 统计意义更强。
+        ``DataManager.target_ret[t]`` 已表示信号日 ``t`` 收盘后、下一开盘
+        执行的前视收益，因此不能再次移位。只在同索引的有限样本上计算，
+        也为后续面板 Adapter 保留 NaN/停牌语义。
         """
         N, T = factor.shape
         if T < 2:
@@ -419,8 +421,13 @@ class W1ngmanEngine:
 
         ic_list = []
         for n in range(N):
-            x  = factor[n, :-1]
-            y  = target_ret[n, 1:]
+            x = factor[n]
+            y = target_ret[n]
+            valid = torch.isfinite(x) & torch.isfinite(y)
+            if valid.sum() < 2:
+                continue
+            x = x[valid]
+            y = y[valid]
             xm = x - x.mean()
             ym = y - y.mean()
             sx = (xm ** 2).mean().sqrt()

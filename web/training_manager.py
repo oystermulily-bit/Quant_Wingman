@@ -22,6 +22,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 LOG_DIR = PROJECT_ROOT / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 WEB_GENERATOR_BACKEND = "rd_agent"
+WEB_TRAINING_SCOPE = "LEGACY_SINGLE_SYMBOL_PARQUET"
+CSI300_CONCLUSION_STATUS = "NOT_AVAILABLE_ADAPTER_NOT_CONNECTED"
 
 
 class JobState(str, Enum):
@@ -63,6 +65,8 @@ class TrainingJob:
             "finished_at": self.finished_at,
             "exit_code": self.exit_code,
             "error": self.error,
+            "training_scope": WEB_TRAINING_SCOPE,
+            "csi300_conclusion_status": CSI300_CONCLUSION_STATUS,
         }
 
 
@@ -135,6 +139,10 @@ class TrainingManager:
             self._log_fp.write(
                 "[Web] 公式生成器=RD-Agent | LLM="
                 f"{ModelConfig.RD_AGENT_MODEL} | rounds={rounds} | REINFORCE=disabled\n"
+            )
+            self._log_fp.write(
+                "[研究范围] LEGACY_SINGLE_SYMBOL_PARQUET；沪深300 Adapter 未接入 Engine，"
+                "本任务不得解释为沪深300面板结论\n"
             )
             env = os.environ.copy()
             env["PYTHONUNBUFFERED"] = "1"

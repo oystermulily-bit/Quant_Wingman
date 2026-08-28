@@ -101,8 +101,8 @@ class LabelRegistry:
             group = block.groupby(["date", "industry_code"], observed=True)["gross_log_return"]
             industry_sum = group.transform("sum")
             industry_count = group.transform("count")
-            industry_loo = (industry_sum - block["gross_log_return"]) / (industry_count - 1)
-            industry_loo = industry_loo.where(industry_count > 1)
+            denom = (industry_count - 1).replace(0, np.nan)
+            industry_loo = (industry_sum - block["gross_log_return"]) / denom
             block["ABSOLUTE"] = block["gross_log_return"]
             block["MARKET_EXCESS"] = block["gross_log_return"] - market_mean
             block["INDUSTRY_EXCESS"] = block["gross_log_return"] - industry_loo

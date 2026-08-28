@@ -185,3 +185,16 @@ def test_split_point_exact_count():
         assert oos < 0, (
             f"T={T}: OOS 均值应 < 0，期望 OOS={expected_oos} 期，实际 {oos}"
         )
+
+
+def test_ts_ic_uses_same_index_target_and_ignores_nonfinite() -> None:
+    """target_ret[t] 已是 factor[t] 的前视标签，旧的二次 shift 会反转结论。"""
+    bt = MT5Backtest()
+    factor = torch.tensor(
+        [[1.0, 2.0, 4.0, 8.0, float("nan"), 16.0, 32.0, 64.0, 128.0, 256.0, 512.0, 1024.0]]
+    )
+    target = torch.tensor(
+        [[1.0, 2.0, 4.0, 8.0, 999.0, 16.0, 32.0, 64.0, 128.0, 256.0, 512.0, 1024.0]]
+    )
+
+    assert bt._ts_ic_stability(factor, target) == pytest.approx(3.0)
