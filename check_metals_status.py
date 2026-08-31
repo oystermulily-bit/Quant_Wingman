@@ -1,7 +1,7 @@
 import torch, glob
 
 f = sorted(glob.glob(r'D:\cl\MT5_W1ngman\checkpoints\ckpt_metals_comm_step_*.pt'))[-1]
-ckpt = torch.load(f, map_location='cpu', weights_only=False)
+ckpt = torch.load(f, map_location='cpu', weights_only=True)
 th = ckpt.get('training_history', {})
 step = ckpt['step']
 best = ckpt['best_score']

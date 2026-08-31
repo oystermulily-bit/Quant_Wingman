@@ -4,27 +4,21 @@
 使用 tqsdk 天勤量化，前复权 adj_type="F"。
 周期: M15, M30, H1, D1
 """
-import json
 import sys
 import time
 from pathlib import Path
 
 import pandas as pd
 from datetime import timezone, timedelta
+from web.settings import load_settings
 
-# 读取 tqsdk 凭证
-settings_path = Path(r"D:\cl\quant_w1ngman\web_settings.json")
-try:
-    settings = json.loads(settings_path.read_text(encoding="utf-8"))
-    user = str(settings.get("tqsdk_user", "")).strip()
-    pwd = str(settings.get("tqsdk_password", "")).strip()
-except Exception:
-    user, pwd = "", ""
-
+settings = load_settings()
+user = str(settings.get("tqsdk_user", "")).strip()
+pwd = str(settings.get("tqsdk_password", "")).strip()
 if not user or not pwd:
-    user, pwd = "", ""
+    raise RuntimeError("请先设置环境变量 TQSDK_USER 和 TQSDK_PASSWORD")
 
-print(f"tqsdk 账号: {user}")
+print("已从环境变量加载 tqsdk 凭据")
 print("=" * 60)
 
 # 橡胶主连 tqsdk 代码

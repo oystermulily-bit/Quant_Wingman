@@ -56,3 +56,49 @@ def test_save_settings_ignores_ephemeral_path(project: Path, monkeypatch: pytest
     )
     loaded = load_settings()
     assert loaded["last_data_file"] == "D:\\real\\XAUUSD_H1.parquet"
+
+
+def test_legacy_secrets_are_removed_from_json_and_env_wins(
+    project: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    settings_path = project / "web_settings.json"
+    monkeypatch.setattr(settings_mod, "SETTINGS_PATH", settings_path)
+    monkeypatch.setattr(settings_mod, "PROJECT_ROOT", project)
+    monkeypatch.setenv("TQSDK_USER", "environment-user")
+    monkeypatch.setenv("TQSDK_PASSWORD", "environment-password")
+    settings_path.write_text(
+        json.dumps(
+            {
+                "debug_mode": True,
+                "tqsdk_user": "legacy-user",
+                "tqsdk_password": "legacy-password",
+                "ai_api_key": "legacy-api-key",
+                "feishu_secret": "legacy-secret",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    loaded = load_settings()
+
+    assert loaded["tqsdk_user"] == "environment-user"
+    assert loaded["tqsdk_password"] == "environment-password"
+    assert loaded["ai_api_key"] == ""
+    persisted = json.loads(settings_path.read_text(encoding="utf-8"))
+    assert not (settings_mod._SECRET_KEYS & set(persisted))
+
+
+def test_ui_secret_updates_are_process_only(
+    project: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    settings_path = project / "web_settings.json"
+    monkeypatch.setattr(settings_mod, "SETTINGS_PATH", settings_path)
+    monkeypatch.setattr(settings_mod, "PROJECT_ROOT", project)
+    monkeypatch.delenv("W1NGMAN_AI_API_KEY", raising=False)
+
+    saved = save_settings({"ai_api_key": "runtime-only", "debug_mode": True})
+
+    assert saved["ai_api_key"] == "runtime-only"
+    assert settings_mod.os.environ["W1NGMAN_AI_API_KEY"] == "runtime-only"
+    persisted = json.loads(settings_path.read_text(encoding="utf-8"))
+    assert "ai_api_key" not in persisted

@@ -656,7 +656,7 @@ def main():
     import glob, torch
     ckpt_files = sorted(glob.glob(r"D:\cl\MT5_W1ngman\checkpoints\ckpt_metals_comm_step_*.pt"))
     if ckpt_files:
-        ckpt = torch.load(ckpt_files[-1], map_location='cpu', weights_only=False)
+        ckpt = torch.load(ckpt_files[-1], map_location='cpu', weights_only=True)
         bf = ckpt.get('best_formula')
         bs = ckpt.get('best_score', 0)
         step = ckpt.get('step', 0)

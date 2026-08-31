@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import re
 
+import pytest
+from fastapi import HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from web import app as web_app
@@ -13,6 +15,8 @@ SECRET_SETTINGS = {
     "feishu_enabled": True,
     "feishu_webhook_url": "https://example.invalid/private-hook",
     "feishu_secret": "private-signing-secret",
+    "tqsdk_user": "private-user",
+    "tqsdk_password": "private-password",
     "last_data_file": "",
     "debug_mode": False,
 }
@@ -37,9 +41,22 @@ def test_settings_endpoint_never_returns_stored_credentials(monkeypatch) -> None
     assert payload["ai_api_key"] == ""
     assert payload["feishu_webhook_url"] == ""
     assert payload["feishu_secret"] == ""
+    assert payload["tqsdk_user"] == ""
+    assert payload["tqsdk_password"] == ""
     assert payload["has_api_key"] is True
     assert payload["has_feishu_webhook"] is True
     assert payload["has_feishu_secret"] is True
+    assert payload["has_tqsdk_credentials"] is True
+
+
+def test_training_import_is_loopback_only() -> None:
+    local = Request({"type": "http", "client": ("127.0.0.1", 1234)})
+    remote = Request({"type": "http", "client": ("192.168.1.20", 1234)})
+
+    web_app._require_loopback_client(local)
+    with pytest.raises(HTTPException) as exc:
+        web_app._require_loopback_client(remote)
+    assert exc.value.status_code == 403
 
 
 def test_config_marks_legacy_scope_without_returning_key(monkeypatch) -> None:

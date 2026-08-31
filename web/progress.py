@@ -83,7 +83,7 @@ def _load_checkpoint_meta(path: Path) -> dict[str, Any]:
     if cached and cached[0] == mtime:
         return cached[1]
 
-    ckpt = torch.load(path, map_location="cpu", weights_only=False)
+    ckpt = torch.load(path, map_location="cpu", weights_only=True)
     backend = ckpt.get("generator_backend")
     if backend != "rd_agent":
         raise ValueError(

@@ -3,7 +3,7 @@ import torch, glob
 files = sorted(glob.glob(r'D:\cl\MT5_W1ngman\checkpoints\ckpt_metals_comm_step_*.pt'))
 # Check last 5 checkpoints in detail
 for f in files[-5:]:
-    ckpt = torch.load(f, map_location='cpu', weights_only=False)
+    ckpt = torch.load(f, map_location='cpu', weights_only=True)
     step = ckpt.get('step', 0)
     best = ckpt.get('best_score', 0)
     restarts = ckpt.get('restarts', 0)

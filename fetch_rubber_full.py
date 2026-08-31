@@ -4,20 +4,20 @@
 覆盖周期: 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 1d, 1w
 保存路径: D:\\国内期货K线数据\\橡胶主连_{TF}.parquet
 """
-import json
 import time
 from pathlib import Path
 
 import pandas as pd
 from datetime import timezone, timedelta
 from tqsdk import TqApi, TqAuth, TqSim
+from web.settings import load_settings
 
 # ── 配置 ──
-settings = json.loads(Path(r"D:\cl\quant_w1ngman\web_settings.json").read_text(encoding="utf-8"))
+settings = load_settings()
 user = settings.get("tqsdk_user", "")
 pwd = settings.get("tqsdk_password", "")
 if not user or not pwd:
-    user, pwd = "", ""
+    raise RuntimeError("请先设置环境变量 TQSDK_USER 和 TQSDK_PASSWORD")
 
 TQSDK_SYMBOL = "KQ.m@SHFE.ru"  # 橡胶主连
 DATA_LENGTH = 10000  # tqsdk 上限
@@ -38,7 +38,7 @@ TIMEFRAMES = [
     (604800,  "W1",  "周线"),
 ]
 
-print(f"tqsdk 账号: {user}")
+print("已从环境变量加载 tqsdk 凭据")
 print(f"品种: 橡胶主连 ({TQSDK_SYMBOL})")
 print(f"数据长度上限: {DATA_LENGTH}")
 print("=" * 80)

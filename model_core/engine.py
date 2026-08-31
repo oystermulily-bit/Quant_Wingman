@@ -983,7 +983,9 @@ class W1ngmanEngine:
 
     def load_checkpoint(self, path: str) -> int:
         self._ensure_holdout_isolation()
-        ckpt = torch.load(path, map_location=ModelConfig.DEVICE)
+        # Checkpoints contain only tensors and primitive containers. The
+        # restricted loader prevents accidental pickle code execution.
+        ckpt = torch.load(path, map_location=ModelConfig.DEVICE, weights_only=True)
 
         artifact_backend = ckpt.get("generator_backend")
         if artifact_backend != self.generator_backend:

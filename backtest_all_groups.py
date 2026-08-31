@@ -397,7 +397,7 @@ def main():
     if ckpt_files:
         import torch
         latest_ckpt = ckpt_files[-1]
-        ckpt = torch.load(latest_ckpt, map_location='cpu', weights_only=False)
+        ckpt = torch.load(latest_ckpt, map_location='cpu', weights_only=True)
         best_formula = ckpt.get('best_formula')
         best_score = ckpt.get('best_score', 0)
         step = ckpt.get('step', 0)

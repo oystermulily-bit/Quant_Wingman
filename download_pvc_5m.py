@@ -3,24 +3,17 @@
 使用 tqsdk 拉取 PVC主连(KQ.m@DCE.v) 的 5 分钟 K 线，
 保存为项目兼容的 Parquet 格式（time/open/high/low/close/tick_volume）。
 """
-import json
 import sys
 from pathlib import Path
+from web.settings import load_settings
 
-# 读取 tqsdk 凭证（优先 web_settings.json，未配置则用默认账号）
-settings_path = Path(__file__).parent / "web_settings.json"
-try:
-    settings = json.loads(settings_path.read_text(encoding="utf-8"))
-    user = str(settings.get("tqsdk_user", "")).strip()
-    pwd = str(settings.get("tqsdk_password", "")).strip()
-except Exception:
-    user, pwd = "", ""
-
-# 内置默认账号
+settings = load_settings()
+user = str(settings.get("tqsdk_user", "")).strip()
+pwd = str(settings.get("tqsdk_password", "")).strip()
 if not user or not pwd:
-    user, pwd = "", ""
+    raise RuntimeError("请先设置环境变量 TQSDK_USER 和 TQSDK_PASSWORD")
 
-print(f"tqsdk 账号: {user}")
+print("已从环境变量加载 tqsdk 凭据")
 print("正在连接天勤量化...")
 
 from tqsdk import TqApi, TqAuth, TqSim

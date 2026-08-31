@@ -2,7 +2,7 @@
 import sys, torch
 sys.path.insert(0, '.')
 
-ckpt = torch.load('checkpoints/ckpt_step_0480.pt', map_location='cpu', weights_only=False)
+ckpt = torch.load('checkpoints/ckpt_step_0480.pt', map_location='cpu', weights_only=True)
 h       = ckpt['training_history']
 tokens  = ckpt['best_formula']
 best_sc = ckpt['best_score']

@@ -1,7 +1,7 @@
 """国内期货数据源（tqsdk 天勤量化，实时行情）。
 
 通过 tqsdk 实时拉取国内期货主连 K 线，支持 60 个品种 × 5 个周期。
-账号优先从 web_settings.json 读取，未配置时使用内置默认账号。
+账号只从环境变量 TQSDK_USER / TQSDK_PASSWORD 读取。
 
 特点：
   - 实时拉取最新 K 线（不是本地文件）
@@ -11,12 +11,11 @@
 """
 from __future__ import annotations
 
-import json
 import threading
 import time
-from pathlib import Path
 
 from web.data_sources.base import Bar, DataSource, DataSourceUnavailable
+from web.settings import load_settings
 
 # 周期映射：CANON_TIMEFRAMES → tqsdk duration_seconds
 _TF_TO_SECONDS = {
@@ -62,25 +61,13 @@ _SYMBOL_MAP = {
 
 _PRESETS = list(_SYMBOL_MAP.keys())
 
-# tqsdk 账号只允许来自 web_settings.json 或环境，禁止把真实密码写进源码。
-_DEFAULT_TQSDK_USER = ""
-_DEFAULT_TQSDK_PASSWORD = ""
-
-# web_settings.json 路径
-_SETTINGS_PATH = Path(__file__).resolve().parents[2] / "web_settings.json"
-
-
 def _load_credentials() -> tuple[str, str]:
-    """读取 tqsdk 账号密码。优先 web_settings.json，未配置则用内置默认账号。"""
-    try:
-        data = json.loads(_SETTINGS_PATH.read_text(encoding="utf-8"))
-        user = str(data.get("tqsdk_user", "")).strip()
-        pwd = str(data.get("tqsdk_password", "")).strip()
-        if user and pwd:
-            return user, pwd
-    except Exception:
-        pass
-    return _DEFAULT_TQSDK_USER, _DEFAULT_TQSDK_PASSWORD
+    """Read credentials resolved by the environment-only settings layer."""
+    settings = load_settings()
+    return (
+        str(settings.get("tqsdk_user") or "").strip(),
+        str(settings.get("tqsdk_password") or "").strip(),
+    )
 
 
 class DomesticFuturesSource(DataSource):

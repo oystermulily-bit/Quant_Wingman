@@ -7,7 +7,7 @@ for f in files:
     step_num = int(name.split('step_')[1].split('.')[0])
     if step_num % 100 != 0 and step_num != 20:
         continue
-    ckpt = torch.load(f, map_location='cpu', weights_only=False)
+    ckpt = torch.load(f, map_location='cpu', weights_only=True)
     step = ckpt.get('step', 0)
     best = ckpt.get('best_score', 0)
     restarts = ckpt.get('restarts', 0)

@@ -4,7 +4,6 @@
 tqsdk data_length=10000（上限），前复权 adj_type="F"。
 每个品种每个周期建连接→拉数据→关连接，间隔 0.3s。
 """
-import json
 import time
 import sys
 from pathlib import Path
@@ -12,13 +11,14 @@ from pathlib import Path
 import pandas as pd
 from datetime import timezone, timedelta
 from tqsdk import TqApi, TqAuth, TqSim
+from web.settings import load_settings
 
 # ── 配置 ──
-settings = json.loads(Path(r"D:\cl\quant_w1ngman\web_settings.json").read_text(encoding="utf-8"))
+settings = load_settings()
 user = settings.get("tqsdk_user", "")
 pwd = settings.get("tqsdk_password", "")
 if not user or not pwd:
-    user, pwd = "", ""
+    raise RuntimeError("请先设置环境变量 TQSDK_USER 和 TQSDK_PASSWORD")
 
 DATA_LENGTH = 10000
 BJ_TZ = timezone(timedelta(hours=8))

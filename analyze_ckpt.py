@@ -7,7 +7,7 @@ ckpts = sorted(glob.glob('checkpoints/ckpt_step_*.pt'))
 latest = ckpts[-1]
 print(f"Latest checkpoint: {latest}")
 
-ckpt    = torch.load(latest, map_location='cpu', weights_only=False)
+ckpt    = torch.load(latest, map_location='cpu', weights_only=True)
 tokens  = ckpt['best_formula']
 best_sc = ckpt['best_score']
 h       = ckpt['training_history']

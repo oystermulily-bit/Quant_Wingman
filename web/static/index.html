@@ -92,8 +92,8 @@
           <span class="action-sep" aria-hidden="true"></span>
           <button class="btn btn-secondary" id="exportBtn" disabled title="下载当前品种的最优策略 JSON">导出策略</button>
           <button class="btn btn-secondary" id="exportTrainingBtn" disabled title="打包 checkpoint、训练曲线与策略为 zip">导出训练</button>
-          <button class="btn btn-secondary" id="importTrainingBtn" disabled title="上传 .zip 或 .pt，下次训练断点续训">导入训练</button>
-          <input type="file" id="importTrainingFile" accept=".zip,.pt" hidden />
+          <button class="btn btn-secondary" id="importTrainingBtn" disabled title="上传安全训练包 .zip，下次训练断点续训">导入训练</button>
+          <input type="file" id="importTrainingFile" accept=".zip,application/zip" hidden />
         </div>
         <small class="field-hint">强制离线：只用本地 Parquet，不连接 MT5。命名：<code>{品种}_{周期}.parquet</code>，如 <code>XAUUSD_H1.parquet</code> / <code>002008_60min.parquet</code>（<code>60min</code>/<code>1h</code> 等同 <code>H1</code>）</small>
       </div>

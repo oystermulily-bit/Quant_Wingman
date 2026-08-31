@@ -1,6 +1,7 @@
 """FastAPI application for quant_w1ngman training UI."""
 from __future__ import annotations
 
+import ipaddress
 import json
 import sys
 import time
@@ -49,7 +50,11 @@ from web.training_manager import (
     training_manager,
 )
 from web.training_time import get_training_time_summary
-from web.training_package import build_training_export_zip, import_training_package
+from web.training_package import (
+    MAX_PACKAGE_BYTES,
+    build_training_export_zip,
+    import_training_package,
+)
 from web.backtest_manager import backtest_manager
 from web.realtime_manager import realtime_manager
 from web.data_sources.factory import list_sources
@@ -137,12 +142,30 @@ def _public_settings(settings: dict[str, Any]) -> dict[str, Any]:
         str(settings.get("feishu_webhook_url") or "").strip()
     )
     public["has_feishu_secret"] = bool(str(settings.get("feishu_secret") or "").strip())
+    public["has_tqsdk_credentials"] = bool(
+        str(settings.get("tqsdk_user") or "").strip()
+        and str(settings.get("tqsdk_password") or "").strip()
+    )
     # Empty compatibility fields tell old clients not to prefill secrets. New
     # clients use the has_* flags and leave an existing credential unchanged.
     public["ai_api_key"] = ""
     public["feishu_webhook_url"] = ""
     public["feishu_secret"] = ""
+    public["tqsdk_user"] = ""
+    public["tqsdk_password"] = ""
     return public
+
+
+def _require_loopback_client(request: Request) -> None:
+    """Keep local administrative file imports inaccessible from the LAN."""
+    host = request.client.host if request.client else ""
+    try:
+        if ipaddress.ip_address(host).is_loopback:
+            return
+    except ValueError:
+        if host.lower() == "localhost":
+            return
+    raise HTTPException(403, "训练包导入仅允许从本机访问")
 
 
 @app.middleware("http")
@@ -704,15 +727,26 @@ def api_export_training(symbol: str):
 
 @app.post("/api/training/import")
 async def api_import_training(
+    request: Request,
     file: UploadFile = File(...),
     symbol: str | None = Query(None, description="当前选择的品种，用于校验导入包是否一致"),
 ) -> dict[str, Any]:
+    _require_loopback_client(request)
     if training_manager.status().get("active"):
         raise HTTPException(409, "训练进行中，请先停止再导入")
 
+    content_length = request.headers.get("content-length")
+    if content_length:
+        try:
+            if int(content_length) > MAX_PACKAGE_BYTES + 1024 * 1024:
+                raise HTTPException(413, "上传训练包超过大小限制")
+        except ValueError:
+            raise HTTPException(400, "Content-Length 不合法")
     raw = await file.read()
     if not raw:
         raise HTTPException(400, "上传文件为空")
+    if len(raw) > MAX_PACKAGE_BYTES:
+        raise HTTPException(413, "上传训练包超过大小限制")
 
     try:
         return import_training_package(

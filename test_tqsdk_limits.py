@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """探索 tqsdk get_kline_serial 的周期和 data_length 上限。"""
-import json
-from pathlib import Path
 from tqsdk import TqApi, TqAuth, TqSim
+from web.settings import load_settings
 
-settings = json.loads(Path(r"D:\cl\quant_w1ngman\web_settings.json").read_text(encoding="utf-8"))
+settings = load_settings()
 user = settings.get("tqsdk_user", "")
 pwd = settings.get("tqsdk_password", "")
+if not user or not pwd:
+    raise RuntimeError("请先设置环境变量 TQSDK_USER 和 TQSDK_PASSWORD")
 
 api = TqApi(TqSim(), auth=TqAuth(user, pwd), disable_print=True)
 

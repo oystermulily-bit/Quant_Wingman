@@ -10,7 +10,7 @@ if not ckpts:
     print("无 metals_comm checkpoint"); sys.exit(1)
 
 latest = ckpts[-1]
-ckpt = torch.load(latest, map_location='cpu', weights_only=False)
+ckpt = torch.load(latest, map_location='cpu', weights_only=True)
 
 formula = ckpt['best_formula']
 score = float(ckpt['best_score'])

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,43 @@ _DEFAULT = {
     "tqsdk_user": "",
     "tqsdk_password": "",
 }
+
+# Secrets may be supplied by the UI for the lifetime of the current process, but
+# are never written to web_settings.json. Persistent configuration belongs in
+# the process environment or the operating system's secret manager.
+_SECRET_ENV = {
+    "ai_api_key": "W1NGMAN_AI_API_KEY",
+    "feishu_webhook_url": "W1NGMAN_FEISHU_WEBHOOK_URL",
+    "feishu_secret": "W1NGMAN_FEISHU_SECRET",
+    "tqsdk_user": "TQSDK_USER",
+    "tqsdk_password": "TQSDK_PASSWORD",
+}
+_SECRET_KEYS = frozenset(_SECRET_ENV)
+_PERSISTED_KEYS = frozenset(_DEFAULT) - _SECRET_KEYS
+
+
+def _environment_secret(key: str) -> str:
+    value = str(os.environ.get(_SECRET_ENV[key], "") or "").strip()
+    if value or key != "ai_api_key":
+        return value
+    # Keep the existing provider-specific deployment variables compatible.
+    return str(
+        os.environ.get("SILICONFLOW_API_KEY")
+        or os.environ.get("DEEPSEEK_API_KEY")
+        or ""
+    ).strip()
+
+
+def _persisted_payload(settings: dict) -> dict:
+    """Return the public/non-secret subset allowed on disk."""
+    return {key: settings.get(key, _DEFAULT[key]) for key in _PERSISTED_KEYS}
+
+
+def _write_persisted_settings(settings: dict) -> None:
+    SETTINGS_PATH.write_text(
+        json.dumps(_persisted_payload(settings), indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
 
 
 def _as_pct(value, default: float) -> float:
@@ -104,14 +142,18 @@ def _recover_last_data_file(current: dict) -> str:
 
 
 def load_settings() -> dict:
-    if not SETTINGS_PATH.exists():
-        return dict(_DEFAULT)
-    try:
-        data = json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return dict(_DEFAULT)
+    data: dict = {}
+    if SETTINGS_PATH.exists():
+        try:
+            loaded = json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                data = loaded
+        except (json.JSONDecodeError, OSError):
+            data = {}
     out = dict(_DEFAULT)
-    out.update({k: v for k, v in data.items() if k in _DEFAULT})
+    out.update({k: v for k, v in data.items() if k in _PERSISTED_KEYS})
+    for key in _SECRET_KEYS:
+        out[key] = _environment_secret(key)
     out["debug_mode"] = bool(out.get("debug_mode", False))
     out["last_strategy_file"] = str(out.get("last_strategy_file") or "").strip()
     out["ai_provider"] = str(out.get("ai_provider") or "deepseek").strip().lower()
@@ -149,17 +191,26 @@ def load_settings() -> dict:
     if recovered != out.get("last_data_file") and _is_production_settings_path():
         out["last_data_file"] = recovered
         if recovered:
-            SETTINGS_PATH.write_text(
-                json.dumps(out, indent=2, ensure_ascii=False),
-                encoding="utf-8",
-            )
+            _write_persisted_settings(out)
     elif recovered != out.get("last_data_file"):
         out["last_data_file"] = recovered
+    # One-way migration: strip credentials left by older versions immediately.
+    if SETTINGS_PATH.exists() and any(key in data for key in _SECRET_KEYS):
+        _write_persisted_settings(out)
     return out
 
 
 def save_settings(data: dict) -> dict:
     current = load_settings()
+    for key, env_name in _SECRET_ENV.items():
+        if key not in data:
+            continue
+        value = str(data[key] or "").strip()
+        if value:
+            os.environ[env_name] = value
+        else:
+            os.environ.pop(env_name, None)
+        current[key] = value
     if "last_data_file" in data:
         path = str(data["last_data_file"] or "").strip()
         if (
@@ -181,8 +232,6 @@ def save_settings(data: dict) -> dict:
             if provider in ("deepseek", "siliconflow", "openclaw", "openclaw_wb")
             else "deepseek"
         )
-    if "ai_api_key" in data:
-        current["ai_api_key"] = str(data["ai_api_key"] or "").strip()
     if "bt_commission_pct" in data:
         current["bt_commission_pct"] = _as_pct(
             data["bt_commission_pct"], _DEFAULT["bt_commission_pct"]
@@ -215,16 +264,5 @@ def save_settings(data: dict) -> dict:
         current["realtime_watches"] = cleaned
     if "feishu_enabled" in data:
         current["feishu_enabled"] = bool(data["feishu_enabled"])
-    if "feishu_webhook_url" in data:
-        current["feishu_webhook_url"] = str(data["feishu_webhook_url"] or "").strip()
-    if "feishu_secret" in data:
-        current["feishu_secret"] = str(data["feishu_secret"] or "").strip()
-    if "tqsdk_user" in data:
-        current["tqsdk_user"] = str(data["tqsdk_user"] or "").strip()
-    if "tqsdk_password" in data:
-        current["tqsdk_password"] = str(data["tqsdk_password"] or "").strip()
-    SETTINGS_PATH.write_text(
-        json.dumps(current, indent=2, ensure_ascii=False),
-        encoding="utf-8",
-    )
+    _write_persisted_settings(current)
     return current

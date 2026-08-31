@@ -1064,7 +1064,7 @@ function updateTrainingBtns(progress, training) {
   }
   if (importBtn) {
     importBtn.disabled = !sym || !!active;
-    importBtn.title = active ? "训练进行中，请停止后再导入" : "上传 .zip 或 .pt，下次训练断点续训";
+    importBtn.title = active ? "训练进行中，请停止后再导入" : "上传安全训练包 .zip，下次训练断点续训";
   }
 }
 
@@ -1111,6 +1111,11 @@ async function handleImportTrainingFile(event) {
   const input = event.target;
   const file = input.files?.[0];
   if (!file) return;
+  if (!file.name.toLowerCase().endsWith(".zip")) {
+    await logClientError("安全限制：仅支持网页导出的 .zip 训练包，不接受 .pt 文件");
+    input.value = "";
+    return;
+  }
 
   const sym = selectedSymbol;
   if (!sym) {

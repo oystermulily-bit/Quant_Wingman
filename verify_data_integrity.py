@@ -4,7 +4,6 @@
 维度1: 重新拉取 6 个抽样品种的 D1+M15，和已保存文件做逐 bar 对比
 维度2: 对全部 600 个文件做深度一致性检查（时间连续性、价格合理性、成交量合理性）
 """
-import json
 import time
 from pathlib import Path
 
@@ -12,15 +11,16 @@ import pandas as pd
 import numpy as np
 from datetime import timezone, timedelta
 from tqsdk import TqApi, TqAuth, TqSim
+from web.settings import load_settings
 
 BJ_TZ = timezone(timedelta(hours=8))
 DATA_DIR = Path(r"D:\国内期货K线数据")
 
-settings = json.loads(Path(r"D:\cl\quant_w1ngman\web_settings.json").read_text(encoding="utf-8"))
+settings = load_settings()
 user = settings.get("tqsdk_user", "")
 pwd = settings.get("tqsdk_password", "")
 if not user or not pwd:
-    user, pwd = "", ""
+    raise RuntimeError("请先设置环境变量 TQSDK_USER 和 TQSDK_PASSWORD")
 
 # ── 维度1: 抽样重新拉取对比 ──
 SAMPLE_SYMBOLS = [
