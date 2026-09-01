@@ -49,6 +49,12 @@ from web.training_manager import (
     WEB_TRAINING_SCOPE,
     training_manager,
 )
+from web.v2_status import (
+    data_status as v2_data_status,
+    experiment_status as v2_experiment_status,
+    refuse_recommendation as v2_refuse_recommendation,
+    system_status as v2_system_status,
+)
 from web.training_time import get_training_time_summary
 from web.training_package import (
     MAX_PACKAGE_BYTES,
@@ -106,6 +112,14 @@ class AnalyzeTrainingRequest(BaseModel):
     symbol: str | None = None
 
 
+class RecommendationRequest(BaseModel):
+    as_of: str | None = None
+    whitelist_id: str | None = None
+    holdings_id: str | None = None
+    account_value: float | None = None
+    requested_horizon: int | None = Field(default=None, ge=1, le=5)
+
+
 class StartBacktestRequest(BaseModel):
     strategy_file: str
     commission_pct: float | None = None
@@ -142,15 +156,12 @@ def _public_settings(settings: dict[str, Any]) -> dict[str, Any]:
         str(settings.get("feishu_webhook_url") or "").strip()
     )
     public["has_feishu_secret"] = bool(str(settings.get("feishu_secret") or "").strip())
-    public["has_tqsdk_credentials"] = bool(
-        str(settings.get("tqsdk_user") or "").strip()
-        and str(settings.get("tqsdk_password") or "").strip()
-    )
     # Empty compatibility fields tell old clients not to prefill secrets. New
     # clients use the has_* flags and leave an existing credential unchanged.
     public["ai_api_key"] = ""
     public["feishu_webhook_url"] = ""
     public["feishu_secret"] = ""
+    public.pop("has_tqsdk_credentials", None)
     public["tqsdk_user"] = ""
     public["tqsdk_password"] = ""
     return public
@@ -346,6 +357,26 @@ def _sync_and_persist_best_strategy(
     if info:
         save_settings({"last_strategy_file": info["strategy_file"]})
     return info
+
+
+@app.get("/api/v2/system-status")
+def api_v2_system_status() -> dict[str, Any]:
+    return v2_system_status()
+
+
+@app.get("/api/v2/data-status")
+def api_v2_data_status() -> dict[str, Any]:
+    return v2_data_status()
+
+
+@app.get("/api/v2/research/experiments/{experiment_id}")
+def api_v2_research_experiment(experiment_id: str) -> dict[str, Any]:
+    return v2_experiment_status(experiment_id)
+
+
+@app.post("/api/v2/portfolio/recommendation")
+def api_v2_portfolio_recommendation(req: RecommendationRequest) -> dict[str, Any]:
+    return v2_refuse_recommendation(requested_horizon=req.requested_horizon)
 
 
 @app.get("/api/health")

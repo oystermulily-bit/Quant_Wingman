@@ -43,10 +43,10 @@ def test_settings_endpoint_never_returns_stored_credentials(monkeypatch) -> None
     assert payload["feishu_secret"] == ""
     assert payload["tqsdk_user"] == ""
     assert payload["tqsdk_password"] == ""
+    assert "has_tqsdk_credentials" not in payload
     assert payload["has_api_key"] is True
     assert payload["has_feishu_webhook"] is True
     assert payload["has_feishu_secret"] is True
-    assert payload["has_tqsdk_credentials"] is True
 
 
 def test_training_import_is_loopback_only() -> None:
