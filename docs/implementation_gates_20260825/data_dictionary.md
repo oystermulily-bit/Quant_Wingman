@@ -51,11 +51,31 @@
 ```text
 date, index_code, code, is_member, weight_pct,
 effective_at, known_at, known_at_source,
-entry_effective_date, exit_effective_date,
+entry_effective_date,
 membership_source, source_request_id
 ```
 
-验收：每个完整交易日 `000300.SH` 恰好300个不同 code；权重集合和成员集合一致；权重和约100%。异常不许通过删行“修复”。
+验收：每个完整交易日 `000300.SH` 恰好300个不同 code；权重集合和成员集合一致；权重和约100%。异常不许通过删行“修复”。每日成员表不得包含尚未实现的 `exit_effective_date`。
+
+## `membership_spell_audit`
+
+主键：`code, spell_id`
+
+`code, spell_id, index_code, entry_effective_date, realized_exit_date, censored_at_snapshot_end`
+
+已实现退出日只写审计表。快照末日仍在指数内的区间 `realized_exit_date` 为空，`censored_at_snapshot_end=true`。
+
+## `execution_bars`
+
+主键：`date, code`
+
+字段与 `daily_bars` 相同，但覆盖**曾入选成分**的全部可报价日，不按当日是否仍是成员切片。回测强制出指数平仓与缺报价估值必须读此表，不得只用成员面板。
+
+## `execution_status`
+
+主键：`date, code`
+
+字段与 `trading_status` 相同，覆盖范围与 `execution_bars` 对齐。
 
 ## `industry_membership`
 
@@ -169,4 +189,4 @@ delisting_return, portfolio_pnl_included
 
 ## 异常/验收输出
 
-`membership_exceptions`、`quote_exceptions`、`industry_exceptions`、`corporate_action_exceptions`、`temporal_leakage_report`、`prefix_invariance_report`、`checksums.sha256`。任何硬门槛异常必须保留行级证据。
+`membership_exceptions`、`quote_exceptions`、`industry_exceptions`、`corporate_action_exceptions`、`membership_spell_audit`、`temporal_leakage_report`、`prefix_invariance_report`、`checksums.sha256`。任何硬门槛异常必须保留行级证据。

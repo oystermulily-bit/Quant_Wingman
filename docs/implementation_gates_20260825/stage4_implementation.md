@@ -5,7 +5,9 @@
 统计门禁：`KEEP_1D_BASELINE`  
 RD-Agent：不允许  
 Holdout：未读取、未计算表现  
-产品待办：保持关闭
+产品待办：保持关闭  
+现行产物：`experiments/stage4_hs300_v2_execution_ledger`（2026-09-01）  
+归档：`experiments/stage4_hs300_v2`（2026-08-28 成员切片回测）
 
 本阶段回答的唯一预注册问题是：在冻结的点时沪深300 Top-20 等权长仓参考组合、同一标签、成本、切分和 `SIMPLE_ENSEMBLE_V1` 下，3 日或 5 日是否相对 1 日具有稳定、扣费后仍有经济意义的 Development OOF 增量。
 
@@ -33,23 +35,23 @@ Holdout：未读取、未计算表现
 
 ```powershell
 cd C:\Users\Administrator\Documents\Codex\2026-07-31\yue-2\quant_w1ngman
-D:\anaconda\python.exe run_stage4_feasibility.py `
+.\.venv\Scripts\python.exe run_stage4_feasibility.py `
   --snapshot "D:\Hulucoding\AmAzing_Data\research_snapshots\csi300_2014_present_v2" `
-  --stage3 "experiments\stage3_hs300_v2" `
-  --output "experiments\stage4_hs300_v2"
+  --stage3 "experiments\stage3_hs300_v2_execution_ledger" `
+  --output "experiments\stage4_hs300_v2_execution_ledger"
 ```
 
 输入必须已存在：
 
 ```text
-experiments/stage3_hs300_v2/stage3_report.json
-experiments/stage3_hs300_v2/development_oof_portfolio_daily.parquet
-experiments/stage3_hs300_v2/development_features.parquet
-experiments/stage3_hs300_v2/development_labels.parquet
+experiments/stage3_hs300_v2_execution_ledger/stage3_report.json
+experiments/stage3_hs300_v2_execution_ledger/development_oof_portfolio_daily.parquet
+experiments/stage3_hs300_v2_execution_ledger/development_features.parquet
+experiments/stage3_hs300_v2_execution_ledger/development_labels.parquet
 ```
 
-正式输出：`experiments/stage4_hs300_v2/stage4_report.json`  
-旧协议 `w1ngman_stage4_feasibility_v1` 备份为 `stage4_report_protocol_v1.json`，不得当作本轮结论。
+正式输出：`experiments/stage4_hs300_v2_execution_ledger/stage4_report.json`  
+2026-08-28 成员切片结论归档为 `experiments/stage4_hs300_v2/stage4_report.json`，不得当作现行证据。旧协议 `w1ngman_stage4_feasibility_v1` 备份为 `stage4_report_protocol_v1.json`，不得当作本轮结论。
 
 ## 冻结口径（未改）
 
@@ -67,17 +69,19 @@ experiments/stage3_hs300_v2/development_labels.parquet
 
 OOF 裁剪：特征使用 457,500 行，排除非 OOF 319,800 行；标签使用 4,117,500 行，排除 2,878,200 行。
 
-## 主结果（Development OOF，成本 ×1）
+## 主结果（现行 Development OOF，成本 ×1，执行账本）
 
 | 周期 | 全相位中位净 Sharpe | 中位扣费年化 | 中位最大回撤 | 相对 1 日 ΔSharpe | 相对 1 日 Δ年化 |
 |---|---:|---:|---:|---:|---:|
-| 1 日 | -0.655 | -11.0% | 55.4% | — | — |
-| 3 日 | -0.383 | -7.1% | 41.6% | +0.272 | +3.88pct |
-| 5 日 | -0.174 | -4.1% | 34.2% | +0.481 | +6.94pct |
+| 1 日 | -0.606 | -11.1% | 55.6% | — | — |
+| 3 日 | -0.317 | -6.8% | 43.8% | +0.289 | +4.36pct |
+| 5 日 | -0.126 | -3.6% | 35.0% | +0.480 | +7.53pct |
 
-全部 3 个 3 日相位、全部 5 个 5 日相位的净 Sharpe 都高于 1 日，且全部仍为负。不准只报最好相位：3 日最差相位 Sharpe = -0.385；5 日最差 = -0.293。
+全部 3 个 3 日相位、全部 5 个 5 日相位的净 Sharpe 都高于 1 日，且全部仍为负。不准只报最好相位：3 日最差相位 Sharpe = -0.347；5 日最差 = -0.245。
 
-配对 Bootstrap 与 Holm 均拒绝“无改善”：3 日 CI `[0.093, 0.544]`，5 日 CI `[0.199, 0.759]`，Holm p ≈ 0.002。统计上的“相对 1 日更好”成立，但预注册辅助门槛没有同时满足，因此不能 GO。
+配对 Bootstrap 与 Holm 均拒绝“无改善”：3 日 CI `[0.103, 0.546]`，5 日 CI `[0.184, 0.751]`，Holm p ≈ 0.002。统计上的“相对 1 日更好”成立，但预注册辅助门槛没有同时满足，因此不能 GO。
+
+2026-08-28 成员切片归档点估计为 1 日 -0.655 / 3 日 -0.383 / 5 日 -0.174。执行账本改变了成交与估值，不改变 GO 阈值，也不改变“不能 GO”的结论。
 
 ## 成本披露（不进入 GO）
 
@@ -85,16 +89,16 @@ OOF 日频毛/净拆分满足 `净改善 = 毛 Alpha + 成本节约`：
 
 | 周期 | 毛年化 | 成本拖累年化 | 净年化 | 相对 1 日毛 Alpha | 相对 1 日成本节约 | 相对 1 日净年化 | 日均换手 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| 1 日 | +6.2% | 17.2pct | -11.0% | — | — | — | 73.3% |
-| 3 日 | +2.3% | 9.4pct | -7.1% | **-3.93pct** | +7.81pct | +3.88pct | 40.0% |
-| 5 日 | +3.0% | 7.1pct | -4.1% | **-3.18pct** | +10.11pct | +6.94pct | 29.2% |
+| 1 日 | +8.2% | 19.4pct | -11.1% | — | — | — | 81.7% |
+| 3 日 | +3.4% | 10.2pct | -6.8% | **-4.80pct** | +9.16pct | +4.36pct | 43.1% |
+| 5 日 | +4.0% | 7.6pct | -3.6% | **-4.22pct** | +11.75pct | +7.53pct | 31.3% |
 
 阶段3折内成本敏感性（中位净 Sharpe）：
 
 | 周期 | ×0 | ×1 | ×1.5 |
 |---|---:|---:|---:|
-| 3 日 | +0.308 | -0.268 | -0.630 |
-| 5 日 | +0.278 | -0.211 | -0.467 |
+| 3 日 | +0.385 | -0.245 | -0.607 |
+| 5 日 | +0.307 | -0.205 | -0.467 |
 
 扣费后更“不那么差”的是 5 日，但 3 日和 5 日在成本 ×1 与 ×1.5 下净 Sharpe 均为负。相对 1 日的净增量主要来自换手下降，而不是更强的毛 Alpha。毛 Alpha 为负，因此不能把 3/5 日解释为可部署的预测优势。
 
@@ -128,7 +132,7 @@ v2 相对旧 v1 的实质变化来自“只用 OOF 日期做稳健性”，不�
 | 3 日是否具有稳定样本外增量 | 否。净 Sharpe 仍为负；折与信号不一致。 |
 | 5 日是否具有稳定样本外增量 | 否。同上，且个股集中度检查失败。 |
 | 哪个周期扣费后更合理 | 5 日净损失小于 3 日、3 日小于 1 日，但三者扣费后均不可用。 |
-| 结果是否依赖特定调仓相位 | 方向上不依赖；幅度上 5 日相位 Sharpe 从 -0.29 到 -0.08。已报告全部相位。 |
+| 结果是否依赖特定调仓相位 | 方向上不依赖；幅度上 5 日相位 Sharpe 从 -0.245 到 -0.065。已报告全部相位。 |
 | 行业特征是否有边际贡献 | 第一期 GO 未启用行业层；5 日 RankIC 增量在多数行业 Leave-One-Out 下不稳健。 |
 | 市场状态是否降低风险 | 第一期未启用市场层，不作为本门禁证据。 |
 | 三层简单规则是否优于单层基线 | 未比较。按冻结比较树，周期未通过则停止增加复杂度。 |
@@ -155,12 +159,12 @@ v2 相对旧 v1 的实质变化来自“只用 OOF 日期做稳健性”，不�
 - 停止增加公式搜索、评分器、优化器和建议 API；
 - 若用户明确提出**新的研究假设**（例如改成本口径、改参考组合、补数据版本），必须先改阶段2冻结表并重新预注册，不能在本结果上调 GO 阈值。
 
-不允许在未改假设的前提下进入阶段5。
+不允许在未改假设的前提下进入阶段5。KEEP_1D 工程收口见 `keep_1d_closure.md`：状态 API 与拒绝建议骨架，不是阶段5或阶段9。
 
 ## 测试
 
 ```powershell
-D:\anaconda\python.exe -m pytest tests/unit/test_stage4_feasibility.py -q `
+.\.venv\Scripts\python.exe -m pytest tests/unit/test_stage4_feasibility.py -q `
   --basetemp "C:\Users\Administrator\Documents\Codex\2026-07-31\yue-2\quant_w1ngman\.pytest-tmp-stage4"
 ```
 

@@ -21,7 +21,7 @@
 | `GET /api/v2/research/factors` | 公式/SOTA研究结果，不含建议 | 阶段5 |
 | `GET/POST /api/v2/whitelists` | 用户白名单版本 | 阶段9 |
 | `POST /api/v2/holdings` | 当前持仓快照 | 阶段9 |
-| `POST /api/v2/portfolio/recommendation` | 下一调仓日目标权重 | 阶段9且Holdout后 |
+| `POST /api/v2/portfolio/recommendation` | 下一调仓日目标权重 | 阶段9且Holdout后；KEEP_1D 允许拒绝骨架（空仓位、现金 100%、`MODEL_NOT_VALIDATED`），不得夹带可交易权重 |
 | `GET /api/v2/releases/{id}` | 冻结模型/数据/代码/审计状态 | 阶段8 |
 
 ## 3. 通用响应头部

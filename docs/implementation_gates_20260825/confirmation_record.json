@@ -11,5 +11,15 @@
     "D21": "SIMPLE_ENSEMBLE_V1，Top20，每股5%，不可买空缺留现金且不补位"
   },
   "system_status_after_confirmation": "MODEL_NOT_VALIDATED",
-  "next_stage": "STAGE_3_MINIMUM_RESEARCH_LOOP"
+  "next_stage_at_confirmation": "STAGE_3_MINIMUM_RESEARCH_LOOP",
+  "next_stage": "KEEP_1D_CLOSURE_NO_STAGE5",
+  "stage4_completed_on": "2026-08-28",
+  "stage4_reconfirmed_on": "2026-09-01",
+  "current_statistical_gate": "KEEP_1D_BASELINE",
+  "current_stage3_dir": "experiments/stage3_hs300_v2_execution_ledger",
+  "current_stage4_dir": "experiments/stage4_hs300_v2_execution_ledger",
+  "archived_stage3_dir": "experiments/stage3_hs300_v2",
+  "archived_stage4_dir": "experiments/stage4_hs300_v2",
+  "rd_agent_allowed": false,
+  "holdout_read": false
 }

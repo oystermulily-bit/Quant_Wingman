@@ -18,7 +18,7 @@
 - Development 内推荐 5 个 expanding Walk-Forward OOF 验证折。
 - Purge=20日且逐样本断言 `train.label_end_time < validation.feature_available_at`。
 - Embargo=5日；未来 fold 的训练集不得使用前一验证窗后的 embargo 日期。
-- Holdout 方案 D16 已确认为尾部 `max(10%,480交易日)` 且至少两个日历年；必须在数据层权限上不可读，而不只是调用方约定不看。
+- Holdout 方案 D16 已确认为尾部 `max(10%,480交易日)` 且至少两个日历年。封存方式：只读文件 + 一次性 `sealed/holdout.capability` + 追加访问日志。这不是独立 OS 用户、HSM 或加密保险库。未到阶段8不得消耗该令牌或读取 Holdout 价格。
 
 ## 3. 第一阶段预注册信号
 
@@ -98,7 +98,7 @@ IC、ICIR、RankIC、RankICIR、方向胜率、正收益概率及校准误差、
 阶段7生成 `FROZEN_RELEASE_CANDIDATE` 后才允许：
 
 - 验证 release/data/config/code/SOTA/成本/组合哈希完全一致；
-- 原子预留访问账本；
+- 原子预留访问账本（消耗一次性 capability，写入 `sealed/holdout.access.log`）；
 - 运行一次并写不可变报告；
 - 不现场改公式、成本、阈值、行业规则或组合约束；
 - 失败即 `HOLDOUT_FAILED`，不重跑挑最好一次。
