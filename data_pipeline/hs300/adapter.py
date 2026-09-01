@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from data_pipeline.hs300.config import RESEARCH_START, SEAL_CONFIRM_PHRASE
+from data_pipeline.hs300.config import RESEARCH_START
 from data_pipeline.hs300.seal import load_sealed_holdout_prices
 from data_pipeline.hs300_panel import HS300PanelDataManager
 from model_core.vocab import FEATURE_NAMES, VOCAB_VERSION
@@ -143,7 +143,7 @@ class HS300WingmanAdapter:
         ns = self.dates.asi8
         return torch.from_numpy(ns.astype(np.int64))
 
-    def load_holdout_prices(self, *, confirm: str) -> dict[str, pd.DataFrame]:
-        if confirm != SEAL_CONFIRM_PHRASE:
-            raise PermissionError("Holdout prices are sealed")
-        return load_sealed_holdout_prices(self.snapshot_dir, confirm=confirm)
+    def load_holdout_prices(self, *, capability_token: str) -> dict[str, pd.DataFrame]:
+        return load_sealed_holdout_prices(
+            self.snapshot_dir, capability_token=capability_token
+        )

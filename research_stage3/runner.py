@@ -173,9 +173,13 @@ class Stage3ResearchRunner:
         dev_status = manager.trading_status[
             manager.trading_status["date"].isin(split.development_dates)
         ].copy()
+        exec_bars = manager.execution_bars_for_dates(split.development_dates)
+        exec_status = manager.execution_status_for_dates(split.development_dates)
         split.assert_panel_dates(dev_panel)
         split.assert_panel_dates(dev_bars)
         split.assert_panel_dates(dev_status)
+        split.assert_panel_dates(exec_bars)
+        split.assert_panel_dates(exec_status)
 
         print("[stage3] building development features", flush=True)
         features = SimpleSignalBuilder().build(dev_panel, dev_bars)
@@ -226,12 +230,13 @@ class Stage3ResearchRunner:
                 for phase in range(horizon):
                     metrics, daily = backtester.run(
                         features,
-                        dev_bars,
-                        dev_status,
+                        exec_bars,
+                        exec_status,
                         split.development_dates,
                         validation_dates,
                         horizon=horizon,
                         phase=phase,
+                        membership=dev_panel[["date", "code"]],
                     )
                     metric_payload = metrics.to_dict()
                     sensitivity: dict[str, dict[str, Any]] = {
@@ -240,13 +245,14 @@ class Stage3ResearchRunner:
                     for multiplier in (0.0, 1.5):
                         stressed, _ = backtester.run(
                             features,
-                            dev_bars,
-                            dev_status,
+                            exec_bars,
+                            exec_status,
                             split.development_dates,
                             validation_dates,
                             horizon=horizon,
                             phase=phase,
                             cost_multiplier=multiplier,
+                            membership=dev_panel[["date", "code"]],
                         )
                         sensitivity[f"{multiplier:.1f}"] = stressed.to_dict()
                     metric_payload["cost_sensitivity"] = sensitivity

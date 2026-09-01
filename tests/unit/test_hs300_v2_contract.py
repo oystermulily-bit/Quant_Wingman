@@ -97,7 +97,17 @@ def test_holdout_prices_are_physically_split(tmp_path: Path) -> None:
     assert pd.Timestamp("2024-08-26") not in set(pd.to_datetime(stored["date"]))
     adapter = HS300WingmanAdapter(tmp_path)
     with pytest.raises(PermissionError, match="sealed"):
-        adapter.load_holdout_prices(confirm="nope")
+        adapter.load_holdout_prices(capability_token="nope")
+    token = (tmp_path / "sealed" / "holdout.capability").read_text(encoding="utf-8").strip()
+    loaded = adapter.load_holdout_prices(capability_token=token)
+    assert list(loaded["daily_bars"]["date"]) == [pd.Timestamp("2024-08-26")]
+    with pytest.raises(PermissionError, match="consumed"):
+        adapter.load_holdout_prices(capability_token=token)
+    lock = json.loads((tmp_path / "sealed" / "holdout.lock.json").read_text(encoding="utf-8"))
+    assert "unseal_phrase" not in lock
+    log = (tmp_path / "sealed" / "holdout.access.log").read_text(encoding="utf-8")
+    assert "granted" in log
+    assert "denied" in log
 
 
 def test_attach_lineage_writes_required_fields() -> None:

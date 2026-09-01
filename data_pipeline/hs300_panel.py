@@ -121,7 +121,7 @@ class SnapshotManifestValidator:
         "universe_membership": {
             "date", "index_code", "code", "is_member", "weight_pct",
             "effective_at", "known_at", "known_at_source", "entry_effective_date",
-            "exit_effective_date", "membership_source", "source_request_id",
+            "membership_source", "source_request_id",
         },
         "industry_membership": {
             "code", "industry_system", "level", "industry_code", "industry_name",
@@ -146,6 +146,18 @@ class SnapshotManifestValidator:
             "ex_date", "payment_date", "effective_at", "cash_dividend",
             "stock_dividend_ratio", "rights_ratio", "rights_price", "known_at",
             "known_at_source", "raw_payload_hash",
+        },
+        "execution_bars": {
+            "date", "code", "open_raw", "high_raw", "low_raw", "close_raw",
+            "volume", "amount", "preclose", "open_tr", "close_tr",
+            "has_quote", "quote_missing_reason",
+        },
+        "execution_status": {
+            "date", "code", "can_buy_open", "can_sell_open",
+        },
+        "membership_spell_audit": {
+            "code", "spell_id", "entry_effective_date", "realized_exit_date",
+            "censored_at_snapshot_end",
         },
     }
 
@@ -382,6 +394,8 @@ class HS300PanelDataManager:
         self.daily_bars: pd.DataFrame | None = None
         self.trading_status: pd.DataFrame | None = None
         self.calendar: pd.DatetimeIndex | None = None
+        self.execution_bars: pd.DataFrame | None = None
+        self.execution_status: pd.DataFrame | None = None
 
     def load(self, *, raise_on_gate_failure: bool = True) -> "HS300PanelDataManager":
         validator = SnapshotManifestValidator(self.snapshot_dir)
@@ -408,6 +422,7 @@ class HS300PanelDataManager:
             status = pd.read_parquet(validator.table_path(manifest, "trading_status"))
             calendar = pd.read_parquet(validator.table_path(manifest, "trading_calendar"))
             self._build(bars, members, industries, status, calendar)
+            self._load_execution_ledger(manifest, validator)
         except SnapshotValidationError as exc:
             report.add("SCHEMA_OR_CAUSALITY_FAILURE", str(exc))
         except Exception as exc:
@@ -429,6 +444,16 @@ class HS300PanelDataManager:
         assert self.report is not None
         bars = _drop_lineage(bars)
         members = _drop_lineage(members)
+        if "exit_effective_date" in members.columns:
+            leaked = int(members["exit_effective_date"].notna().sum())
+            members = members.drop(columns=["exit_effective_date"])
+            if leaked:
+                self.report.add(
+                    "MEMBERSHIP_FUTURE_EXIT_STRIPPED",
+                    "universe_membership 日表含有事后才知道的退出日，已从模型面板剥离；完整区间见 audit/membership_spell_audit.parquet",
+                    severity="WARNING",
+                    row_count=leaked,
+                )
         industries = _drop_lineage(industries)
         status = _drop_lineage(status)
         calendar = _drop_lineage(calendar)
@@ -773,6 +798,71 @@ class HS300PanelDataManager:
             raise RuntimeError("Call load() first")
         allowed = pd.DatetimeIndex(dates)
         return self.daily_bars[self.daily_bars["date"].isin(allowed)].copy()
+
+    def execution_bars_for_dates(self, dates: Iterable[pd.Timestamp]) -> pd.DataFrame:
+        frame = self.execution_bars if self.execution_bars is not None else self.daily_bars
+        if frame is None:
+            raise RuntimeError("Call load() first")
+        allowed = pd.DatetimeIndex(dates)
+        return frame[frame["date"].isin(allowed)].copy()
+
+    def execution_status_for_dates(self, dates: Iterable[pd.Timestamp]) -> pd.DataFrame:
+        frame = self.execution_status if self.execution_status is not None else self.trading_status
+        if frame is None:
+            raise RuntimeError("Call load() first")
+        allowed = pd.DatetimeIndex(dates)
+        return frame[frame["date"].isin(allowed)].copy()
+
+    def _load_execution_ledger(
+        self,
+        manifest: dict[str, Any],
+        validator: SnapshotManifestValidator,
+    ) -> None:
+        self.execution_bars = None
+        self.execution_status = None
+        files = (manifest or {}).get("files") or {}
+        for name, attr in (
+            ("execution_bars", "execution_bars"),
+            ("execution_status", "execution_status"),
+        ):
+            path: Path | None = None
+            if name in files:
+                try:
+                    path = validator.table_path(manifest, name)
+                except (KeyError, ValueError, TypeError):
+                    path = None
+            if path is None:
+                candidate = self.snapshot_dir / "standardized" / f"{name}.parquet"
+                path = candidate if candidate.is_file() else None
+            if path is None or not Path(path).is_file():
+                continue
+            frame = _drop_lineage(pd.read_parquet(path))
+            frame["date"] = _normalise_date(frame["date"])
+            frame["code"] = _normalise_code(frame["code"])
+            setattr(self, attr, frame)
+        if self.report is None:
+            return
+        holdout_start = None
+        for lock_path in (
+            self.snapshot_dir / "splits" / "holdout.lock.json",
+            self.snapshot_dir / "sealed" / "holdout.lock.json",
+        ):
+            if lock_path.is_file():
+                lock = json.loads(lock_path.read_text(encoding="utf-8"))
+                holdout_start = pd.Timestamp(lock["holdout_start"]).normalize()
+                break
+        if holdout_start is None:
+            return
+        for attr, label in (
+            ("execution_bars", "execution_bars"),
+            ("execution_status", "execution_status"),
+        ):
+            frame = getattr(self, attr)
+            if frame is not None and (frame["date"] >= holdout_start).any():
+                self.report.add(
+                    "HOLDOUT_PRICES_NOT_SEALED",
+                    f"{label} 仍含 Holdout 日期",
+                )
 
     def _holdout_dates(self, complete_dates: pd.DatetimeIndex) -> pd.DatetimeIndex:
         dates_path = self.snapshot_dir / "splits" / "holdout_dates.parquet"

@@ -29,7 +29,7 @@ def build_universe_membership(
     *,
     index_code: str = INDEX_CODE,
     expected_members: int = EXPECTED_MEMBERS,
-) -> tuple[pd.DataFrame, pd.DataFrame]:
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     required = {"CON_CODE", "TRADE_DATE", "WEIGHT"}
     missing = required - set(weights.columns)
     if missing:
@@ -68,13 +68,28 @@ def build_universe_membership(
     new_spell = gap.gt(10)
     spell_id = new_spell.groupby(ordered["code"]).cumsum()
     ordered["spell_id"] = spell_id.to_numpy()
-    bounds = (
+    # Daily training rows may keep the already-observed spell start. The
+    # realized last membership date is only known after the stock leaves, so
+    # it stays in the audit table and is never copied onto prior days.
+    snapshot_end = ordered["date"].max() if len(ordered) else pd.NaT
+    spells = (
         ordered.groupby(["code", "spell_id"], sort=False)["date"]
-        .agg(entry_effective_date="min", exit_effective_date="max")
+        .agg(entry_effective_date="min", last_member_date="max")
         .reset_index()
     )
-    members = ordered.merge(bounds, on=["code", "spell_id"], how="left")
+    spells["index_code"] = index_code
+    still_open = spells["last_member_date"].eq(snapshot_end) if len(spells) else False
+    spells["realized_exit_date"] = spells["last_member_date"]
+    spells.loc[still_open, "realized_exit_date"] = pd.NaT
+    spells["censored_at_snapshot_end"] = still_open
+    spells = spells.drop(columns=["last_member_date"])
+    members = ordered.merge(
+        spells[["code", "spell_id", "entry_effective_date"]],
+        on=["code", "spell_id"],
+        how="left",
+    )
     members = members.drop(columns=["spell_id"])
+    spells = spells.sort_values(["code", "spell_id"], kind="stable").reset_index(drop=True)
 
     counts = members.groupby("date", observed=True)["code"].nunique()
     sums = members.groupby("date", observed=True)["weight_pct"].sum(min_count=1)
@@ -99,4 +114,6 @@ def build_universe_membership(
             )
     exceptions = pd.DataFrame(exception_rows)
     members = members.sort_values(["date", "code"], kind="stable").reset_index(drop=True)
-    return members, exceptions
+    if "exit_effective_date" in members.columns:
+        members = members.drop(columns=["exit_effective_date"])
+    return members, exceptions, spells

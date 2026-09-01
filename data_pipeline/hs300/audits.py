@@ -19,8 +19,16 @@ def write_json(path: Path, payload: dict) -> None:
 
 def audit_holdout_isolation(root: Path, holdout_start: pd.Timestamp) -> dict:
     issues: list[str] = []
-    for name in ("daily_bars", "universe_membership", "trading_status"):
+    for name in (
+        "daily_bars",
+        "universe_membership",
+        "trading_status",
+        "execution_bars",
+        "execution_status",
+    ):
         path = root / "standardized" / f"{name}.parquet"
+        if not path.is_file():
+            continue
         frame = pd.read_parquet(path, columns=["date"])
         leaked = int(holdout_index(frame["date"], holdout_start).sum())
         if leaked:

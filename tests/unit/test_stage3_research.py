@@ -48,7 +48,6 @@ def _make_snapshot(root: Path, *, dates: int = 180, symbols: int = 12) -> Path:
                     "known_at": pd.NaT,
                     "known_at_source": "MISSING",
                     "entry_effective_date": calendar_dates[0],
-                    "exit_effective_date": pd.NaT,
                     "membership_source": "DAILY_INDEX_WEIGHT",
                     "source_request_id": "synthetic-test",
                 }
@@ -457,6 +456,113 @@ def test_directional_cost_and_blocked_buy_are_audited() -> None:
     assert metrics.transaction_cost > 0
     assert metrics.net_total_return < 0
     assert daily["transaction_cost"].sum() == pytest.approx(metrics.transaction_cost)
+
+
+def test_exited_constituent_sells_on_next_open() -> None:
+    dates = pd.bdate_range("2024-01-02", periods=12)
+    held = "000001.SZ"
+    other = "000002.SZ"
+    member_rows = []
+    feature_rows = []
+    bar_rows = []
+    status_rows = []
+    for date in dates:
+        for code in (held, other):
+            is_member = not (code == held and date >= dates[5])
+            if is_member:
+                member_rows.append({"date": date, "code": code, "is_member": True})
+                feature_rows.append(
+                    {
+                        "date": date,
+                        "code": code,
+                        "valid_signal": True,
+                        "median_amount_20": 100.0,
+                        "simple_ensemble": 1.0 if code == held else 0.0,
+                    }
+                )
+            bar_rows.append(
+                {"date": date, "code": code, "open_tr": 10.0, "has_quote": True}
+            )
+            status_rows.append(
+                {
+                    "date": date,
+                    "code": code,
+                    "can_buy_open": True,
+                    "can_sell_open": True,
+                }
+            )
+    cfg = Stage3Config(
+        top_n=1,
+        target_weight=0.5,
+        liquidity_median_amount_20d=0,
+        holdout_min_dates=1,
+        holdout_min_years=0,
+    )
+    metrics, daily = ReferenceBacktester(cfg).run(
+        pd.DataFrame(feature_rows),
+        pd.DataFrame(bar_rows),
+        pd.DataFrame(status_rows),
+        dates,
+        dates[:10],
+        horizon=5,
+        phase=1,
+        membership=pd.DataFrame(member_rows),
+    )
+    assert metrics.universe_exit_sells >= 1
+    assert metrics.universe_exit_pending == 0
+    held_after_exit = daily[daily["date"] >= dates[5]]
+    assert held_after_exit["holding_count"].max() <= 1
+
+
+def test_missing_quotes_catch_up_gap_on_resume() -> None:
+    dates = pd.bdate_range("2024-01-02", periods=8)
+    code = "000001.SZ"
+    opens = [10.0, 10.0, np.nan, np.nan, 12.0, 12.0, 12.0, 12.0]
+    features = pd.DataFrame(
+        {
+            "date": dates,
+            "code": code,
+            "valid_signal": True,
+            "median_amount_20": 100.0,
+            "simple_ensemble": 1.0,
+        }
+    )
+    bars = pd.DataFrame(
+        {
+            "date": dates,
+            "code": code,
+            "open_tr": opens,
+            "has_quote": [np.isfinite(value) for value in opens],
+        }
+    )
+    status = pd.DataFrame(
+        {
+            "date": dates,
+            "code": code,
+            "can_buy_open": True,
+            "can_sell_open": True,
+        }
+    )
+    cfg = Stage3Config(
+        top_n=1,
+        target_weight=1.0,
+        buy_cost_rate=0.0,
+        sell_cost_rate=0.0,
+        liquidity_median_amount_20d=0,
+        holdout_min_dates=1,
+        holdout_min_years=0,
+    )
+    metrics, daily = ReferenceBacktester(cfg).run(
+        features,
+        bars,
+        status,
+        dates,
+        dates[:6],
+        horizon=1,
+        phase=0,
+    )
+    assert metrics.missing_valuation_intervals >= 1
+    assert daily["nav"].iloc[-1] == pytest.approx(1.2, rel=1e-9)
 
 
 def test_stage3_runner_writes_development_only_outputs(tmp_path: Path) -> None:

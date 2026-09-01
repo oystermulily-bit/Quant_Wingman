@@ -97,10 +97,46 @@ def test_membership_requires_300_and_keeps_exceptions() -> None:
             "WEIGHT": 100.0,
         }
     )
-    members, exceptions = build_universe_membership(pd.DataFrame(rows))
+    members, exceptions, spells = build_universe_membership(pd.DataFrame(rows))
     assert members.groupby("date")["code"].nunique().loc[pd.Timestamp("2010-01-04")] == 300
     assert not exceptions.empty
     assert "member_count=1" in str(exceptions["reason"].iloc[-1])
+    assert "exit_effective_date" not in members.columns
+    assert "realized_exit_date" in spells.columns
+
+
+def test_membership_realized_exit_stays_off_daily_rows() -> None:
+    rows = []
+    for date, code, weight in (
+        ("20100104", "000001.SZ", 50.0),
+        ("20100104", "000002.SZ", 50.0),
+        ("20100105", "000001.SZ", 50.0),
+        ("20100105", "000002.SZ", 50.0),
+        ("20100106", "000002.SZ", 50.0),
+        ("20100106", "000003.SZ", 50.0),
+    ):
+        rows.append(
+            {
+                "INDEX_CODE": "000300.SH",
+                "CON_CODE": code,
+                "TRADE_DATE": date,
+                "WEIGHT": weight,
+            }
+        )
+    members, _exceptions, spells = build_universe_membership(
+        pd.DataFrame(rows), expected_members=2
+    )
+    assert "exit_effective_date" not in members.columns
+    early = members[
+        (members["code"] == "000001.SZ")
+        & (members["date"] == pd.Timestamp("2010-01-04"))
+    ].iloc[0]
+    assert early["entry_effective_date"] == pd.Timestamp("2010-01-04")
+    leavers = spells[spells["code"] == "000001.SZ"]
+    assert leavers["realized_exit_date"].iloc[0] == pd.Timestamp("2010-01-05")
+    stayers = spells[spells["code"] == "000002.SZ"]
+    assert bool(stayers["censored_at_snapshot_end"].iloc[0]) is True
+    assert pd.isna(stayers["realized_exit_date"].iloc[0])
 
 
 def test_limit_up_open_is_not_buyable() -> None:

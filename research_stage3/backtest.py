@@ -30,6 +30,8 @@ class BacktestMetrics:
     blocked_buys: int
     blocked_sells: int
     missing_valuation_intervals: int
+    universe_exit_sells: int
+    universe_exit_pending: int
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -58,8 +60,10 @@ class ReferenceBacktester:
         self._dates: pd.DatetimeIndex | None = None
         self._feature_by_date: dict[pd.Timestamp, pd.DataFrame] = {}
         self._simple_returns: pd.DataFrame | None = None
+        self._open_prices: pd.DataFrame | None = None
         self._can_buy: dict[tuple[pd.Timestamp, str], bool] = {}
         self._can_sell: dict[tuple[pd.Timestamp, str], bool] = {}
+        self._members_by_date: dict[pd.Timestamp, set[str]] = {}
         self._target_key: tuple | None = None
         self._targets: dict[pd.Timestamp, list[tuple[str, float]]] = {}
 
@@ -69,27 +73,40 @@ class ReferenceBacktester:
         daily_bars: pd.DataFrame,
         trading_status: pd.DataFrame,
         trading_dates: Iterable[pd.Timestamp],
+        membership: pd.DataFrame | None = None,
     ) -> pd.DatetimeIndex:
         dates = pd.DatetimeIndex(pd.to_datetime(list(trading_dates))).normalize()
         dates = dates.drop_duplicates().sort_values()
-        key = (id(features), id(daily_bars), id(trading_status), dates[0], dates[-1], len(dates))
-        if key == self._market_key and self._simple_returns is not None:
+        key = (
+            id(features),
+            id(daily_bars),
+            id(trading_status),
+            id(membership) if membership is not None else None,
+            dates[0],
+            dates[-1],
+            len(dates),
+        )
+        if key == self._market_key and self._open_prices is not None:
             return dates
 
         feature = features.copy()
         feature["date"] = pd.to_datetime(feature["date"]).dt.normalize()
+        feature["code"] = feature["code"].astype(str)
         self._feature_by_date = {
             date: block for date, block in feature.groupby("date", observed=True)
         }
 
         bars = daily_bars[["date", "code", "open_tr", "has_quote"]].copy()
         bars["date"] = pd.to_datetime(bars["date"]).dt.normalize()
+        bars["code"] = bars["code"].astype(str)
         bars.loc[~bars["has_quote"].fillna(False).astype(bool), "open_tr"] = np.nan
         open_prices = bars.pivot(index="date", columns="code", values="open_tr").reindex(dates)
+        self._open_prices = open_prices
         self._simple_returns = open_prices.shift(-1) / open_prices - 1.0
 
         status = trading_status.copy()
         status["date"] = pd.to_datetime(status["date"]).dt.normalize()
+        status["code"] = status["code"].astype(str)
         status = status.set_index(["date", "code"])
         self._can_buy = {
             key: bool(value) for key, value in status["can_buy_open"].items()
@@ -97,10 +114,42 @@ class ReferenceBacktester:
         self._can_sell = {
             key: bool(value) for key, value in status["can_sell_open"].items()
         }
+        if membership is not None and len(membership):
+            mem = membership.copy()
+            mem["date"] = pd.to_datetime(mem["date"]).dt.normalize()
+            mem["code"] = mem["code"].astype(str)
+            if "is_member" in mem.columns:
+                mem = mem.loc[mem["is_member"].fillna(False).astype(bool)]
+            self._members_by_date = {
+                date: set(block["code"].astype(str))
+                for date, block in mem.groupby("date", observed=True)
+            }
+        else:
+            self._members_by_date = {
+                date: set(block["code"].astype(str))
+                for date, block in self._feature_by_date.items()
+            }
         self._dates = dates
         self._market_key = key
         self._target_key = None
         return dates
+
+    def _open_px(self, date: pd.Timestamp, code: str) -> float:
+        prices = self._open_prices
+        if prices is None or code not in prices.columns or date not in prices.index:
+            return float("nan")
+        value = prices.at[date, code]
+        return float(value) if np.isfinite(value) else float("nan")
+
+    def _sellable(self, date: pd.Timestamp, code: str) -> bool:
+        key = (date, code)
+        if key in self._can_sell:
+            return self._can_sell[key]
+        px = self._open_px(date, code)
+        return bool(np.isfinite(px) and px > 0)
+
+    def _buyable(self, date: pd.Timestamp, code: str) -> bool:
+        return self._can_buy.get((date, code), False)
 
     def _prepare_targets(
         self,
@@ -150,12 +199,15 @@ class ReferenceBacktester:
         phase: int,
         cost_multiplier: float = 1.0,
         score_column: str = "simple_ensemble",
+        membership: pd.DataFrame | None = None,
     ) -> tuple[BacktestMetrics, pd.DataFrame]:
         if horizon not in self.config.horizons:
             raise ValueError(f"unsupported horizon {horizon}")
         if not 0 <= phase < horizon:
             raise ValueError("phase must be in [0, horizon)")
-        dates = self._prepare_market(features, daily_bars, trading_status, trading_dates)
+        dates = self._prepare_market(
+            features, daily_bars, trading_status, trading_dates, membership
+        )
         allowed_signals = set(pd.DatetimeIndex(pd.to_datetime(list(signal_dates))).normalize())
         targets = self._prepare_targets(
             dates,
@@ -164,8 +216,8 @@ class ReferenceBacktester:
             phase=phase,
             score_column=score_column,
         )
-        simple_returns = self._simple_returns
-        assert simple_returns is not None
+        open_prices = self._open_prices
+        assert open_prices is not None
 
         if not allowed_signals:
             raise ValueError("signal_dates cannot be empty")
@@ -177,52 +229,62 @@ class ReferenceBacktester:
 
         cash = 1.0
         holdings: dict[str, float] = {}
+        last_open: dict[str, float] = {}
         gross_nav = 1.0
         previous_nav = 1.0
         total_cost = 0.0
         total_turnover = 0.0
         blocked_buys = blocked_sells = missing_valuation = rebalance_count = 0
+        universe_exit_sells = universe_exit_pending = 0
         records: list[dict] = []
-        can_buy = self._can_buy
-        can_sell = self._can_sell
 
-        def allowed(date: pd.Timestamp, code: str, column: str) -> bool:
-            key = (date, code)
-            if column == "can_sell_open":
-                return can_sell.get(key, False)
-            return can_buy.get(key, False)
-
-        for date in active_dates[:-1]:
+        for date, next_date in zip(active_dates[:-1], active_dates[1:]):
             nav_before = cash + sum(holdings.values())
             day_cost = 0.0
             day_turnover = 0.0
-            if date in targets:
+            universe = self._members_by_date.get(date, set())
+            rebalance = date in targets
+            if rebalance:
                 rebalance_count += 1
-                ranked = targets[date]
+                ranked = [(code, score) for code, score in targets[date] if code in universe]
                 target_values = {
                     code: nav_before * self.config.target_weight for code, _ in ranked
                 }
-                for code in sorted(set(holdings) | set(target_values)):
-                    current = holdings.get(code, 0.0)
-                    desired = target_values.get(code, 0.0)
-                    sell = max(0.0, current - desired)
-                    if sell <= 1e-15:
-                        continue
-                    if not allowed(date, code, "can_sell_open"):
-                        blocked_sells += 1
-                        continue
-                    fee = sell * self.config.sell_cost_rate * cost_multiplier
-                    holdings[code] = current - sell
-                    cash += sell - fee
-                    day_cost += fee
-                    day_turnover += sell
+            else:
+                ranked = []
+                target_values = {
+                    code: value
+                    for code, value in holdings.items()
+                    if code in universe
+                }
+
+            for code in sorted(set(holdings) | set(target_values)):
+                current = holdings.get(code, 0.0)
+                desired = target_values.get(code, 0.0)
+                sell = max(0.0, current - desired)
+                if sell <= 1e-15:
+                    continue
+                exiting = code not in universe
+                if not self._sellable(date, code):
+                    blocked_sells += 1
+                    if exiting:
+                        universe_exit_pending += 1
+                    continue
+                fee = sell * self.config.sell_cost_rate * cost_multiplier
+                holdings[code] = current - sell
+                cash += sell - fee
+                day_cost += fee
+                day_turnover += sell
+                if exiting:
+                    universe_exit_sells += 1
+            if rebalance:
                 for code, _score in ranked:
                     current = holdings.get(code, 0.0)
                     desired = target_values[code]
                     buy = max(0.0, desired - current)
                     if buy <= 1e-15:
                         continue
-                    if not allowed(date, code, "can_buy_open"):
+                    if not self._buyable(date, code):
                         blocked_buys += 1
                         continue
                     rate = self.config.buy_cost_rate * cost_multiplier
@@ -235,14 +297,24 @@ class ReferenceBacktester:
                     cash -= executed + fee
                     day_cost += fee
                     day_turnover += executed
-                holdings = {code: value for code, value in holdings.items() if value > 1e-12}
+            holdings = {code: value for code, value in holdings.items() if value > 1e-12}
 
             gross_day_gain = 0.0
             for code, value in list(holdings.items()):
-                asset_return = simple_returns.at[date, code] if code in simple_returns else np.nan
-                if not np.isfinite(asset_return):
-                    # Explicit valuation carry during suspension/missing quote. This
-                    # does not create an OHLCV row and is counted in the audit trail.
+                px_today = self._open_px(date, code)
+                if np.isfinite(px_today) and px_today > 0:
+                    last_open[code] = px_today
+                px_next = self._open_px(next_date, code)
+                base = last_open.get(code)
+                if (
+                    base is not None
+                    and base > 0
+                    and np.isfinite(px_next)
+                    and px_next > 0
+                ):
+                    asset_return = px_next / base - 1.0
+                    last_open[code] = px_next
+                else:
                     asset_return = 0.0
                     missing_valuation += 1
                 gain = value * float(asset_return)
@@ -293,5 +365,8 @@ class ReferenceBacktester:
             blocked_buys=blocked_buys,
             blocked_sells=blocked_sells,
             missing_valuation_intervals=missing_valuation,
+            universe_exit_sells=universe_exit_sells,
+            universe_exit_pending=universe_exit_pending,
         )
         return metrics, daily
+

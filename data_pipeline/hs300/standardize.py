@@ -112,11 +112,11 @@ def prepare_kline_with_preclose(
     return bars
 
 
-def build_daily_bars(
+def assemble_quoted_bars(
     kline: pd.DataFrame,
     status: pd.DataFrame,
-    members: pd.DataFrame,
 ) -> pd.DataFrame:
+    """Chain OpenTR on the vendor kline. Not sliced to index membership."""
     bars = prepare_kline_with_preclose(kline, status)
     chain = build_preclose_chain(
         bars[["date", "code", "open", "high", "low", "close", "preclose"]]
@@ -163,21 +163,28 @@ def build_daily_bars(
         "close_tr",
     ]
     bars.loc[~quoted, numeric_cols] = pd.NA
+    return bars
 
-    member_keys = members.loc[members["is_member"], ["date", "code"]].drop_duplicates()
-    panel_bars = member_keys.merge(bars, on=["date", "code"], how="left")
-    missing = panel_bars["has_quote"].isna()
-    panel_bars.loc[missing, "has_quote"] = False
-    panel_bars.loc[missing, "quote_missing_reason"] = panel_bars.loc[
-        missing, "quote_missing_reason"
-    ].fillna("UNAVAILABLE_FROM_VENDOR")
+
+def _finalize_daily_bar_frame(panel_bars: pd.DataFrame) -> pd.DataFrame:
+    panel_bars = panel_bars.copy()
     panel_bars["available_at"] = available_at(panel_bars["date"])
     panel_bars["available_at_source"] = "DERIVED_POLICY"
     panel_bars["revision_id"] = "raw_v1"
-    panel_bars["source_row_hash"] = _row_hash(
-        panel_bars.fillna(""),
-        ["date", "code", "open", "high", "low", "close", "volume", "amount", "preclose"],
+    hashed = panel_bars.reindex(
+        columns=[
+            "date",
+            "code",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "preclose",
+        ]
     )
+    panel_bars["source_row_hash"] = _row_hash(hashed.fillna(""), list(hashed.columns))
     out = pd.DataFrame(
         {
             "date": panel_bars["date"],
@@ -205,6 +212,45 @@ def build_daily_bars(
     if out.duplicated(["date", "code"]).any():
         raise ValueError("daily_bars duplicate date+code")
     return out.sort_values(["date", "code"], kind="stable").reset_index(drop=True)
+
+
+def slice_member_panel(quoted_bars: pd.DataFrame, members: pd.DataFrame) -> pd.DataFrame:
+    member_keys = members.loc[members["is_member"], ["date", "code"]].drop_duplicates()
+    panel_bars = member_keys.merge(quoted_bars, on=["date", "code"], how="left")
+    missing = panel_bars["has_quote"].isna()
+    panel_bars.loc[missing, "has_quote"] = False
+    panel_bars.loc[missing, "quote_missing_reason"] = panel_bars.loc[
+        missing, "quote_missing_reason"
+    ].fillna("UNAVAILABLE_FROM_VENDOR")
+    return _finalize_daily_bar_frame(panel_bars)
+
+
+def slice_execution_ledger(quoted_bars: pd.DataFrame, members: pd.DataFrame) -> pd.DataFrame:
+    """Keep quotes for every date of any stock that was ever an index member.
+
+    The research panel stays membership-sliced. This ledger is what the
+    backtest uses to flatten positions after a stock leaves CSI 300.
+    """
+    ever = set(members["code"].astype(str).str.upper().unique())
+    bars = quoted_bars.copy()
+    bars["code"] = bars["code"].astype(str).str.upper()
+    panel_bars = bars[bars["code"].isin(ever)].copy()
+    if panel_bars.empty:
+        return _finalize_daily_bar_frame(panel_bars)
+    missing = panel_bars["has_quote"].isna()
+    panel_bars.loc[missing, "has_quote"] = False
+    panel_bars.loc[missing, "quote_missing_reason"] = panel_bars.loc[
+        missing, "quote_missing_reason"
+    ].fillna("UNAVAILABLE_FROM_VENDOR")
+    return _finalize_daily_bar_frame(panel_bars)
+
+
+def build_daily_bars(
+    kline: pd.DataFrame,
+    status: pd.DataFrame,
+    members: pd.DataFrame,
+) -> pd.DataFrame:
+    return slice_member_panel(assemble_quoted_bars(kline, status), members)
 
 
 def _manifest_file(rel: str, path: Path) -> dict:
@@ -245,19 +291,29 @@ def freeze_panel_snapshot(root: Path, *, raw_root: Path | None = None) -> dict:
         _concat_parts(store, "trading_calendar"), end_date, start=research_start
     )
     weights = _concat_parts(store, "index_weight")
-    members, exceptions = build_universe_membership(weights)
+    members, exceptions, membership_spells = build_universe_membership(weights)
     members = members[members["date"] >= research_start].reset_index(drop=True)
     kline = _concat_parts(store, "daily_kline")
     status_raw = _concat_parts(store, "stock_status")
     print("freeze: chaining OpenTR on full kline, then slicing to research start", flush=True)
-    daily_bars = build_daily_bars(kline, status_raw, members)
+    quoted_bars = assemble_quoted_bars(kline, status_raw)
+    daily_bars = slice_member_panel(quoted_bars, members)
+    execution_bars = slice_execution_ledger(quoted_bars, members)
     daily_bars = daily_bars[daily_bars["date"] >= research_start].reset_index(drop=True)
+    execution_bars = execution_bars[execution_bars["date"] >= research_start].reset_index(
+        drop=True
+    )
     trading_status = build_trading_status(
         status_raw,
-        daily_bars.rename(
-            columns={"open_raw": "open", "volume": "volume", "amount": "amount"}
-        )[["date", "code", "open", "volume", "amount"]],
+        quoted_bars[["date", "code", "open", "volume", "amount"]],
     )
+    ever_codes = set(members["code"].astype(str).str.upper().unique())
+    execution_status = trading_status[
+        trading_status["code"].astype(str).str.upper().isin(ever_codes)
+    ].copy()
+    execution_status = execution_status[
+        execution_status["date"] >= research_start
+    ].reset_index(drop=True)
     member_status = members[["date", "code"]].merge(
         trading_status, on=["date", "code"], how="left"
     )
@@ -334,6 +390,12 @@ def freeze_panel_snapshot(root: Path, *, raw_root: Path | None = None) -> dict:
     member_status, holdout_status = split_development_and_holdout(
         member_status, holdout_start
     )
+    execution_bars, holdout_execution_bars = split_development_and_holdout(
+        execution_bars, holdout_start
+    )
+    execution_status, holdout_execution_status = split_development_and_holdout(
+        execution_status, holdout_start
+    )
 
     built_at = datetime.now(timezone.utc).isoformat()
     data_version = f"{SNAPSHOT_ID}:{end_date.date().isoformat()}"
@@ -360,6 +422,11 @@ def freeze_panel_snapshot(root: Path, *, raw_root: Path | None = None) -> dict:
     holdout_members = _apply_lineage(holdout_members, **lineage_kw)
     holdout_bars = _apply_lineage(holdout_bars, **lineage_kw)
     holdout_status = _apply_lineage(holdout_status, **lineage_kw)
+    execution_bars = _apply_lineage(execution_bars, **lineage_kw)
+    execution_status = _apply_lineage(execution_status, **lineage_kw)
+    holdout_execution_bars = _apply_lineage(holdout_execution_bars, **lineage_kw)
+    holdout_execution_status = _apply_lineage(holdout_execution_status, **lineage_kw)
+    membership_spells = _apply_lineage(membership_spells, **lineage_kw)
 
     sealed = write_sealed_holdout(
         root,
@@ -367,6 +434,8 @@ def freeze_panel_snapshot(root: Path, *, raw_root: Path | None = None) -> dict:
             "daily_bars": holdout_bars,
             "universe_membership": holdout_members,
             "trading_status": holdout_status,
+            "execution_bars": holdout_execution_bars,
+            "execution_status": holdout_execution_status,
         },
         holdout_start=split_payload["holdout_start"],
         holdout_date_count=split_payload["holdout_date_count"],
@@ -386,12 +455,22 @@ def freeze_panel_snapshot(root: Path, *, raw_root: Path | None = None) -> dict:
         "corporate_actions": actions,
         "industry_exceptions": industry_exceptions,
         "membership_exceptions": exceptions,
+        "execution_bars": execution_bars,
+        "execution_status": execution_status,
     }
     for name, frame in mapping.items():
         path = std / f"{name}.parquet"
         path.parent.mkdir(parents=True, exist_ok=True)
         frame.to_parquet(path, index=False)
         files[name] = _manifest_file(f"standardized/{name}.parquet", path)
+
+    audit_dir = root / "audit"
+    audit_dir.mkdir(parents=True, exist_ok=True)
+    spell_path = audit_dir / "membership_spell_audit.parquet"
+    membership_spells.to_parquet(spell_path, index=False)
+    files["membership_spell_audit"] = _manifest_file(
+        "audit/membership_spell_audit.parquet", spell_path
+    )
 
     raw_requests = []
     for meta_path in meta_files:

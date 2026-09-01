@@ -19,11 +19,20 @@ SCHEMA_DOCUMENT = {
     "tables": {
         "trading_calendar": {"primary_key": ["date"]},
         "universe_membership": {"primary_key": ["date", "index_code", "code"]},
+        "membership_spell_audit": {
+            "primary_key": ["code", "spell_id"],
+            "note": "audit-only realized membership spells; not a model feature table",
+        },
         "daily_bars": {
             "primary_key": ["date", "code", "revision_id"],
             "price_policy": "unadjusted OHLCV; OpenTR/HighTR/LowTR/CloseTR from PRECLOSE chain",
         },
+        "execution_bars": {
+            "primary_key": ["date", "code"],
+            "note": "ever-member quotes including post-exit dates for position flattening",
+        },
         "trading_status": {"primary_key": ["date", "code"]},
+        "execution_status": {"primary_key": ["date", "code"]},
         "industry_membership": {"primary_key": ["code", "industry_system", "level", "valid_from"]},
         "security_master": {"primary_key": ["code", "valid_from"]},
         "corporate_actions": {"primary_key": ["action_id"]},
