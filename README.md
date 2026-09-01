@@ -55,8 +55,6 @@ python -m venv .venv
 ```powershell
 $env:SILICONFLOW_API_KEY="你的Key"
 $env:SILICONFLOW_MODEL="deepseek-ai/DeepSeek-V4-Pro"
-$env:TQSDK_USER="你的天勤用户名"
-$env:TQSDK_PASSWORD="你的天勤密码"
 ```
 
 网页中临时输入的 AI Key 或通知密钥只在当前服务进程内有效，重启后需重新配置。训练断点只能导入网页导出的 v2 `.zip` 安全训练包；不再接受可触发 pickle 反序列化的 `.pt` 上传。

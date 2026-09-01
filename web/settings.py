@@ -24,9 +24,6 @@ _DEFAULT = {
     "feishu_enabled": False,
     "feishu_webhook_url": "",
     "feishu_secret": "",
-    # tqsdk 天勤量化账号（国内期货实时数据源）
-    "tqsdk_user": "",
-    "tqsdk_password": "",
 }
 
 # Secrets may be supplied by the UI for the lifetime of the current process, but
@@ -36,11 +33,12 @@ _SECRET_ENV = {
     "ai_api_key": "W1NGMAN_AI_API_KEY",
     "feishu_webhook_url": "W1NGMAN_FEISHU_WEBHOOK_URL",
     "feishu_secret": "W1NGMAN_FEISHU_SECRET",
-    "tqsdk_user": "TQSDK_USER",
-    "tqsdk_password": "TQSDK_PASSWORD",
 }
 _SECRET_KEYS = frozenset(_SECRET_ENV)
 _PERSISTED_KEYS = frozenset(_DEFAULT) - _SECRET_KEYS
+# Dropped tqsdk / domestic-futures credentials; still strip them from old JSON.
+_RETIRED_SECRET_KEYS = frozenset({"tqsdk_user", "tqsdk_password"})
+_RETIRED_WATCH_SOURCES = frozenset({"domestic_futures"})
 
 
 def _environment_secret(key: str) -> str:
@@ -170,6 +168,7 @@ def load_settings() -> dict:
     if not isinstance(watches, list):
         watches = []
     cleaned = []
+    had_retired_watches = False
     for w in watches:
         if not isinstance(w, dict):
             continue
@@ -177,6 +176,9 @@ def load_settings() -> dict:
         sym = str(w.get("symbol") or "").strip()
         tf = str(w.get("timeframe") or "").strip()
         sf = str(w.get("strategy_file") or "").strip()
+        if src in _RETIRED_WATCH_SOURCES:
+            had_retired_watches = True
+            continue
         if src and sym and tf and sf:
             cleaned.append(
                 {"source": src, "symbol": sym, "timeframe": tf, "strategy_file": sf}
@@ -185,8 +187,6 @@ def load_settings() -> dict:
     out["feishu_enabled"] = bool(out.get("feishu_enabled", False))
     out["feishu_webhook_url"] = str(out.get("feishu_webhook_url") or "").strip()
     out["feishu_secret"] = str(out.get("feishu_secret") or "").strip()
-    out["tqsdk_user"] = str(out.get("tqsdk_user") or "").strip()
-    out["tqsdk_password"] = str(out.get("tqsdk_password") or "").strip()
     recovered = _recover_last_data_file(out)
     if recovered != out.get("last_data_file") and _is_production_settings_path():
         out["last_data_file"] = recovered
@@ -195,7 +195,10 @@ def load_settings() -> dict:
     elif recovered != out.get("last_data_file"):
         out["last_data_file"] = recovered
     # One-way migration: strip credentials left by older versions immediately.
-    if SETTINGS_PATH.exists() and any(key in data for key in _SECRET_KEYS):
+    if SETTINGS_PATH.exists() and (
+        had_retired_watches
+        or any(key in data for key in (_SECRET_KEYS | _RETIRED_SECRET_KEYS))
+    ):
         _write_persisted_settings(out)
     return out
 
@@ -252,6 +255,8 @@ def save_settings(data: dict) -> dict:
             sym = str(w.get("symbol") or "").strip()
             tf = str(w.get("timeframe") or "").strip()
             sf = str(w.get("strategy_file") or "").strip()
+            if src in _RETIRED_WATCH_SOURCES:
+                continue
             if src and sym and tf and sf:
                 cleaned.append(
                     {

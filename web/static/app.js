@@ -2149,10 +2149,10 @@ function onRtSourceChange() {
     if (src.timeframes && src.timeframes.includes(cur)) tfSel.value = cur;
     else if (src.timeframes && src.timeframes.includes("1h")) tfSel.value = "1h";
   }
-  // 品种输入/下拉切换：presets 较多时（如国内期货 60 个品种）用下拉框
+  // 品种输入/下拉切换：预设较多时用下拉框
   const symbolInput = $("rtSymbolInput");
   const symbolSelect = $("rtSymbolSelect");
-  const useSelect = src.id === "domestic_futures" || (src.presets && src.presets.length > 20);
+  const useSelect = Boolean(src.presets && src.presets.length > 20);
   if (symbolInput && symbolSelect) {
     if (useSelect) {
       symbolInput.hidden = true;

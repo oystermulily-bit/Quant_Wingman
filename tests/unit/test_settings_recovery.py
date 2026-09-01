@@ -74,6 +74,14 @@ def test_legacy_secrets_are_removed_from_json_and_env_wins(
                 "tqsdk_password": "legacy-password",
                 "ai_api_key": "legacy-api-key",
                 "feishu_secret": "legacy-secret",
+                "realtime_watches": [
+                    {
+                        "source": "domestic_futures",
+                        "symbol": "橡胶主连",
+                        "timeframe": "1h",
+                        "strategy_file": "best_ru.json",
+                    }
+                ],
             }
         ),
         encoding="utf-8",
@@ -81,11 +89,14 @@ def test_legacy_secrets_are_removed_from_json_and_env_wins(
 
     loaded = load_settings()
 
-    assert loaded["tqsdk_user"] == "environment-user"
-    assert loaded["tqsdk_password"] == "environment-password"
+    assert "tqsdk_user" not in loaded
+    assert "tqsdk_password" not in loaded
+    assert loaded["realtime_watches"] == []
     assert loaded["ai_api_key"] == ""
     persisted = json.loads(settings_path.read_text(encoding="utf-8"))
     assert not (settings_mod._SECRET_KEYS & set(persisted))
+    assert not (settings_mod._RETIRED_SECRET_KEYS & set(persisted))
+    assert persisted.get("realtime_watches") == []
 
 
 def test_ui_secret_updates_are_process_only(
