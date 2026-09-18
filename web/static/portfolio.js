@@ -691,8 +691,9 @@
       const point = row.weight_upper-row.weight_lower < 1e-8;
       rangeCell.append(node("strong", point ? "固定 " + percent(row.target_weight) : percent(row.weight_lower) + "～" + percent(row.weight_upper)));
       if (point) rangeCell.append(node("small", ({FIXED_BY_BOUNDS:"上下限相同",FIXED_BY_DEADBAND:"调仓阈值固定",NO_FEASIBLE_WIDTH:"当前约束／容忍度下无可调空间"})[row.interval_status] || "无可调空间", "weight-reason"));
-      tr.append(identity, node("td", percent(row.expected_return) + " / " + percent(row.return_standard_error), "numeric"),
-        node("td", percent(row.current_weight), "numeric muted"), targetCell, rangeCell);
+      tr.append(identity, rangeCell, targetCell,
+        node("td", percent(row.expected_return) + " / " + percent(row.return_standard_error), "numeric"),
+        node("td", percent(row.current_weight), "numeric muted"));
       const deltaClass = row.delta_weight > 0 ? "positive" : row.delta_weight < 0 ? "negative" : "muted";
       tr.append(node("td", percent(row.delta_weight, true), "numeric " + deltaClass), node("td", ACTIONS[row.action] || row.action || "—"));
       const execution = node("td", EXECUTION[row.execution_status] || row.execution_status || "执行信息未知",
