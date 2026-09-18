@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "contest": "cumcm",
+  "main_tex": "main.tex",
+  "template": {
+    "path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-09-03\\y\\work\\package-20260903\\math-modeling-skill-2.0.2\\tools\\latex\\assets\\templates\\cumcm",
+    "source": null,
+    "version": null,
+    "sha256": "beffdfb2062dbc72f3d6050691ec9a3816d8f91fd85840720ddd8ec757a3ae61"
+  },
+  "template_files": {
+    "main.tex": "d606c76d66e26729d352fc81eae25c82850a5f5633c46167f626db402c7ae91b",
+    "references.bib": "c85fa9f8c7cdb3b0c8c2f394bebd7624f6ff5abdd6bac5b4f43b58e67ee7c222"
+  },
+  "resource_bindings": [
+    {
+      "source": "figures/wingman_flow.pdf",
+      "destination": "figs/wingman_flow.pdf",
+      "sha256": "a3ee1ed5d819610d114985232e3f8325f089116d84c20b0dce16b7ab28c4e2a4",
+      "hash_mode": "content",
+      "bound_at": "2026-09-18T05:58:21.713242+00:00"
+    },
+    {
+      "source": "figures/wingman_pipeline.pdf",
+      "destination": "figs/wingman_pipeline.pdf",
+      "sha256": "8526db24026b9f93c4c3ee6b78978d7ee61e271b44e1b71cb0d9a63c36383e1a",
+      "hash_mode": "content",
+      "bound_at": "2026-09-18T05:58:21.867879+00:00"
+    }
+  ],
+  "created_at": "2026-09-17T07:48:40.782007+00:00"
+}

@@ -1,0 +1,71 @@
+{
+  "experiment": "D21_V3_CSI500_TECH_CANDIDATE_PREFLIGHT",
+  "frozen_economic_protocol": false,
+  "development_adaptive": true,
+  "candidate_pool": "PIT CSI300 UNION (PIT CSI500 technology MINUS PIT CSI300)",
+  "technology": [
+    "电子",
+    "计算机",
+    "通信"
+  ],
+  "coverage_threshold": 0.95,
+  "scenarios_fixed_before_fetch": [
+    [
+      "baseline",
+      "strict",
+      60,
+      54,
+      120,
+      20,
+      90,
+      60,
+      5,
+      50
+    ],
+    [
+      "shrink_only",
+      "shrink",
+      60,
+      54,
+      120,
+      20,
+      90,
+      60,
+      5,
+      50
+    ],
+    [
+      "short_only",
+      "strict",
+      20,
+      18,
+      60,
+      10,
+      45,
+      20,
+      2,
+      17
+    ],
+    [
+      "shrink_and_short",
+      "shrink",
+      20,
+      18,
+      60,
+      10,
+      45,
+      20,
+      2,
+      17
+    ]
+  ],
+  "non_candidate_residual_history": "missing; not backfilled",
+  "development_start": "2014-01-02",
+  "development_end": "2024-08-23",
+  "labels_read": false,
+  "holdout_read": false,
+  "rd_agent_allowed": false,
+  "interval_policy": "INDATE <= date <= OUTDATE; effective dates, not verified announcement dates",
+  "source_code_sha256": "76014d03ab6321f31799d32a0f4ef8f1f783d60308fa18b6ab2f6f8b10696918",
+  "original_source_sha256": "507e3518a0611d8e16e6b8a6d486b03879483ac57f75d854394cf4f5412060f6"
+}

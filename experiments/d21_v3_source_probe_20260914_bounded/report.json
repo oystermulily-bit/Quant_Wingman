@@ -1,0 +1,9 @@
+{
+  "status": "SOURCE_PROBE_TIMEOUT",
+  "timeout_seconds": 30,
+  "tcp_connected": true,
+  "supplemented_rows": 0,
+  "holdout_read": false,
+  "labels_read": false,
+  "reason": "SDK login or initial data request did not return within deadline"
+}

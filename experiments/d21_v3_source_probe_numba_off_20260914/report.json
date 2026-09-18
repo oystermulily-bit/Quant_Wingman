@@ -1,0 +1,16 @@
+{
+  "status": "PROBE_RETURNED",
+  "holdout_read": false,
+  "labels_read": false,
+  "supplement_applied": false,
+  "rows": 168,
+  "columns": [
+    "WEIGHT",
+    "CON_CODE",
+    "TRADE_DATE",
+    "INDEX_CODE"
+  ],
+  "sdk_version": "1.1.9",
+  "begin_date": 20200102,
+  "end_date": 20200103
+}

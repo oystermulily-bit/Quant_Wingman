@@ -1,0 +1,24 @@
+{
+  "snapshot_id": "csi300_2014_present_v2",
+  "status": "DATA_GATE_PASSED",
+  "checked_files": 14,
+  "trading_dates": 2591,
+  "panel_rows": 777300,
+  "issues": [
+    {
+      "code": "INDUSTRY_UNMAPPED",
+      "message": "存在无法按历史有效区间匹配的行业；成员行保留，行业为空",
+      "severity": "WARNING",
+      "row_count": 13845
+    }
+  ],
+  "metadata": {
+    "industry_coverage": 0.9821883442686221,
+    "schema_version": "w1ngman_hs300_panel_v2",
+    "index_code": "000300.SH",
+    "expected_members": 300,
+    "first_date": "2014-01-02",
+    "last_date": "2024-08-23"
+  },
+  "passed": true
+}

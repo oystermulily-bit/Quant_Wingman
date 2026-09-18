@@ -1,0 +1,150 @@
+{
+  "A": {
+    "phases": [
+      {
+        "phase": 0,
+        "observations": 1525,
+        "total_return": -0.21958989761285752,
+        "annualized_return": -0.03811156984425956,
+        "sharpe": -0.13277076183624145,
+        "sortino": -0.18749152688045936,
+        "max_drawdown": 0.3364337663119772,
+        "calmar": -0.11328104863564277
+      },
+      {
+        "phase": 1,
+        "observations": 1525,
+        "total_return": -0.17251411644241121,
+        "annualized_return": -0.029241208402153718,
+        "sharpe": -0.0784699525875144,
+        "sortino": -0.11189227593880678,
+        "max_drawdown": 0.3645054273349013,
+        "calmar": -0.08022159948605484
+      },
+      {
+        "phase": 2,
+        "observations": 1525,
+        "total_return": -0.29776472798165776,
+        "annualized_return": -0.05389234165364276,
+        "sharpe": -0.2262797514098782,
+        "sortino": -0.3076406688927455,
+        "max_drawdown": 0.3470528540822039,
+        "calmar": -0.15528568925376904
+      },
+      {
+        "phase": 3,
+        "observations": 1525,
+        "total_return": -0.2727557932553446,
+        "annualized_return": -0.04868936790351286,
+        "sharpe": -0.196090411243085,
+        "sortino": -0.2663145252305215,
+        "max_drawdown": 0.35063937190676997,
+        "calmar": -0.13885881565079541
+      },
+      {
+        "phase": 4,
+        "observations": 1525,
+        "total_return": -0.10679951011298672,
+        "annualized_return": -0.017545026513640094,
+        "sharpe": -0.012727178427689273,
+        "sortino": -0.018156465336526612,
+        "max_drawdown": 0.3748120721692584,
+        "calmar": -0.046810195872552036
+      }
+    ],
+    "sharpe": -0.13277076183624145,
+    "annualized_return": -0.03811156984425956,
+    "max_drawdown": 0.35063937190676997,
+    "total_return": -0.21958989761285752
+  },
+  "D": {
+    "phases": [
+      {
+        "phase": 0,
+        "observations": 1525,
+        "total_return": 0.4182312177705594,
+        "annualized_return": 0.05628714687709602,
+        "sharpe": 0.38142784457363776,
+        "sortino": 0.5425206363102012,
+        "max_drawdown": 0.33383027723513403,
+        "calmar": 0.16861007139100823
+      },
+      {
+        "phase": 1,
+        "observations": 1525,
+        "total_return": 0.5249449025768711,
+        "annualized_return": 0.0683654407761014,
+        "sharpe": 0.4463262273252805,
+        "sortino": 0.6439055748214558,
+        "max_drawdown": 0.254184107015502,
+        "calmar": 0.26896032792456215
+      },
+      {
+        "phase": 2,
+        "observations": 1525,
+        "total_return": 0.5961137424171896,
+        "annualized_return": 0.07603012656150954,
+        "sharpe": 0.4826305389939557,
+        "sortino": 0.6941831624141793,
+        "max_drawdown": 0.25479362115311,
+        "calmar": 0.2983988618609164
+      },
+      {
+        "phase": 3,
+        "observations": 1525,
+        "total_return": 0.5341980104425044,
+        "annualized_return": 0.06937882224284309,
+        "sharpe": 0.4491373395267983,
+        "sortino": 0.6373547971483761,
+        "max_drawdown": 0.2748845293049451,
+        "calmar": 0.25239260433560884
+      },
+      {
+        "phase": 4,
+        "observations": 1525,
+        "total_return": 0.5497292576965362,
+        "annualized_return": 0.07106824499117792,
+        "sharpe": 0.4582214828342357,
+        "sortino": 0.650620167363452,
+        "max_drawdown": 0.2924276228071171,
+        "calmar": 0.24302849473988974
+      }
+    ],
+    "sharpe": 0.4491373395267983,
+    "annualized_return": 0.06937882224284309,
+    "max_drawdown": 0.2748845293049451,
+    "total_return": 0.5341980104425044
+  },
+  "delta_sharpe": 0.5819081013630397,
+  "delta_annualized": 0.10749039208710265,
+  "scenario": "absolute_common_rank_delta_influence_uniform_006",
+  "deleted": [
+    "000008.SZ",
+    "000157.SZ",
+    "000413.SZ",
+    "000568.SZ",
+    "000630.SZ",
+    "000671.SZ",
+    "000792.SZ",
+    "001965.SZ",
+    "002468.SZ",
+    "002602.SZ",
+    "300769.SZ",
+    "600219.SH",
+    "600390.SH",
+    "600415.SH",
+    "600637.SH",
+    "600804.SH",
+    "601077.SH",
+    "601225.SH",
+    "601236.SH",
+    "601288.SH",
+    "601607.SH",
+    "601698.SH",
+    "601988.SH",
+    "603288.SH",
+    "603899.SH",
+    "688187.SH",
+    "688271.SH"
+  ]
+}

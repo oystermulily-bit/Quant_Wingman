@@ -1,0 +1,150 @@
+{
+  "status": "PREFLIGHT_COMPLETED_NOT_A_GO_DECISION",
+  "development_adaptive": true,
+  "holdout_read": false,
+  "labels_read": false,
+  "rd_agent_allowed": false,
+  "threshold": 0.95,
+  "oof_member_days": 460500,
+  "oof_dates": 1535,
+  "coverage_denominator": "all PIT member rows in original split validation dates; not PnL ledger dates",
+  "source_sha256": "507e3518a0611d8e16e6b8a6d486b03879483ac57f75d854394cf4f5412060f6",
+  "split_sha256": "d3ef31827be73c730887a3dd57f861e1e2d08403e3394b4f7640864f6eb2ab89",
+  "code_sha256": "03413938d331269846d2120cbe88248980bf977352935e1d8942191b7db755d1",
+  "residual_missing_counts": {
+    "valid": 394235,
+    "fewer_than_5_peers": 53786,
+    "missing_industry": 9828,
+    "missing_return": 2651
+  },
+  "scenarios": [
+    {
+      "name": "baseline",
+      "parameters": [
+        "strict",
+        60,
+        54,
+        120,
+        20,
+        90,
+        60,
+        5,
+        50
+      ],
+      "coverage": 0.7771530944625407,
+      "coverage_passed": false,
+      "fold_coverage": [
+        0.7253745928338762,
+        0.8069598262757872,
+        0.7980890336590662,
+        0.7559826275787188,
+        0.7993593919652552
+      ],
+      "daily_valid_min": 204,
+      "daily_valid_median": 233.0,
+      "daily_valid_max": 265,
+      "signal_coverage": {
+        "low_vol": 0.8180977198697068,
+        "momentum": 0.7849315960912052,
+        "efficiency": 0.8170032573289903
+      }
+    },
+    {
+      "name": "shrink_only",
+      "parameters": [
+        "shrink",
+        60,
+        54,
+        120,
+        20,
+        90,
+        60,
+        5,
+        50
+      ],
+      "coverage": 0.897600434310532,
+      "coverage_passed": false,
+      "fold_coverage": [
+        0.8597502714440826,
+        0.9294679695982627,
+        0.9005646036916395,
+        0.8731704668838219,
+        0.9250488599348534
+      ],
+      "daily_valid_min": 243,
+      "daily_valid_median": 269.0,
+      "daily_valid_max": 298,
+      "signal_coverage": {
+        "low_vol": 0.9365124864277958,
+        "momentum": 0.9030944625407166,
+        "efficiency": 0.9348577633007601
+      }
+    },
+    {
+      "name": "short_only",
+      "parameters": [
+        "strict",
+        20,
+        18,
+        60,
+        10,
+        45,
+        20,
+        2,
+        17
+      ],
+      "coverage": 0.8124733984799132,
+      "coverage_passed": false,
+      "fold_coverage": [
+        0.7802823018458198,
+        0.8328447339847991,
+        0.8305754614549403,
+        0.7936264929424539,
+        0.8250380021715527
+      ],
+      "daily_valid_min": 207,
+      "daily_valid_median": 245.0,
+      "daily_valid_max": 266,
+      "signal_coverage": {
+        "low_vol": 0.8430770901194354,
+        "momentum": 0.818514657980456,
+        "efficiency": 0.8407839305103149
+      }
+    },
+    {
+      "name": "shrink_and_short",
+      "parameters": [
+        "shrink",
+        20,
+        18,
+        60,
+        10,
+        45,
+        20,
+        2,
+        17
+      ],
+      "coverage": 0.9319956568946797,
+      "coverage_passed": false,
+      "fold_coverage": [
+        0.9134310532030402,
+        0.9555917480998914,
+        0.9336047774158523,
+        0.9103800217155266,
+        0.9469706840390879
+      ],
+      "daily_valid_min": 246,
+      "daily_valid_median": 282.0,
+      "daily_valid_max": 297,
+      "signal_coverage": {
+        "low_vol": 0.9604277958740499,
+        "momentum": 0.9357046688382193,
+        "efficiency": 0.9585711183496199
+      }
+    }
+  ],
+  "option1": "BLOCKED_NO_VERIFIED_FULL_A_SHARE_PIT_SNAPSHOT_OR_MARKET_CONNECTOR",
+  "option3": "AUDITED_NO_VERIFIED_REPAIR_SOURCE; no fill applied",
+  "option2": "EXCLUDED; non-member residual history remains missing",
+  "freeze_status": "CANDIDATE_SPEC_ONLY; v3 economic protocol not frozen"
+}

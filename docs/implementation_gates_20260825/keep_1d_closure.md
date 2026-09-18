@@ -10,6 +10,8 @@ Holdout：未读
 
 阶段4已经判定 3 日和 5 日不能 GO。执行账本重冻后再次判定，结论不变。按 `docs/01_研究原则.md` 第 4 条和 `docs/02_第一期实验协议.md` 第 10 节，**不得进入阶段5公式研究**。本文件记录协议允许的工程收口，不是新的研究假设。
 
+2026-09-01 用户确认独立假设 D21-v2。本收口与 D21-v1 证据不得覆盖。v2 产物目录为 `experiments/stage3r_d21_v2_h2_5d` 与 `experiments/stage4r_d21_v2_h2_5d`。v2 即使 Development 通过也不启动阶段5。
+
 ## 不允许
 
 - 启动 RD-Agent / 公式搜索 / LightGBM / SOTA

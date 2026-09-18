@@ -1,0 +1,62 @@
+{
+  "own_sample_ic": {
+    "simple_ensemble": 0.02709977815460071,
+    "slow_residual_ensemble": 0.030210311378916124,
+    "IDIO_LOW_VOL_60": 0.04156619207802663,
+    "RES_MOM_120_20": 0.018688067384994348,
+    "RES_TREND_EFF_60_5": 0.0012581666337827882
+  },
+  "common_sample_ic": {
+    "simple_ensemble": 0.026812716571551442,
+    "slow_residual_ensemble": 0.02970228611561545,
+    "IDIO_LOW_VOL_60": 0.04050391640980971,
+    "RES_MOM_120_20": 0.018369710567249495,
+    "RES_TREND_EFF_60_5": -0.001128678293678767
+  },
+  "pairwise_component_ic": {
+    "IDIO_LOW_VOL_60": {
+      "old_ic": 0.027484780682596483,
+      "new_ic": 0.040985584624291485,
+      "rows": 423451
+    },
+    "RES_MOM_120_20": {
+      "old_ic": 0.027181671451227633,
+      "new_ic": 0.018037716292060458,
+      "rows": 407167
+    },
+    "RES_TREND_EFF_60_5": {
+      "old_ic": 0.027370987712399507,
+      "new_ic": 0.0006522781317171857,
+      "rows": 422713
+    }
+  },
+  "oof_member_rows": 457500,
+  "joined_rows": 457500,
+  "common_rows": 406112,
+  "stock_count": 533,
+  "head_size": 27,
+  "common_loo_min_delta": 0.0020470548787471857,
+  "common_loo_max_delta": 0.003488948935786433,
+  "old_test": [
+    {
+      "scenario": "baseline",
+      "old_ic": 0.02709977815460072,
+      "new_ic": 0.030210311378916117,
+      "delta_ic": 0.0031105332243153982,
+      "old_dates": 1520.0,
+      "new_dates": 1520.0,
+      "old_rows": 444998.0,
+      "new_rows": 406916.0
+    },
+    {
+      "scenario": "old_proxy",
+      "old_ic": 0.028459852273526987,
+      "new_ic": 0.02838517174787456,
+      "delta_ic": -7.468052565242495e-05,
+      "old_dates": 1520.0,
+      "new_dates": 1520.0,
+      "old_rows": 424314.0,
+      "new_rows": 389683.0
+    }
+  ]
+}

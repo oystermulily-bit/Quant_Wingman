@@ -1,0 +1,15 @@
+[
+  {
+    "request_id": "index500",
+    "snapshot_id": "d21_v3_source_reverified_20260914",
+    "method": "get_index_constituent",
+    "parameters_json": "{\"codes\": [\"000905.SH\"], \"is_local\": false}",
+    "sdk_version": "1.1.9",
+    "mcp_server_sha256": "80A76C1C9CE5DCDFAF279275862A4E98F9D429310B2AA10835E8C5B466EE5F7D",
+    "requested_at": "2026-09-14T06:50:49.003140+00:00",
+    "success": false,
+    "retry_count": 0,
+    "completed_at": "2026-09-14T06:50:50.939803+00:00",
+    "error": "HDF5ExtError"
+  }
+]

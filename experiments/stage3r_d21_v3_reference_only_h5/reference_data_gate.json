@@ -1,0 +1,13 @@
+{
+  "status": "REFERENCE_DATA_GATE_PASSED_DERIVED_TIME_POLICY",
+  "source_report_sha256": "a8114caa236ecfb96994d22d5585e5e244edb88688f48d44183e6203722fea54",
+  "normalized_report_sha256": "be1b13a209f8bacd21535285983a1bfe887c1d3d644e7fab572a354977fcc6eb",
+  "timed_report_sha256": "eae0a7816ad2652b62ad409563a2fb924b56f4d4a0aa6cabee28ca5ec464b264",
+  "signal_file_sha256": "ba98c31b12eba62ed26f40e5ac33da715d420eaedd2f7d67717bd36f9a502714",
+  "full_oof_coverage": 0.897600434310532,
+  "native_announcement_verified": false,
+  "time_policy": "D05_D06_DERIVED_POLICY",
+  "fresh_request_lineage_verified": true,
+  "holdout_read": false,
+  "economic_gate_evaluated": false
+}

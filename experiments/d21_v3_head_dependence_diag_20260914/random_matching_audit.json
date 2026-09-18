@@ -1,0 +1,3602 @@
+[
+  {
+    "scenario": "old_proxy_matched_000",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 262.8888888888889,
+    "max_member_day_gap": 763
+  },
+  {
+    "scenario": "old_proxy_matched_001",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 276.4074074074074,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_002",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 224.40740740740742,
+    "max_member_day_gap": 763
+  },
+  {
+    "scenario": "old_proxy_matched_003",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 329.14814814814815,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_004",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 396.5925925925926,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_005",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 306.0740740740741,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_006",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 265.9259259259259,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_007",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 431.74074074074076,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_008",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 256.25925925925924,
+    "max_member_day_gap": 874
+  },
+  {
+    "scenario": "old_proxy_matched_009",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 342.85185185185185,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_010",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 424.5925925925926,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_011",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 357.8888888888889,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_012",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 406.85185185185185,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_013",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 393.3703703703704,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_014",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 253.92592592592592,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_015",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 352.3703703703704,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_016",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 429.9259259259259,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_017",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 368.962962962963,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_018",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 280.4074074074074,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_019",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 319.81481481481484,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_020",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 406.3333333333333,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_021",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 409.3703703703704,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_022",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 375.1111111111111,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_023",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 299.9259259259259,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "old_proxy_matched_024",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 326.25925925925924,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_025",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 369.0740740740741,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_026",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 422.9259259259259,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_027",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 388.037037037037,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_028",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 249.07407407407408,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "old_proxy_matched_029",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 401.1111111111111,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_030",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 423.3333333333333,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_031",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 283.74074074074076,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_032",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 386.7037037037037,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_033",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 278.4074074074074,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_034",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 406.6666666666667,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_035",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 372.44444444444446,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_036",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 304.1111111111111,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_037",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 294.3703703703704,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_038",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 369.18518518518516,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_039",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 360.48148148148147,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "old_proxy_matched_040",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 308.48148148148147,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_041",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 419.77777777777777,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_042",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 321.3333333333333,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_043",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 372.037037037037,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_044",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 397.44444444444446,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_045",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 346.8888888888889,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_046",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 361.77777777777777,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_047",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 442.81481481481484,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_048",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 400.55555555555554,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_049",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 322.962962962963,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "old_proxy_matched_050",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 368.962962962963,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_051",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 335.1111111111111,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_052",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 372.6296296296296,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_053",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 368.2962962962963,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_054",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 401.22222222222223,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_055",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 310.74074074074076,
+    "max_member_day_gap": 999
+  },
+  {
+    "scenario": "old_proxy_matched_056",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 343.7037037037037,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_057",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 384.18518518518516,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_058",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 370.2962962962963,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_059",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 332.51851851851853,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_060",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 421.22222222222223,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_061",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 365.7037037037037,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_062",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 290.81481481481484,
+    "max_member_day_gap": 842
+  },
+  {
+    "scenario": "old_proxy_matched_063",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 286.81481481481484,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_064",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 313.51851851851853,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "old_proxy_matched_065",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 438.9259259259259,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_066",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 362.18518518518516,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_067",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 372.6296296296296,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_068",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 354.0740740740741,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "old_proxy_matched_069",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 336.22222222222223,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_070",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 263.4074074074074,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_071",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 353.48148148148147,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_072",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 327.4074074074074,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_073",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 341.2962962962963,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_074",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 413.3703703703704,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_075",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 389.3333333333333,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_076",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 458.77777777777777,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_077",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 379.74074074074076,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_078",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 315.18518518518516,
+    "max_member_day_gap": 999
+  },
+  {
+    "scenario": "old_proxy_matched_079",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 449.25925925925924,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_080",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 318.962962962963,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_081",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 368.3703703703704,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_082",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 340.0,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_083",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 359.77777777777777,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_084",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 343.9259259259259,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_085",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 435.3333333333333,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_086",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 398.0740740740741,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_087",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 309.9259259259259,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "old_proxy_matched_088",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 343.962962962963,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_089",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 333.7037037037037,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_090",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 258.2962962962963,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_091",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 299.0,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_092",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 443.3703703703704,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_093",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 377.55555555555554,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_094",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 355.4074074074074,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_095",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 368.51851851851853,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_096",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 325.51851851851853,
+    "max_member_day_gap": 884
+  },
+  {
+    "scenario": "old_proxy_matched_097",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 361.44444444444446,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_098",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 378.3703703703704,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_099",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 429.4074074074074,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_100",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 348.55555555555554,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_101",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 322.85185185185185,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_102",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 370.85185185185185,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_103",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 376.48148148148147,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_104",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 367.81481481481484,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_105",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 330.962962962963,
+    "max_member_day_gap": 999
+  },
+  {
+    "scenario": "old_proxy_matched_106",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 399.5925925925926,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_107",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 374.3333333333333,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_108",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 345.14814814814815,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_109",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 364.037037037037,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_110",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 282.6666666666667,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_111",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 387.0,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_112",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 402.74074074074076,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_113",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 383.037037037037,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_114",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 350.55555555555554,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_115",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 307.55555555555554,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_116",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 344.25925925925924,
+    "max_member_day_gap": 884
+  },
+  {
+    "scenario": "old_proxy_matched_117",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 445.6666666666667,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_118",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 367.77777777777777,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_119",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 330.77777777777777,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_120",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 374.8888888888889,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_121",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 247.1851851851852,
+    "max_member_day_gap": 763
+  },
+  {
+    "scenario": "old_proxy_matched_122",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 315.0740740740741,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_123",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 298.7037037037037,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_124",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 409.3703703703704,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_125",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 342.8888888888889,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_126",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 360.74074074074076,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_127",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 327.6666666666667,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_128",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 318.85185185185185,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_129",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 413.18518518518516,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_130",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 469.7037037037037,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_131",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 266.3703703703704,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "old_proxy_matched_132",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 303.0,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "old_proxy_matched_133",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 268.18518518518516,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "old_proxy_matched_134",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 411.81481481481484,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_135",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 285.4074074074074,
+    "max_member_day_gap": 999
+  },
+  {
+    "scenario": "old_proxy_matched_136",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 426.3333333333333,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_137",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 347.5925925925926,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_138",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 322.2962962962963,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_139",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 370.0740740740741,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_140",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 360.8888888888889,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_141",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 374.8888888888889,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_142",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 399.55555555555554,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_143",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 317.2962962962963,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "old_proxy_matched_144",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 407.48148148148147,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_145",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 286.3333333333333,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "old_proxy_matched_146",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 386.18518518518516,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_147",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 328.44444444444446,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_148",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 315.44444444444446,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_149",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 262.18518518518516,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_150",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 387.2962962962963,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_151",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 357.81481481481484,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_152",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 329.44444444444446,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_153",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 421.44444444444446,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_154",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 299.18518518518516,
+    "max_member_day_gap": 763
+  },
+  {
+    "scenario": "old_proxy_matched_155",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 340.0740740740741,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_156",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 357.14814814814815,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_157",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 320.25925925925924,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_158",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 389.4074074074074,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_159",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 341.48148148148147,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_160",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 379.14814814814815,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_161",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 280.962962962963,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "old_proxy_matched_162",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 363.14814814814815,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_163",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 370.5925925925926,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_164",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 329.2962962962963,
+    "max_member_day_gap": 999
+  },
+  {
+    "scenario": "old_proxy_matched_165",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 359.3703703703704,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_166",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 351.2962962962963,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_167",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 366.81481481481484,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_168",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 361.4074074074074,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_169",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 341.81481481481484,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_170",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 269.6666666666667,
+    "max_member_day_gap": 763
+  },
+  {
+    "scenario": "old_proxy_matched_171",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 327.44444444444446,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_172",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 363.037037037037,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_173",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 374.51851851851853,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_174",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 382.48148148148147,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_175",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 389.3703703703704,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_176",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 339.22222222222223,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_177",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 396.77777777777777,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_178",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 333.74074074074076,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_179",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 312.85185185185185,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_180",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 357.18518518518516,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_181",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 317.18518518518516,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_182",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 308.48148148148147,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_183",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 341.74074074074076,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_184",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 378.25925925925924,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_185",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 324.22222222222223,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_186",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 330.48148148148147,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_187",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 386.0740740740741,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_188",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 363.18518518518516,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_189",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 323.14814814814815,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_190",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 316.5925925925926,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_191",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 356.51851851851853,
+    "max_member_day_gap": 1245
+  },
+  {
+    "scenario": "old_proxy_matched_192",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 336.3703703703704,
+    "max_member_day_gap": 1401
+  },
+  {
+    "scenario": "old_proxy_matched_193",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 433.18518518518516,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "old_proxy_matched_194",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 307.51851851851853,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_195",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 252.7037037037037,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "old_proxy_matched_196",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 369.85185185185185,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "old_proxy_matched_197",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 260.8888888888889,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "old_proxy_matched_198",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 402.14814814814815,
+    "max_member_day_gap": 1356
+  },
+  {
+    "scenario": "old_proxy_matched_199",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 387.962962962963,
+    "max_member_day_gap": 1290
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_000",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 244.22222222222223,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_001",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 430.5925925925926,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_002",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 218.74074074074073,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_003",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 330.74074074074076,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_004",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 214.96296296296296,
+    "max_member_day_gap": 998
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_005",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 388.037037037037,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_006",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 241.37037037037038,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_007",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 363.44444444444446,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_008",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 327.85185185185185,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_009",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 224.14814814814815,
+    "max_member_day_gap": 936
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_010",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 270.5925925925926,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_011",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 301.1111111111111,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_012",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 305.25925925925924,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_013",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 284.6296296296296,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_014",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 266.77777777777777,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_015",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 219.14814814814815,
+    "max_member_day_gap": 933
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_016",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 218.8148148148148,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_017",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 315.85185185185185,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_018",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 352.44444444444446,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_019",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 273.5925925925926,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_020",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 278.037037037037,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_021",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 249.55555555555554,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_022",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 271.74074074074076,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_023",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 228.03703703703704,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_024",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 269.81481481481484,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_025",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 262.962962962963,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_026",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 369.0,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_027",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 324.22222222222223,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_028",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 313.7037037037037,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_029",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 287.14814814814815,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_030",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 299.2962962962963,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_031",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 360.0,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_032",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 225.40740740740742,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_033",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 312.25925925925924,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_034",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 232.8148148148148,
+    "max_member_day_gap": 1061
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_035",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 411.2962962962963,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_036",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 224.96296296296296,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_037",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 287.22222222222223,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_038",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 310.0,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_039",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 356.0740740740741,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_040",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 225.5185185185185,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_041",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 228.77777777777777,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_042",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 250.33333333333334,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_043",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 293.2962962962963,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_044",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 296.85185185185185,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_045",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 237.7037037037037,
+    "max_member_day_gap": 998
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_046",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 378.44444444444446,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_047",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 242.07407407407408,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_048",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 207.59259259259258,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_049",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 279.962962962963,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_050",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 300.14814814814815,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_051",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 316.6666666666667,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_052",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 367.0740740740741,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_053",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 274.55555555555554,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_054",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 212.25925925925927,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_055",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 246.96296296296296,
+    "max_member_day_gap": 933
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_056",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 344.4074074074074,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_057",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 301.1111111111111,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_058",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 371.18518518518516,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_059",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 212.88888888888889,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_060",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 341.3703703703704,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_061",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 372.7037037037037,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_062",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 207.37037037037038,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_063",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 361.3333333333333,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_064",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 402.7037037037037,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_065",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 225.7037037037037,
+    "max_member_day_gap": 1061
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_066",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 234.4814814814815,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_067",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 287.3333333333333,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_068",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 314.14814814814815,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_069",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 277.18518518518516,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_070",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 265.51851851851853,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_071",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 237.74074074074073,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_072",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 299.22222222222223,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_073",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 386.0,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_074",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 310.9259259259259,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_075",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 253.22222222222223,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_076",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 291.1111111111111,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_077",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 240.44444444444446,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_078",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 403.6666666666667,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_079",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 265.8888888888889,
+    "max_member_day_gap": 998
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_080",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 287.44444444444446,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_081",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 359.0,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_082",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 249.40740740740742,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_083",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 273.3333333333333,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_084",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 328.18518518518516,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_085",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 290.2962962962963,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_086",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 345.85185185185185,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_087",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 320.81481481481484,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_088",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 362.6666666666667,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_089",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 167.03703703703704,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_090",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 205.11111111111111,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_091",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 261.1111111111111,
+    "max_member_day_gap": 995
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_092",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 302.81481481481484,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_093",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 229.4814814814815,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_094",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 219.7037037037037,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_095",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 313.0740740740741,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_096",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 378.6666666666667,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_097",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 252.44444444444446,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_098",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 253.96296296296296,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_099",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 218.33333333333334,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_100",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 278.0740740740741,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_101",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 275.77777777777777,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_102",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 241.1851851851852,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_103",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 290.55555555555554,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_104",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 357.8888888888889,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_105",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 370.3703703703704,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_106",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 244.62962962962962,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_107",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 397.74074074074076,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_108",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 249.62962962962962,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_109",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 293.4074074074074,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_110",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 302.44444444444446,
+    "max_member_day_gap": 950
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_111",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 294.3333333333333,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_112",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 223.40740740740742,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_113",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 284.5925925925926,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_114",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 277.7037037037037,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_115",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 324.85185185185185,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_116",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 222.85185185185185,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_117",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 275.25925925925924,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_118",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 393.0740740740741,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_119",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 331.6666666666667,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_120",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 283.74074074074076,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_121",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 395.85185185185185,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_122",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 304.0740740740741,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_123",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 218.77777777777777,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_124",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 294.2962962962963,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_125",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 244.37037037037038,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_126",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 428.6296296296296,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_127",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 191.85185185185185,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_128",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 258.25925925925924,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_129",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 218.40740740740742,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_130",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 249.03703703703704,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_131",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 278.48148148148147,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_132",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 288.037037037037,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_133",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 180.74074074074073,
+    "max_member_day_gap": 884
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_134",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 378.6296296296296,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_135",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 264.85185185185185,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_136",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 259.74074074074076,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_137",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 338.8888888888889,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_138",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 280.0,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_139",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 301.5925925925926,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_140",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 278.77777777777777,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_141",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 301.2962962962963,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_142",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 309.0740740740741,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_143",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 264.77777777777777,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_144",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 216.59259259259258,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_145",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 222.5185185185185,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_146",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 291.77777777777777,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_147",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 276.81481481481484,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_148",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 262.14814814814815,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_149",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 280.6666666666667,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_150",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 175.0,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_151",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 315.1111111111111,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_152",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 187.77777777777777,
+    "max_member_day_gap": 995
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_153",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 281.8888888888889,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_154",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 374.037037037037,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_155",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 268.14814814814815,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_156",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 184.8148148148148,
+    "max_member_day_gap": 883
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_157",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 250.25925925925927,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_158",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 348.77777777777777,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_159",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 366.7037037037037,
+    "max_member_day_gap": 1171
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_160",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 223.66666666666666,
+    "max_member_day_gap": 1061
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_161",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 315.3703703703704,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_162",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 347.22222222222223,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_163",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 291.77777777777777,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_164",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 305.48148148148147,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_165",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 372.962962962963,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_166",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 357.1111111111111,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_167",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 277.22222222222223,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_168",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 359.77777777777777,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_169",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 310.74074074074076,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_170",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 266.3333333333333,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_171",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 361.22222222222223,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_172",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 302.55555555555554,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_173",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 411.5925925925926,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_174",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 250.1851851851852,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_175",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 322.962962962963,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_176",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 307.6666666666667,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_177",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 255.5185185185185,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_178",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 353.77777777777777,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_179",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 263.5925925925926,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_180",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 241.03703703703704,
+    "max_member_day_gap": 936
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_181",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 360.4074074074074,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_182",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 321.44444444444446,
+    "max_member_day_gap": 1162
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_183",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 280.81481481481484,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_184",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 309.9259259259259,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_185",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 247.92592592592592,
+    "max_member_day_gap": 933
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_186",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 314.0,
+    "max_member_day_gap": 1189
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_187",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 285.55555555555554,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_188",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 320.77777777777777,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_189",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 297.0,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_190",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 225.62962962962962,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_191",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 291.5925925925926,
+    "max_member_day_gap": 1168
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_192",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 251.96296296296296,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_193",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 254.2962962962963,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_194",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 372.85185185185185,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_195",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 375.962962962963,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_196",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 300.3333333333333,
+    "max_member_day_gap": 1291
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_197",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 244.55555555555554,
+    "max_member_day_gap": 1054
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_198",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 227.44444444444446,
+    "max_member_day_gap": 995
+  },
+  {
+    "scenario": "actual_D_net_pnl_matched_199",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 473.81481481481484,
+    "max_member_day_gap": 1354
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_000",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 395.9259259259259,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_001",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 337.14814814814815,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_002",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 281.74074074074076,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_003",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 356.962962962963,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_004",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 326.77777777777777,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_005",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 254.22222222222223,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_006",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 293.77777777777777,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_007",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 295.74074074074076,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_008",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 325.6666666666667,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_009",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 359.25925925925924,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_010",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 336.9259259259259,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_011",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 313.3333333333333,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_012",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 267.77777777777777,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_013",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 336.6666666666667,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_014",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 320.3333333333333,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_015",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 373.0740740740741,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_016",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 298.962962962963,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_017",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 415.2962962962963,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_018",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 365.5925925925926,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_019",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 454.22222222222223,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_020",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 361.6666666666667,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_021",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 285.8888888888889,
+    "max_member_day_gap": 933
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_022",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 260.3703703703704,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_023",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 346.77777777777777,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_024",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 335.9259259259259,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_025",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 297.962962962963,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_026",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 344.1111111111111,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_027",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 323.962962962963,
+    "max_member_day_gap": 889
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_028",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 361.14814814814815,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_029",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 339.5925925925926,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_030",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 307.5925925925926,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_031",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 306.81481481481484,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_032",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 307.3703703703704,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_033",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 388.3703703703704,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_034",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 389.25925925925924,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_035",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 319.3333333333333,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_036",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 319.3703703703704,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_037",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 367.3333333333333,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_038",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 301.85185185185185,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_039",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 413.4074074074074,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_040",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 308.51851851851853,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_041",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 336.1111111111111,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_042",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 323.7037037037037,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_043",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 326.4074074074074,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_044",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 209.92592592592592,
+    "max_member_day_gap": 998
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_045",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 269.44444444444446,
+    "max_member_day_gap": 1116
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_046",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 262.6296296296296,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_047",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 414.6666666666667,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_048",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 308.44444444444446,
+    "max_member_day_gap": 998
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_049",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 325.8888888888889,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_050",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 329.85185185185185,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_051",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 284.48148148148147,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_052",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 321.3703703703704,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_053",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 372.3333333333333,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_054",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 325.74074074074076,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_055",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 198.96296296296296,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_056",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 299.5925925925926,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_057",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 329.3703703703704,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_058",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 264.9259259259259,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_059",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 314.18518518518516,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_060",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 310.9259259259259,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_061",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 282.74074074074076,
+    "max_member_day_gap": 933
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_062",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 274.8888888888889,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_063",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 398.51851851851853,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_064",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 346.74074074074076,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_065",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 346.14814814814815,
+    "max_member_day_gap": 1119
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_066",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 365.5925925925926,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_067",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 284.5925925925926,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_068",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 341.1111111111111,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_069",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 319.7037037037037,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_070",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 305.25925925925924,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_071",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 362.7037037037037,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_072",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 260.3333333333333,
+    "max_member_day_gap": 883
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_073",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 374.0740740740741,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_074",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 406.25925925925924,
+    "max_member_day_gap": 1067
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_075",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 321.48148148148147,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_076",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 395.18518518518516,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_077",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 280.55555555555554,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_078",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 411.2962962962963,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_079",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 388.81481481481484,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_080",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 318.4074074074074,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_081",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 358.0,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_082",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 319.0,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_083",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 289.55555555555554,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_084",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 431.48148148148147,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_085",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 321.3333333333333,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_086",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 356.5925925925926,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_087",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 275.22222222222223,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_088",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 360.25925925925924,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_089",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 279.55555555555554,
+    "max_member_day_gap": 814
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_090",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 466.0,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_091",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 324.8888888888889,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_092",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 359.18518518518516,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_093",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 347.81481481481484,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_094",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 270.81481481481484,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_095",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 328.4074074074074,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_096",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 352.3333333333333,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_097",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 317.6666666666667,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_098",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 293.7037037037037,
+    "max_member_day_gap": 933
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_099",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 276.51851851851853,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_100",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 391.3333333333333,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_101",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 337.77777777777777,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_102",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 392.962962962963,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_103",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 310.77777777777777,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_104",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 318.9259259259259,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_105",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 365.18518518518516,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_106",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 297.85185185185185,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_107",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 408.51851851851853,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_108",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 376.14814814814815,
+    "max_member_day_gap": 998
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_109",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 355.1111111111111,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_110",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 390.22222222222223,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_111",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 494.18518518518516,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_112",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 261.81481481481484,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_113",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 317.9259259259259,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_114",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 214.1851851851852,
+    "max_member_day_gap": 883
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_115",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 392.85185185185185,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_116",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 369.55555555555554,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_117",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 365.1111111111111,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_118",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 259.3333333333333,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_119",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 260.3333333333333,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_120",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 377.8888888888889,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_121",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 302.0740740740741,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_122",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 369.14814814814815,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_123",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 301.44444444444446,
+    "max_member_day_gap": 938
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_124",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 219.62962962962962,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_125",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 437.962962962963,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_126",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 306.7037037037037,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_127",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 437.48148148148147,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_128",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 282.77777777777777,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_129",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 369.77777777777777,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_130",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 296.51851851851853,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_131",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 267.6296296296296,
+    "max_member_day_gap": 889
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_132",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 395.85185185185185,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_133",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 199.40740740740742,
+    "max_member_day_gap": 763
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_134",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 335.8888888888889,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_135",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 333.48148148148147,
+    "max_member_day_gap": 1067
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_136",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 341.51851851851853,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_137",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 226.4814814814815,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_138",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 296.2962962962963,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_139",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 275.8888888888889,
+    "max_member_day_gap": 763
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_140",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 465.51851851851853,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_141",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 255.0,
+    "max_member_day_gap": 932
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_142",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 284.0740740740741,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_143",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 321.48148148148147,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_144",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 375.3333333333333,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_145",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 323.2962962962963,
+    "max_member_day_gap": 933
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_146",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 222.74074074074073,
+    "max_member_day_gap": 932
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_147",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 377.7037037037037,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_148",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 429.14814814814815,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_149",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 309.6666666666667,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_150",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 404.0740740740741,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_151",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 408.55555555555554,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_152",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 425.14814814814815,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_153",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 320.0,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_154",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 285.85185185185185,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_155",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 223.59259259259258,
+    "max_member_day_gap": 933
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_156",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 371.2962962962963,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_157",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 414.74074074074076,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_158",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 312.6666666666667,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_159",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 350.48148148148147,
+    "max_member_day_gap": 1117
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_160",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 395.0740740740741,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_161",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 436.962962962963,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_162",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 336.962962962963,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_163",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 388.1111111111111,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_164",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 388.18518518518516,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_165",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 329.77777777777777,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_166",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 365.44444444444446,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_167",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 369.55555555555554,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_168",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 436.8888888888889,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_169",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 208.14814814814815,
+    "max_member_day_gap": 1352
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_170",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 417.81481481481484,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_171",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 347.14814814814815,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_172",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 470.22222222222223,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_173",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 371.3333333333333,
+    "max_member_day_gap": 1292
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_174",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 290.3703703703704,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_175",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 281.44444444444446,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_176",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 314.6296296296296,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_177",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 333.18518518518516,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_178",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 333.8888888888889,
+    "max_member_day_gap": 941
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_179",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 331.25925925925924,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_180",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 363.037037037037,
+    "max_member_day_gap": 1116
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_181",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 299.81481481481484,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_182",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 335.9259259259259,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_183",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 352.6296296296296,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_184",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 312.81481481481484,
+    "max_member_day_gap": 763
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_185",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 320.9259259259259,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_186",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 374.2962962962963,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_187",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 242.55555555555554,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_188",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 219.2962962962963,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_189",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 342.0740740740741,
+    "max_member_day_gap": 1123
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_190",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 350.81481481481484,
+    "max_member_day_gap": 1232
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_191",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 397.14814814814815,
+    "max_member_day_gap": 1480
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_192",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 194.03703703703704,
+    "max_member_day_gap": 1059
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_193",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 362.25925925925924,
+    "max_member_day_gap": 1068
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_194",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 386.14814814814815,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_195",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 373.18518518518516,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_196",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 388.0,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_197",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 393.0740740740741,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_198",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 331.25925925925924,
+    "max_member_day_gap": 1281
+  },
+  {
+    "scenario": "absolute_common_rank_delta_influence_matched_199",
+    "industry_fallbacks": 0,
+    "mean_member_day_gap": 439.3333333333333,
+    "max_member_day_gap": 1480
+  }
+]

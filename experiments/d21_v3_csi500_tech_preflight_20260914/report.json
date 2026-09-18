@@ -1,0 +1,138 @@
+{
+  "status": "COVERAGE_PREFLIGHT_ONLY_NOT_A_GO_DECISION",
+  "evaluation_code_sha256": "ddcee02e9a277a42a4deec198d89de2a184086130467579ce211f2a060dc0b99",
+  "coverage_any_scenario_passed": false,
+  "scenarios": [
+    {
+      "name": "baseline",
+      "coverage": 0.8073026615888911,
+      "coverage_passed": false,
+      "fold_coverage": [
+        0.7546991023896077,
+        0.8343846801273763,
+        0.8280039881068955,
+        0.8008265820013137,
+        0.8194969953260628
+      ],
+      "daily_coverage_min": 0.7026315789473684,
+      "daily_coverage_median": 0.8119891008174387,
+      "original_csi300_coverage": 0.7891292073832791,
+      "added_csi500_tech_coverage": 0.8869288881277235,
+      "signal_coverage": {
+        "low_vol": 0.8482448789077832,
+        "momentum": 0.8141802893200519,
+        "efficiency": 0.8467261431183059
+      }
+    },
+    {
+      "name": "shrink_only",
+      "coverage": 0.8989855057089614,
+      "coverage_passed": false,
+      "fold_coverage": [
+        0.8605258170666574,
+        0.9283377729958612,
+        0.9069649438282266,
+        0.8876998029340925,
+        0.9116492321388827
+      ],
+      "daily_coverage_min": 0.8078947368421052,
+      "daily_coverage_median": 0.8960674157303371,
+      "original_csi300_coverage": 0.9017372421281216,
+      "added_csi500_tech_coverage": 0.8869288881277235,
+      "signal_coverage": {
+        "low_vol": 0.9390666935406876,
+        "momentum": 0.9043408615952561,
+        "efficiency": 0.9371413113815015
+      }
+    },
+    {
+      "name": "short_only",
+      "coverage": 0.8427533848890209,
+      "coverage_passed": false,
+      "fold_coverage": [
+        0.8077545957307514,
+        0.8603285061041744,
+        0.8602293161464917,
+        0.8360886066710459,
+        0.8499176496772758
+      ],
+      "daily_coverage_min": 0.7157894736842105,
+      "daily_coverage_median": 0.8469656992084432,
+      "original_csi300_coverage": 0.8219826275787188,
+      "added_csi500_tech_coverage": 0.9337595859260528,
+      "signal_coverage": {
+        "low_vol": 0.8735524273252216,
+        "momentum": 0.8480185713629018,
+        "efficiency": 0.8714820668950959
+      }
+    },
+    {
+      "name": "shrink_and_short",
+      "coverage": 0.9341126799410185,
+      "coverage_passed": false,
+      "fold_coverage": [
+        0.9124442223868511,
+        0.9561210943261981,
+        0.9388163868463688,
+        0.9215933143566163,
+        0.9414377921210773
+      ],
+      "daily_coverage_min": 0.8210526315789474,
+      "daily_coverage_median": 0.938337801608579,
+      "original_csi300_coverage": 0.9341932681867535,
+      "added_csi500_tech_coverage": 0.9337595859260528,
+      "signal_coverage": {
+        "low_vol": 0.9639675955884173,
+        "momentum": 0.937986428619418,
+        "efficiency": 0.9619626521829838
+      }
+    }
+  ],
+  "coverage_threshold": 0.95,
+  "oof_member_days": 565602,
+  "oof_dates": 1535,
+  "added_stocks_ever": 194,
+  "latest_added_count": 73,
+  "oof_daily_pool_min": 354,
+  "oof_daily_pool_max": 380,
+  "return_reconciliation": {
+    "paired_rows": 51698,
+    "max_abs_difference": 2.7755575615628914e-16,
+    "rows_different_over_1e_6": 0
+  },
+  "oof_residual_cause_counts": {
+    "valid_strict_residual": 501581,
+    "fewer_than_5_peers": 50953,
+    "missing_industry": 9828,
+    "missing_return": 3240
+  },
+  "holdout_read": false,
+  "labels_read": false,
+  "rd_agent_allowed": false,
+  "economic_gate": "NOT_EVALUATED; new universe requires separate economic protocol freeze",
+  "original_gate_unchanged": "KEEP_1D_BASELINE; D21-v2 INSUFFICIENT_EVIDENCE",
+  "data_limitations": "INDATE/OUTDATE effective history; announcement availability not independently verified",
+  "file_hashes": {
+    "added_candidate_members.parquet": "e8e79a8b7a44fb7e310a62336cf5cc62f094a22f092c799491f8872c73e34aff",
+    "bars_0000.parquet": "c1ad72ba84bb30a45823b7271c8da5e16b9b73396b64e6431eef66da72b2a082",
+    "bars_0025.parquet": "46b7d912329aa07a031040807d3e4d83cae2e84a49774beeaba25f445bc03fef",
+    "bars_0050.parquet": "ac5c5ca412daefb22b72d9086d543e3653f5cc98b71634d13d05a8c922f92bed",
+    "bars_0075.parquet": "e6f6472cc2d9faee7e036f6955c1b95e559497bf15ac05d21e585c2f79891445",
+    "bars_0100.parquet": "67e058d175a40dceededcca50978c095bc481d8ea9796f24c916acdafeac5fa5",
+    "bars_0125.parquet": "21d208ef8ee86f8354647fb43448bf390402775580c8b36010c03c30937b487c",
+    "bars_0150.parquet": "0197e390e52a30c4d23786d0b25a3e9d3255a8dd38d83c658b195cfc244dc43e",
+    "bars_0175.parquet": "ab0e91a3c24ae618037f1e9f63b00e4cd29346c63d96f87ca4b38d545f78fbc4",
+    "coverage_evidence.parquet": "51e0efc02118c37e9b95f9ea43ee3fada82ef12523d0c4c0ef4cca213839a3ed",
+    "development_candidate_inputs.parquet": "05a7599b487e8a0597b8d3c9e28ec19b76f2f8bf52d990fb5eaf503b1f9fcd8b",
+    "index500_intervals.parquet": "950b1c9ab8783b9df9d56503fa3f0c75a27f789a6851da3636afb8a333755b90",
+    "status_0000.parquet": "d81091bc01f0f0b5e9cdb097574d6594e96c80f9cc82cda2c532930538658156",
+    "status_0025.parquet": "fb3fab43f3161eb9dbea9b9f3a85194094cbb0537d8b955fd721ef3f4cee9456",
+    "status_0050.parquet": "35ca49549dd4992459f2b9ecc1a519d932ed31562c45f96247770ca705db1b87",
+    "status_0075.parquet": "31f33e62f5ccc20499515f11e519ef035d0c3f7d909182098fdf5344b9f4f9d2",
+    "status_0100.parquet": "0dfcb187d1e2f18fedafc3822bf9cd1a14f4c63bd16bfe1ccb5b608ba257b944",
+    "status_0125.parquet": "490ce9f203fd286ab2b800040c701799c9ca6907aa4ca9255535465d7561381c",
+    "status_0150.parquet": "6624e4d22d91b986b237a8810fee642180b176fc088526502daad96a9443362d",
+    "status_0175.parquet": "9dd34ffdfe8e15e7086b17b5e500295bf17dd8374cd824982ade26c45eb1f809",
+    "technology_intervals.parquet": "025d038bd036b87253a20d7aa90430fc76c16d8795f59296c3f312f2a7ce1a8d"
+  }
+}

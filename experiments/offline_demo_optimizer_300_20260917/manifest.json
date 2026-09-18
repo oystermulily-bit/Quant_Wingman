@@ -1,0 +1,74 @@
+{
+  "artifact_kind": "OFFLINE_DEMO_SCORE_BUNDLE",
+  "availability_semantics": "signal_time_Asia_Shanghai;timezone_aware;not_file_creation_time",
+  "created_at": "2026-09-17T06:14:52.709401+00:00",
+  "data_role": "synthetic",
+  "expected_score_rows": 300,
+  "files": {
+    "formulas.json": {
+      "sha256": "01515fa89f849f9a302b6771bd76d5f8bb8b394b3a8c14a8c033bf02a3f5d9ec"
+    },
+    "model_evidence.json": {
+      "sha256": "4808beaed7cabb2b70cfe285f01700b7ef29ab489e7031961951c4379263f4d8"
+    },
+    "scores.parquet": {
+      "rows": 300,
+      "sha256": "1ff9a1c9a13f5c16b066175f17524a84180d942f9f706d3c82c5db3505cb651a"
+    },
+    "selected_features.json": {
+      "sha256": "90f942e4203d6f034b5812bbe4c4c76a356b0a4ba8f60f047f4a3abf5178c823"
+    }
+  },
+  "fingerprints": {
+    "data": "a7b3582fa0dcd107414748f95f4beaa6161b5972ccb80655dcfe676cfd770240",
+    "fold": "138c9456772ae8c6cc8b79e1647c395358c6b90cbd74b88f6afd68ae6efc1c07",
+    "formula": "02dc0d577d3da0f1eb7ea857d807823a016555831e9df96c8f25f285662b28e8",
+    "model": "1f57c36582fb0ca14a87cf5d3d1b7344cfdf952193bb28d7e9abfebf387d7a46"
+  },
+  "formulas": [
+    {
+      "expression": "intercept + beta * SYNTHETIC_AR_FEATURE"
+    }
+  ],
+  "holdout_read": false,
+  "member_coverage": 1.0,
+  "member_rows": 300,
+  "missing_policy": "preserve_original_evaluation_grid_no_zero_fill",
+  "model_evidence": {
+    "coefficients": [
+      0.0003937036465561458,
+      0.004488045513006657
+    ],
+    "estimator": "numpy.linalg.lstsq",
+    "fit_label_end_at": "2010-10-04T01:30:00+00:00",
+    "horizon": 5,
+    "seed": 20260917,
+    "synthetic_only": true,
+    "training_rows": 57000
+  },
+  "production_allowed": false,
+  "research_go": false,
+  "run_id": "synthetic_optimizer_300_20260917",
+  "schema_version": "1.0",
+  "score_columns": [
+    "date",
+    "code",
+    "score",
+    "score_available_at",
+    "fold_id",
+    "is_member",
+    "signal_valid"
+  ],
+  "score_rows": 300,
+  "selected_features": [
+    "SYNTHETIC_AR_FEATURE"
+  ],
+  "signal_output": "model_prediction",
+  "sota_promoted": false,
+  "status": "OFFLINE_DEMO_COMPLETED_NOT_VALIDATED",
+  "valid_member_rows": 300,
+  "warnings": [
+    "SYNTHETIC_DATA_NOT_MARKET_EVIDENCE"
+  ],
+  "whitelist_applied": false
+}

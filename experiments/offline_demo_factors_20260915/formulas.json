@@ -1,0 +1,202 @@
+[
+  {
+    "fold_id": "demo_outer_1",
+    "formula_id": "FORMULA_d89cb430fec720c08c27",
+    "round": 0,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_1",
+    "formula_id": "FORMULA_7caeff3fff9714f451dc",
+    "round": 0,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "NEG"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_1",
+    "formula_id": "FORMULA_f95ce117c830250dc3ba",
+    "round": 0,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "ABS"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_1",
+    "formula_id": "FORMULA_11bca6686503d47941d4",
+    "round": 0,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK",
+      "B",
+      "CS_RANK",
+      "MUL"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_1",
+    "formula_id": "FORMULA_1d1514530848a54f1319",
+    "round": 1,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK",
+      "B",
+      "CS_RANK",
+      "ADD"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_1",
+    "formula_id": "FORMULA_e27bcb601fc359fd6682",
+    "round": 1,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK",
+      "B",
+      "CS_RANK",
+      "SUB"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_1",
+    "formula_id": "FORMULA_36eacb2e6ce1c64840a5",
+    "round": 1,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK",
+      "B",
+      "CS_RANK",
+      "DIV"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_1",
+    "formula_id": "FORMULA_6dfe9cb7669a00e3587b",
+    "round": 1,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "B",
+      "CS_RANK"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_2",
+    "formula_id": "FORMULA_d89cb430fec720c08c27",
+    "round": 0,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_2",
+    "formula_id": "FORMULA_7caeff3fff9714f451dc",
+    "round": 0,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "NEG"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_2",
+    "formula_id": "FORMULA_f95ce117c830250dc3ba",
+    "round": 0,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "ABS"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_2",
+    "formula_id": "FORMULA_11bca6686503d47941d4",
+    "round": 0,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK",
+      "B",
+      "CS_RANK",
+      "MUL"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_2",
+    "formula_id": "FORMULA_1d1514530848a54f1319",
+    "round": 1,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK",
+      "B",
+      "CS_RANK",
+      "ADD"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_2",
+    "formula_id": "FORMULA_e27bcb601fc359fd6682",
+    "round": 1,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK",
+      "B",
+      "CS_RANK",
+      "SUB"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_2",
+    "formula_id": "FORMULA_36eacb2e6ce1c64840a5",
+    "round": 1,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "A",
+      "CS_RANK",
+      "B",
+      "CS_RANK",
+      "DIV"
+    ]
+  },
+  {
+    "fold_id": "demo_outer_2",
+    "formula_id": "FORMULA_6dfe9cb7669a00e3587b",
+    "round": 1,
+    "source": "offline_replay",
+    "status": "ELIGIBLE_FOR_JOINT_DEMO",
+    "tokens": [
+      "B",
+      "CS_RANK"
+    ]
+  }
+]

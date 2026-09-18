@@ -1,0 +1,76 @@
+{
+  "status": "COVERAGE_PASSED_DATA_AUDIT_PENDING",
+  "hypothesis_id": "H3_5D_LONG_SHRINK_TECH_REFERENCE_ONLY_V1",
+  "coverage_threshold": 0.85,
+  "oof_member_days": 460500,
+  "oof_dates": 1535,
+  "development_adaptive": true,
+  "holdout_read": false,
+  "labels_read": false,
+  "stage5_allowed": false,
+  "economic_gate_evaluated": false,
+  "data_limitations": "INDATE/OUTDATE effective history; announcement availability not independently verified",
+  "source_sha256": "05a7599b487e8a0597b8d3c9e28ec19b76f2f8bf52d990fb5eaf503b1f9fcd8b",
+  "split_sha256": "d3ef31827be73c730887a3dd57f861e1e2d08403e3394b4f7640864f6eb2ab89",
+  "code_sha256": "6fdab990159a9974bbb1315f469b55e0a3bb16328d7797ebc69c527ab3b84933",
+  "dependencies_sha256": {
+    "research_d21_v3_preflight.py": "03413938d331269846d2120cbe88248980bf977352935e1d8942191b7db755d1",
+    "research_d21_v3_coverage85.py": "6cadf6ae535bc3e646444490d7415a64565eeb0462a5f1d885da211892177349"
+  },
+  "scenarios": [
+    {
+      "scenario": "reference_only_long_shrink",
+      "coverage": 0.897600434310532,
+      "coverage_only_passed": true,
+      "daily_valid_min": 243,
+      "daily_valid_quantiles": {
+        "0": 243.0,
+        "0.05": 248.0,
+        "0.25": 261.0,
+        "0.5": 269.0,
+        "0.75": 276.0,
+        "0.95": 285.5999999999999,
+        "1": 298.0
+      },
+      "days_below_85": 146,
+      "fraction_days_below_85": 0.09511400651465798,
+      "industry_coverage_below_85": [
+        {
+          "industry_bucket": "801030.SI",
+          "member_days": 16282,
+          "valid_member_days": 13193,
+          "coverage": 0.8102812922245425,
+          "scenario": "reference_only_long_shrink"
+        },
+        {
+          "industry_bucket": "801130.SI",
+          "member_days": 1378,
+          "valid_member_days": 1158,
+          "coverage": 0.8403483309143687,
+          "scenario": "reference_only_long_shrink"
+        },
+        {
+          "industry_bucket": "801970.SI",
+          "member_days": 292,
+          "valid_member_days": 174,
+          "coverage": 0.5958904109589042,
+          "scenario": "reference_only_long_shrink"
+        },
+        {
+          "industry_bucket": "801980.SI",
+          "member_days": 1513,
+          "valid_member_days": 1084,
+          "coverage": 0.7164573694646398,
+          "scenario": "reference_only_long_shrink"
+        },
+        {
+          "industry_bucket": "UNKNOWN",
+          "member_days": 9828,
+          "valid_member_days": 18,
+          "coverage": 0.0018315018315018315,
+          "scenario": "reference_only_long_shrink"
+        }
+      ]
+    }
+  ]
+}

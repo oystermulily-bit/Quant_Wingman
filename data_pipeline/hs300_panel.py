@@ -17,6 +17,7 @@ import pandas as pd
 
 from data_pipeline.hs300.config import INDUSTRY_COVERAGE_MIN, RESEARCH_START
 from data_pipeline.hs300.lineage import LINEAGE_COLUMNS
+from data_pipeline.hs300.input_timing import signal_times
 from data_pipeline.hs300.panel_tensors import (
     HS300PanelTensors,
     pack_panel_tensors,
@@ -766,19 +767,13 @@ class HS300PanelDataManager:
                 direction="backward",
                 allow_exact_matches=True,
             )
-            signal_date = joined["date"]
+            signal_cutoff = signal_times(joined)
             known = pd.to_datetime(joined["industry_known_at"], utc=True, errors="coerce")
-            if getattr(known.dt, "tz", None) is not None:
-                known_date = (
-                    known.dt.tz_convert("Asia/Shanghai").dt.tz_localize(None).dt.normalize()
-                )
-            else:
-                known_date = known.dt.normalize()
             invalid = (
                 joined["valid_from"].isna()
                 | (joined["valid_to"].notna() & (joined["date"] > joined["valid_to"]))
                 | (joined["industry_code"].notna() & known.isna())
-                | (known_date > signal_date)
+                | (known > signal_cutoff)
             )
             joined.loc[invalid, industry_columns] = pd.NA
             rows.append(joined)

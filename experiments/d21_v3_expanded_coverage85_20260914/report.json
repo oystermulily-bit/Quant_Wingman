@@ -1,0 +1,383 @@
+{
+  "status": "COVERAGE_REASSESSMENT_COMPLETE_SIGNAL_CONTRACT_PENDING",
+  "coverage_threshold": 0.85,
+  "gate_denominator": "ALL_ORIGINAL_CSI300_OOF_MEMBER_DAYS",
+  "oof_member_days": 460500,
+  "oof_dates": 1535,
+  "expanded_member_days_disclosure_only": 565602,
+  "economic_thresholds": "UNCHANGED_D18_V2",
+  "economic_gate_evaluated": false,
+  "development_adaptive": true,
+  "signal_contract_frozen": false,
+  "stage5_allowed": false,
+  "labels_read": false,
+  "holdout_read": false,
+  "source_sha256": "51e0efc02118c37e9b95f9ea43ee3fada82ef12523d0c4c0ef4cca213839a3ed",
+  "code_sha256": "495be7d68d5bd1c7f93e1f31f49f18eb67ea9f5a715d02aacc8884db9e3c3aa0",
+  "scenarios": [
+    {
+      "scenario": "baseline",
+      "coverage": 0.7891292073832791,
+      "coverage_only_passed": false,
+      "daily_valid_min": 204,
+      "daily_valid_quantiles": {
+        "0": 204.0,
+        "0.05": 209.0,
+        "0.25": 226.0,
+        "0.5": 238.0,
+        "0.75": 247.0,
+        "0.95": 253.0,
+        "1": 265.0
+      },
+      "days_below_85": 1463,
+      "fraction_days_below_85": 0.9530944625407166,
+      "industry_coverage_below_85": [
+        {
+          "industry_bucket": "801010.SI",
+          "member_days": 7235,
+          "valid_member_days": 78,
+          "coverage": 0.01078092605390463,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801030.SI",
+          "member_days": 16282,
+          "valid_member_days": 13193,
+          "coverage": 0.8102812922245425,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801040.SI",
+          "member_days": 5782,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801110.SI",
+          "member_days": 9034,
+          "valid_member_days": 5292,
+          "coverage": 0.5857870267876909,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801130.SI",
+          "member_days": 1378,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801140.SI",
+          "member_days": 3885,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801200.SI",
+          "member_days": 4954,
+          "valid_member_days": 143,
+          "coverage": 0.02886556318126766,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801210.SI",
+          "member_days": 2520,
+          "valid_member_days": 12,
+          "coverage": 0.004761904761904762,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801230.SI",
+          "member_days": 906,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801710.SI",
+          "member_days": 6091,
+          "valid_member_days": 120,
+          "coverage": 0.019701198489574783,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801760.SI",
+          "member_days": 11771,
+          "valid_member_days": 8252,
+          "coverage": 0.7010449409565882,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801890.SI",
+          "member_days": 9439,
+          "valid_member_days": 4781,
+          "coverage": 0.5065155207119398,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801950.SI",
+          "member_days": 7190,
+          "valid_member_days": 1116,
+          "coverage": 0.1552155771905424,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801960.SI",
+          "member_days": 5979,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801970.SI",
+          "member_days": 292,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "801980.SI",
+          "member_days": 1513,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "baseline"
+        },
+        {
+          "industry_bucket": "UNKNOWN",
+          "member_days": 9828,
+          "valid_member_days": 18,
+          "coverage": 0.0018315018315018315,
+          "scenario": "baseline"
+        }
+      ],
+      "expanded_pool_coverage_disclosure_only": 0.8073026615888911,
+      "added_pool_coverage_disclosure_only": 0.8869288881277235
+    },
+    {
+      "scenario": "shrink_only",
+      "coverage": 0.9017372421281216,
+      "coverage_only_passed": true,
+      "daily_valid_min": 243,
+      "daily_valid_quantiles": {
+        "0": 243.0,
+        "0.05": 248.0,
+        "0.25": 262.0,
+        "0.5": 270.0,
+        "0.75": 281.0,
+        "0.95": 286.29999999999995,
+        "1": 298.0
+      },
+      "days_below_85": 137,
+      "fraction_days_below_85": 0.08925081433224756,
+      "industry_coverage_below_85": [
+        {
+          "industry_bucket": "801030.SI",
+          "member_days": 16282,
+          "valid_member_days": 13193,
+          "coverage": 0.8102812922245425,
+          "scenario": "shrink_only"
+        },
+        {
+          "industry_bucket": "801130.SI",
+          "member_days": 1378,
+          "valid_member_days": 1158,
+          "coverage": 0.8403483309143687,
+          "scenario": "shrink_only"
+        },
+        {
+          "industry_bucket": "801970.SI",
+          "member_days": 292,
+          "valid_member_days": 174,
+          "coverage": 0.5958904109589042,
+          "scenario": "shrink_only"
+        },
+        {
+          "industry_bucket": "801980.SI",
+          "member_days": 1513,
+          "valid_member_days": 1084,
+          "coverage": 0.7164573694646398,
+          "scenario": "shrink_only"
+        },
+        {
+          "industry_bucket": "UNKNOWN",
+          "member_days": 9828,
+          "valid_member_days": 18,
+          "coverage": 0.0018315018315018315,
+          "scenario": "shrink_only"
+        }
+      ],
+      "expanded_pool_coverage_disclosure_only": 0.8989855057089614,
+      "added_pool_coverage_disclosure_only": 0.8869288881277235
+    },
+    {
+      "scenario": "short_only",
+      "coverage": 0.8219826275787188,
+      "coverage_only_passed": false,
+      "daily_valid_min": 207,
+      "daily_valid_quantiles": {
+        "0": 207.0,
+        "0.05": 225.0,
+        "0.25": 239.0,
+        "0.5": 250.0,
+        "0.75": 256.5,
+        "0.95": 265.0,
+        "1": 266.0
+      },
+      "days_below_85": 1135,
+      "fraction_days_below_85": 0.739413680781759,
+      "industry_coverage_below_85": [
+        {
+          "industry_bucket": "801010.SI",
+          "member_days": 7235,
+          "valid_member_days": 388,
+          "coverage": 0.053628196268140985,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801040.SI",
+          "member_days": 5782,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801110.SI",
+          "member_days": 9034,
+          "valid_member_days": 5888,
+          "coverage": 0.65176001771087,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801130.SI",
+          "member_days": 1378,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801140.SI",
+          "member_days": 3885,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801200.SI",
+          "member_days": 4954,
+          "valid_member_days": 453,
+          "coverage": 0.09144125958821155,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801210.SI",
+          "member_days": 2520,
+          "valid_member_days": 4,
+          "coverage": 0.0015873015873015873,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801230.SI",
+          "member_days": 906,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801710.SI",
+          "member_days": 6091,
+          "valid_member_days": 426,
+          "coverage": 0.06993925463799047,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801760.SI",
+          "member_days": 11771,
+          "valid_member_days": 8583,
+          "coverage": 0.7291648967802226,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801890.SI",
+          "member_days": 9439,
+          "valid_member_days": 5238,
+          "coverage": 0.5549316664900943,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801950.SI",
+          "member_days": 7190,
+          "valid_member_days": 1739,
+          "coverage": 0.24186369958275383,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801960.SI",
+          "member_days": 5979,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801970.SI",
+          "member_days": 292,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "801980.SI",
+          "member_days": 1513,
+          "valid_member_days": 0,
+          "coverage": 0.0,
+          "scenario": "short_only"
+        },
+        {
+          "industry_bucket": "UNKNOWN",
+          "member_days": 9828,
+          "valid_member_days": 6,
+          "coverage": 0.0006105006105006105,
+          "scenario": "short_only"
+        }
+      ],
+      "expanded_pool_coverage_disclosure_only": 0.8427533848890209,
+      "added_pool_coverage_disclosure_only": 0.9337595859260528
+    },
+    {
+      "scenario": "shrink_and_short",
+      "coverage": 0.9341932681867535,
+      "coverage_only_passed": true,
+      "daily_valid_min": 246,
+      "daily_valid_quantiles": {
+        "0": 246.0,
+        "0.05": 257.0,
+        "0.25": 273.0,
+        "0.5": 282.0,
+        "0.75": 290.0,
+        "0.95": 296.0,
+        "1": 297.0
+      },
+      "days_below_85": 55,
+      "fraction_days_below_85": 0.035830618892508145,
+      "industry_coverage_below_85": [
+        {
+          "industry_bucket": "801970.SI",
+          "member_days": 292,
+          "valid_member_days": 225,
+          "coverage": 0.7705479452054794,
+          "scenario": "shrink_and_short"
+        },
+        {
+          "industry_bucket": "UNKNOWN",
+          "member_days": 9828,
+          "valid_member_days": 6,
+          "coverage": 0.0006105006105006105,
+          "scenario": "shrink_and_short"
+        }
+      ],
+      "expanded_pool_coverage_disclosure_only": 0.9341126799410185,
+      "added_pool_coverage_disclosure_only": 0.9337595859260528
+    }
+  ]
+}

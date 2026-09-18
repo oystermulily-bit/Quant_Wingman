@@ -4,6 +4,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from .candidate_features import add_candidate_features
+
 
 SIGNAL_VERSION = "simple_ensemble_v1"
 
@@ -28,7 +30,10 @@ def _safe_log_return(current: pd.Series, previous: pd.Series) -> pd.Series:
 class SimpleSignalBuilder:
     """Build MOM_20, REV_5 and LOW_VOL_20 without future observations."""
 
-    required_panel = {"date", "code", "industry_code", "has_quote"}
+    required_panel = {
+        "date", "code", "industry_code", "has_quote",
+        "can_buy_open", "can_sell_open", "weight_pct", "entry_effective_date",
+    }
     required_bars = {"date", "code", "close_tr", "amount", "has_quote"}
 
     def build(self, member_panel: pd.DataFrame, daily_bars: pd.DataFrame) -> pd.DataFrame:
@@ -106,13 +111,14 @@ class SimpleSignalBuilder:
         positive_sum = positive.groupby(
             [panel["date"], panel["industry_code"]], observed=True
         ).transform("sum")
-        panel["industry_member_count_loo"] = (industry_count - 1).clip(lower=0)
+        self_valid = panel["stock_return_1d"].notna().astype(int)
+        panel["industry_member_count_loo"] = (industry_count - self_valid).clip(lower=0)
         denom = panel["industry_member_count_loo"].replace(0, np.nan)
         panel["industry_return_1d_loo"] = (
-            industry_sum - panel["stock_return_1d"]
+            industry_sum - panel["stock_return_1d"].fillna(0.0)
         ) / denom
         panel["industry_breadth_loo"] = (
-            positive_sum - positive.astype(float)
+            positive_sum - positive.fillna(False).astype(float)
         ) / denom
         panel["industry_relative_market_1d"] = (
             panel["industry_return_1d_loo"] - panel["market_return_1d"]
@@ -120,6 +126,8 @@ class SimpleSignalBuilder:
         panel["stock_residual_1d"] = (
             panel["stock_return_1d"] - panel["industry_return_1d_loo"]
         )
+
+        panel = add_candidate_features(panel)
 
         for signal in ("MOM_20", "REV_5", "LOW_VOL_20"):
             panel[f"{signal}_rank"] = panel.groupby(

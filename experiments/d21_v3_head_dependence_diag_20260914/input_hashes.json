@@ -1,0 +1,12 @@
+{
+  "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\stage3r_d21_v3_reference_only_h5\\development_features.parquet": "2966dde0879799276f7c5331ddcfe9f4f8ad2b48da15dab2d0a36e850d3c37f2",
+  "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\stage3r_d21_v3_reference_only_h5\\development_labels.parquet": "da7c3a747180c51d0d04e7f9f9f09be6a30dde4c5a5203cabb1c02d4c6064371",
+  "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\stage3r_d21_v3_reference_only_h5\\development_oof_portfolio_daily.parquet": "a40f43294e14c8f1c8a3b5d7b631b76ea6872b9fdce24d9663d9f6bfe3b8fd48",
+  "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\stage3r_d21_v3_reference_only_h5\\split_plan.json": "d3ef31827be73c730887a3dd57f861e1e2d08403e3394b4f7640864f6eb2ab89",
+  "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\stage3r_d21_v3_reference_only_h5\\run_plan.json": "52b38e1441a8af80b0d8051415b6bb5b6f758e5ae28dd9b2443c11ccb44d9c7e",
+  "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2\\standardized\\execution_bars.parquet": "cebdbfd1af641b97ac2852125579668df6e694928e989b8c8b68226167b0ae60",
+  "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2\\standardized\\execution_status.parquet": "c868a5750e12d966353a5105c58df8ce117f12205c83fe0698295090e6cbcce6",
+  "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2\\standardized\\security_master.parquet": "11e6b8a1de7e6879ddd3b6ff2ca89bf9c622a9fb8fec321d82e4e26b04227002",
+  "diagnostic_plan": "e0e0157377679c97c5f8d0d2ac835c363b04e165974fea0b363652dca12663e0",
+  "script": "c1aca3c016087a0e1d374b182ef9fffd5f919945a91f0182f397e48283eb8c2b"
+}

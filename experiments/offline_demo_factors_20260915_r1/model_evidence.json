@@ -1,0 +1,133 @@
+{
+  "backend": "lightgbm",
+  "boost_rounds": 30,
+  "folds": [
+    {
+      "daily_available_stock_counts": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "demo_fallback": false,
+      "evaluated_label_rows": 320,
+      "fitted_features": [
+        "FORMULA_11bca6686503d47941d4",
+        "FORMULA_1d1514530848a54f1319",
+        "FORMULA_36eacb2e6ce1c64840a5",
+        "FORMULA_7caeff3fff9714f451dc",
+        "FORMULA_e27bcb601fc359fd6682"
+      ],
+      "fold_id": "demo_outer_1",
+      "formula_source_saw_outer_feedback": false,
+      "original_member_days": 320,
+      "outer_rank_ic": 0.8083419699388831,
+      "prediction_rows": 320,
+      "score_hash": "c1a5d8f6343bdc34651fc260d67993a7f544baf03c6b9f8988161e07a3a32baf",
+      "selected_features": [
+        "FORMULA_11bca6686503d47941d4",
+        "FORMULA_1d1514530848a54f1319",
+        "FORMULA_36eacb2e6ce1c64840a5",
+        "FORMULA_7caeff3fff9714f451dc",
+        "FORMULA_e27bcb601fc359fd6682"
+      ],
+      "signal_coverage": 1.0,
+      "test_end": "2015-10-07T13:00:00+00:00",
+      "test_start": "2015-09-10T13:00:00+00:00",
+      "train_rows": 2560,
+      "training_labels_only": true
+    },
+    {
+      "daily_available_stock_counts": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "demo_fallback": false,
+      "evaluated_label_rows": 320,
+      "fitted_features": [
+        "FORMULA_11bca6686503d47941d4",
+        "FORMULA_1d1514530848a54f1319",
+        "FORMULA_36eacb2e6ce1c64840a5",
+        "FORMULA_7caeff3fff9714f451dc",
+        "FORMULA_e27bcb601fc359fd6682"
+      ],
+      "fold_id": "demo_outer_2",
+      "formula_source_saw_outer_feedback": false,
+      "original_member_days": 320,
+      "outer_rank_ic": 0.8321022758178552,
+      "prediction_rows": 320,
+      "score_hash": "0e06f16757a14a482f60bf5ecabd8afe83fb51b6f019570bbac6d9a3920f7d9b",
+      "selected_features": [
+        "FORMULA_11bca6686503d47941d4",
+        "FORMULA_1d1514530848a54f1319",
+        "FORMULA_36eacb2e6ce1c64840a5",
+        "FORMULA_7caeff3fff9714f451dc",
+        "FORMULA_e27bcb601fc359fd6682"
+      ],
+      "signal_coverage": 1.0,
+      "test_end": "2015-12-30T13:00:00+00:00",
+      "test_start": "2015-12-03T13:00:00+00:00",
+      "train_rows": 3440,
+      "training_labels_only": true
+    }
+  ],
+  "implementation_hashes": {
+    "demo_formulas": "1d8a8692d81847ae217a3f545de5ffcfd9a5281b5dd72c12076f2d756be42913",
+    "demo_pipeline": "3a7835c0ddd24eea0bec261384463dc12f703e3fb699b73a16fb114e717f6978",
+    "joint_stack": "3edb64e594c64f291f2719c948f074f4f729a03ba390e12b998335d91c914859"
+  },
+  "params": {
+    "bagging_fraction": 1.0,
+    "bagging_freq": 0,
+    "bagging_seed": 20260915,
+    "boosting_type": "gbdt",
+    "data_random_seed": 20260915,
+    "deterministic": true,
+    "feature_fraction": 1.0,
+    "feature_fraction_seed": 20260915,
+    "force_col_wise": true,
+    "learning_rate": 0.04,
+    "metric": "None",
+    "min_child_samples": 20,
+    "num_leaves": 7,
+    "num_threads": 1,
+    "objective": "regression_l2",
+    "seed": 20260915,
+    "verbosity": -1
+  },
+  "version": "4.7.0"
+}

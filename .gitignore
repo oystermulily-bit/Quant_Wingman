@@ -131,3 +131,12 @@ secrets/
 *.key
 credentials*.json
 local_settings*.json
+
+# Project-local offline-demo runtime (installed dependencies, not source).
+.demo_runtime/
+
+# Local offline portfolio snapshots, user lists and allocation simulations.
+portfolio_demo_store/
+.pytest-tmp-optimizer-*/
+.pytest-tmp-*/
+.pytest-security-*/

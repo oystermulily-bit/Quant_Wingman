@@ -1,0 +1,125 @@
+{
+  "status": "GUARDS_FIXED_SOURCE_TIMING_METADATA_PENDING",
+  "adversarial_checks": {
+    "effective_interval_inclusive_boundaries_and_gaps": true,
+    "future_interval_mutation_prefix_unchanged": true,
+    "industry_known_23h_rejected_at_21h_signal": true,
+    "v3_builder_enforces_reference_available_at": true,
+    "findings_are_synthetic_not_proof_of_actual_future_return_leak": true
+  },
+  "availability_scan": {
+    "daily_bars": {
+      "missing_available_at": 0,
+      "later_than_signal_21h": 0,
+      "source_values": {
+        "DERIVED_POLICY": 777300
+      }
+    },
+    "execution_bars": {
+      "missing_available_at": 0,
+      "later_than_signal_21h": 0,
+      "source_values": {
+        "DERIVED_POLICY": 1541187
+      }
+    },
+    "universe_membership": {
+      "missing_available_at": 0,
+      "later_than_signal_21h": 0,
+      "source_values": "NOT_PRESENT"
+    },
+    "added_reference_bars": {
+      "batches": 8,
+      "batches_missing_available_at": 8,
+      "actual_availability_verified": false
+    }
+  },
+  "development_date_scans": [
+    {
+      "path": "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2\\standardized\\daily_bars.parquet",
+      "rows": 777300,
+      "date_min": "2014-01-02 00:00:00",
+      "date_max": "2024-08-23 00:00:00",
+      "missing_dates": 0,
+      "holdout_rows": 0,
+      "sha256": "1e1e5eb7f28bda4a78bf92370d8d160fe7627e677a13f908451b1fad1e4835b3"
+    },
+    {
+      "path": "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2\\standardized\\execution_bars.parquet",
+      "rows": 1541187,
+      "date_min": "2014-01-02 00:00:00",
+      "date_max": "2024-08-23 00:00:00",
+      "missing_dates": 0,
+      "holdout_rows": 0,
+      "sha256": "cebdbfd1af641b97ac2852125579668df6e694928e989b8c8b68226167b0ae60"
+    },
+    {
+      "path": "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2\\standardized\\execution_status.parquet",
+      "rows": 1588164,
+      "date_min": "2014-01-02 00:00:00",
+      "date_max": "2024-08-23 00:00:00",
+      "missing_dates": 0,
+      "holdout_rows": 0,
+      "sha256": "c868a5750e12d966353a5105c58df8ce117f12205c83fe0698295090e6cbcce6"
+    },
+    {
+      "path": "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2\\standardized\\trading_status.parquet",
+      "rows": 777300,
+      "date_min": "2014-01-02 00:00:00",
+      "date_max": "2024-08-23 00:00:00",
+      "missing_dates": 0,
+      "holdout_rows": 0,
+      "sha256": "07616fbfee2243bdb11b05a646b3081ab53285830f48f1402f8faa5ec8456b24"
+    },
+    {
+      "path": "D:\\Hulucoding\\AmAzing_Data\\research_snapshots\\csi300_2014_present_v2\\standardized\\universe_membership.parquet",
+      "rows": 777300,
+      "date_min": "2014-01-02 00:00:00",
+      "date_max": "2024-08-23 00:00:00",
+      "missing_dates": 0,
+      "holdout_rows": 0,
+      "sha256": "d61ec9cfb7613422be22b14119d58505e0575f4f40f238d4034bc85946d28868"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\d21_v3_csi500_tech_preflight_20260914\\development_candidate_inputs.parquet",
+      "rows": 951196,
+      "date_min": "2014-01-02 00:00:00",
+      "date_max": "2024-08-23 00:00:00",
+      "missing_dates": 0,
+      "holdout_rows": 0,
+      "sha256": "05a7599b487e8a0597b8d3c9e28ec19b76f2f8bf52d990fb5eaf503b1f9fcd8b"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\d21_v3_csi500_tech_preflight_20260914\\added_candidate_members.parquet",
+      "rows": 173896,
+      "date_min": "2014-01-02 00:00:00",
+      "date_max": "2024-08-23 00:00:00",
+      "missing_dates": 0,
+      "holdout_rows": 0,
+      "sha256": "e8e79a8b7a44fb7e310a62336cf5cc62f094a22f092c799491f8872c73e34aff"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\d21_v3_reference_only_20260914\\development_reference_only_signals.parquet",
+      "rows": 777300,
+      "date_min": "2014-01-02 00:00:00",
+      "date_max": "2024-08-23 00:00:00",
+      "missing_dates": 0,
+      "holdout_rows": 0,
+      "sha256": "e53e3a78c037d463d1a065265e3dad846d99daa73bbb2190da4031219519eecd"
+    }
+  ],
+  "holdout_lock_matches_split": true,
+  "development_excludes_holdout": true,
+  "holdout_lock_sha256": "bffda3e77219c516e7bb982cbb335ac6faa3e5a980385a757cfd6a5e1c310015",
+  "holdout_payload_read": false,
+  "labels_read": false,
+  "economic_gate_evaluated": false,
+  "scope": "Logical/file separation and current inputs checked; no claim of OS-level denial or complete historical access audit",
+  "production_code_modified": true,
+  "stage5_allowed": false,
+  "code_sha256": "896a542b0be0f3bf6892dc9ab58bca9782074b5c05f2d938d88326a0b19a5984",
+  "implementation_hashes": {
+    "research_d21_v3_reference_only.py": "6bb7feda2d83db486a95f79f38573f477c35765022f7f4f73446a5c6711f810e",
+    "research_d21_v3_tech_expansion.py": "ddcee02e9a277a42a4deec198d89de2a184086130467579ce211f2a060dc0b99",
+    "data_pipeline/hs300_panel.py": "4bfc92ecaac4e12008e60f44bf65d0e7ba617d7d5f2140599b276aaf5f9eb80b"
+  }
+}

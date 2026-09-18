@@ -1,0 +1,7 @@
+{
+  "status": "COMPLETED",
+  "full_reruns": 66,
+  "holdout_read": false,
+  "stage5_allowed": false,
+  "gate_unchanged": "D21_V3_FAILED"
+}

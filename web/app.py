@@ -55,6 +55,7 @@ from web.v2_status import (
     refuse_recommendation as v2_refuse_recommendation,
     system_status as v2_system_status,
 )
+from web.portfolio_api import router as offline_portfolio_router
 from web.training_time import get_training_time_summary
 from web.training_package import (
     MAX_PACKAGE_BYTES,
@@ -73,6 +74,14 @@ setup_logging()
 logger = get_logger()
 
 app = FastAPI(title="quant_w1ngman Training", version="1.1.0")
+app.include_router(offline_portfolio_router)
+
+
+@app.get("/portfolio", include_in_schema=False)
+def offline_portfolio_page():
+    return FileResponse(STATIC_DIR / "portfolio.html")
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://127.0.0.1:8765", "http://localhost:8765"],

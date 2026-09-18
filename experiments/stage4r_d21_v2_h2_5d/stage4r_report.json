@@ -1,0 +1,21 @@
+{
+  "protocol": "w1ngman_stage4r_d21_v2_h2_5d_v1",
+  "status": "INSUFFICIENT_EVIDENCE",
+  "statistical_gate": "INSUFFICIENT_EVIDENCE",
+  "reason": "OOF slow-signal coverage 0.7772 < 0.95",
+  "oof_slow_coverage": 0.777175956284153,
+  "signal_coverage": {
+    "IDIO_LOW_VOL_60": 0.8181814207650273,
+    "RES_MOM_120_20": 0.7849530054644809,
+    "RES_TREND_EFF_60_5": 0.8170841530054644,
+    "simple_ensemble": 0.9805420765027323
+  },
+  "go_not_evaluated": true,
+  "horizon_conclusion": "INSUFFICIENT_EVIDENCE",
+  "note": "Coverage failure is fail-closed. A–D net metrics are not used to relax windows, Top20/Top40, or the 95% rule.",
+  "system_status": "MODEL_NOT_VALIDATED",
+  "rd_agent_allowed": false,
+  "holdout_read": false,
+  "d21_v1_gate_unchanged": "KEEP_1D_BASELINE",
+  "production_eligible": false
+}

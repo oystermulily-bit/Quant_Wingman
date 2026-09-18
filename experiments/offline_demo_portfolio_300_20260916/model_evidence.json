@@ -1,0 +1,125 @@
+{
+  "backend": "lightgbm",
+  "boost_rounds": 12,
+  "folds": [
+    {
+      "daily_available_stock_counts": [
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300
+      ],
+      "demo_fallback": false,
+      "evaluated_label_rows": 6000,
+      "fitted_features": [
+        "B",
+        "FORMULA_11bca6686503d47941d4",
+        "FORMULA_1d1514530848a54f1319"
+      ],
+      "fold_id": "demo_outer_1",
+      "formula_source_saw_outer_feedback": false,
+      "original_member_days": 6000,
+      "outer_rank_ic": 0.8831084228197479,
+      "prediction_rows": 6000,
+      "score_hash": "506d0d94cd3790ffef6606f87060cdc3288e74009e496639726ca61562c5b491",
+      "selected_features": [
+        "B",
+        "FORMULA_11bca6686503d47941d4",
+        "FORMULA_1d1514530848a54f1319"
+      ],
+      "signal_coverage": 1.0,
+      "test_end": "2015-10-07T13:00:00+00:00",
+      "test_start": "2015-09-10T13:00:00+00:00",
+      "train_rows": 48000,
+      "training_labels_only": true
+    },
+    {
+      "daily_available_stock_counts": [
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        299
+      ],
+      "demo_fallback": false,
+      "evaluated_label_rows": 5999,
+      "fitted_features": [
+        "B",
+        "FORMULA_11bca6686503d47941d4",
+        "FORMULA_1d1514530848a54f1319"
+      ],
+      "fold_id": "demo_outer_2",
+      "formula_source_saw_outer_feedback": false,
+      "original_member_days": 6000,
+      "outer_rank_ic": 0.8909896318477859,
+      "prediction_rows": 5999,
+      "score_hash": "b5005e5e1b8390ea27c88491ff2dc9fa83ea57102ed9c809dca8e035e182e8fe",
+      "selected_features": [
+        "B",
+        "FORMULA_11bca6686503d47941d4",
+        "FORMULA_1d1514530848a54f1319"
+      ],
+      "signal_coverage": 0.9998333333333334,
+      "test_end": "2015-12-30T13:00:00+00:00",
+      "test_start": "2015-12-03T13:00:00+00:00",
+      "train_rows": 64500,
+      "training_labels_only": true
+    }
+  ],
+  "implementation_hashes": {
+    "demo_formulas": "1d8a8692d81847ae217a3f545de5ffcfd9a5281b5dd72c12076f2d756be42913",
+    "demo_pipeline": "3a7835c0ddd24eea0bec261384463dc12f703e3fb699b73a16fb114e717f6978",
+    "joint_stack": "3edb64e594c64f291f2719c948f074f4f729a03ba390e12b998335d91c914859"
+  },
+  "params": {
+    "bagging_fraction": 1.0,
+    "bagging_freq": 0,
+    "bagging_seed": 20260916,
+    "boosting_type": "gbdt",
+    "data_random_seed": 20260916,
+    "deterministic": true,
+    "feature_fraction": 1.0,
+    "feature_fraction_seed": 20260916,
+    "force_col_wise": true,
+    "learning_rate": 0.04,
+    "metric": "None",
+    "min_child_samples": 20,
+    "num_leaves": 7,
+    "num_threads": 1,
+    "objective": "regression_l2",
+    "seed": 20260916,
+    "verbosity": -1
+  },
+  "version": "4.7.0"
+}

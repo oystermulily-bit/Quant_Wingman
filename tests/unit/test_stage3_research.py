@@ -14,6 +14,11 @@ from data_pipeline.hs300_panel import (
     SnapshotManifestValidator,
 )
 from research_stage3.backtest import ReferenceBacktester
+from research_stage3.candidate_features import (
+    CANDIDATE_FEATURE_COLUMNS,
+    CANDIDATE_FEATURE_SPECS,
+    CANDIDATE_FEATURE_VERSION,
+)
 from research_stage3.labels import LabelRegistry
 from research_stage3.protocol import DateSplitProtocol, Stage3Config
 from research_stage3.runner import Stage3ResearchRunner
@@ -286,6 +291,10 @@ def _signal_frames(days: int = 60, symbols: int = 12) -> tuple[pd.DataFrame, pd.
                     "code": code,
                     "industry_code": "A" if idx < symbols // 2 else "B",
                     "has_quote": True,
+                    "can_buy_open": True,
+                    "can_sell_open": True,
+                    "weight_pct": 100.0 / symbols + 0.01 * t * (idx + 1),
+                    "entry_effective_date": dates[0],
                 }
             )
             bars_rows.append(
@@ -309,6 +318,101 @@ def test_industry_loo_allows_singleton_industry() -> None:
     assert solo["industry_member_count_loo"].eq(0).all()
     shared = out[out["industry_code"] == "A"]
     assert shared["industry_return_1d_loo"].notna().any()
+
+
+def test_candidate_feature_registry_is_complete_and_unique() -> None:
+    assert len(CANDIDATE_FEATURE_SPECS) == 8
+    assert len(CANDIDATE_FEATURE_COLUMNS) == 8
+    assert len(set(CANDIDATE_FEATURE_COLUMNS)) == 8
+    assert {spec.name for spec in CANDIDATE_FEATURE_SPECS} == {
+        "MARKET_RESIDUAL_MOMENTUM_20",
+        "INDUSTRY_LOO_RESIDUAL_MOMENTUM_20",
+        "STOCK_RESIDUAL_VOLATILITY_20",
+        "INDUSTRY_BREADTH_LOO",
+        "INDUSTRY_DISPERSION_1D_LOO",
+        "TRADABILITY_CROWDING_LOO",
+        "INDEX_WEIGHT_CHANGE_PCT",
+        "MEMBERSHIP_AGE_DAYS",
+    }
+
+
+def test_candidate_feature_expressions_match_hand_calculation() -> None:
+    dates = pd.bdate_range("2024-01-02", periods=25)
+    slopes = {
+        "000001.SZ": 0.01,
+        "000002.SZ": 0.02,
+        "000003.SZ": -0.01,
+        "000004.SZ": 0.005,
+    }
+    panel_rows = []
+    bars_rows = []
+    for t, date in enumerate(dates):
+        for idx, (code, slope) in enumerate(slopes.items()):
+            panel_rows.append(
+                {
+                    "date": date,
+                    "code": code,
+                    "industry_code": "A" if code != "000004.SZ" else "B",
+                    "has_quote": True,
+                    "can_buy_open": not (date == dates[-1] and code == "000003.SZ"),
+                    "can_sell_open": True,
+                    "weight_pct": 20.0 + idx + 0.1 * t,
+                    "entry_effective_date": dates[0],
+                }
+            )
+            bars_rows.append(
+                {
+                    "date": date,
+                    "code": code,
+                    "close_tr": 100.0 * np.exp(slope * t),
+                    "amount": 30_000_000.0,
+                    "has_quote": True,
+                }
+            )
+
+    out = SimpleSignalBuilder().build(pd.DataFrame(panel_rows), pd.DataFrame(bars_rows))
+    final = out[out["date"] == dates[-1]].set_index("code")
+    target = final.loc["000001.SZ"]
+
+    # MOM20 values are 20 * slope.  The market LOO peers are 0.4, -0.2, 0.1;
+    # the industry LOO peers are 0.4 and -0.2.
+    assert target["MOM_20"] == pytest.approx(0.2, abs=1e-12)
+    assert target["market_momentum_20_loo"] == pytest.approx(0.1, abs=1e-12)
+    assert target["market_residual_momentum_20"] == pytest.approx(0.1, abs=1e-12)
+    assert target["industry_momentum_20_loo"] == pytest.approx(0.1, abs=1e-12)
+    assert target["industry_loo_residual_momentum_20"] == pytest.approx(0.1, abs=1e-12)
+
+    # The two industry peers have returns 0.02 and -0.01.  Their positive
+    # fraction is 1/2 and population standard deviation is 0.015.
+    assert target["industry_breadth_loo"] == pytest.approx(0.5, abs=1e-12)
+    assert target["industry_dispersion_1d_loo"] == pytest.approx(0.015, abs=1e-12)
+    assert target["tradability_crowding_loo"] == pytest.approx(0.5, abs=1e-12)
+
+    # Constant exponential slopes give a constant industry residual and zero
+    # residual volatility once 20 observations are available.
+    assert target["stock_residual_volatility_20"] == pytest.approx(0.0, abs=1e-12)
+    assert target["index_weight_change_pct"] == pytest.approx(0.1, abs=1e-12)
+    assert target["membership_age_days"] == float((dates[-1] - dates[0]).days)
+    assert target["candidate_feature_version"] == CANDIDATE_FEATURE_VERSION
+
+
+def test_loo_excludes_missing_self_without_dropping_a_valid_peer() -> None:
+    panel, bars = _signal_frames(days=25, symbols=4)
+    final_date = panel["date"].max()
+    target_code = "000000.SZ"
+    bars.loc[
+        (bars["date"] == final_date) & (bars["code"] == target_code),
+        ["close_tr", "has_quote"],
+    ] = [np.nan, False]
+    panel.loc[
+        (panel["date"] == final_date) & (panel["code"] == target_code),
+        "has_quote",
+    ] = False
+    out = SimpleSignalBuilder().build(panel, bars)
+    target = out[(out["date"] == final_date) & (out["code"] == target_code)].iloc[0]
+    # Industry A has one valid peer after the target's return becomes missing.
+    assert target["industry_member_count_loo"] == 1
+    assert np.isfinite(target["industry_return_1d_loo"])
 
 
 def test_label_registry_allows_singleton_industry() -> None:
@@ -356,10 +460,15 @@ def test_simple_signals_are_prefix_invariant_and_future_sentinel_safe() -> None:
     prefix = SimpleSignalBuilder().build(prefix_panel, prefix_bars)
     mutated = bars.copy()
     mutated.loc[mutated["date"] > cutoff, "close_tr"] *= 1_000_000
-    full = SimpleSignalBuilder().build(panel, mutated)
+    mutated_panel = panel.copy()
+    future = mutated_panel["date"] > cutoff
+    mutated_panel.loc[future, "weight_pct"] *= 100
+    mutated_panel.loc[future, ["can_buy_open", "can_sell_open"]] = False
+    full = SimpleSignalBuilder().build(mutated_panel, mutated)
     columns = [
         "MOM_20", "REV_5", "LOW_VOL_20", "simple_ensemble",
         "market_return_1d", "industry_return_1d_loo", "stock_residual_1d",
+        *CANDIDATE_FEATURE_COLUMNS,
     ]
     actual = full[full["date"] <= cutoff].reset_index(drop=True)
     pd.testing.assert_frame_equal(prefix[columns], actual[columns], check_exact=True)
@@ -580,6 +689,8 @@ def test_stage3_runner_writes_development_only_outputs(tmp_path: Path) -> None:
     assert (output / "development_labels.parquet").is_file()
     assert not any("holdout" in path.name.lower() for path in output.glob("*.parquet"))
     features = pd.read_parquet(output / "development_features.parquet")
+    assert set(CANDIDATE_FEATURE_COLUMNS).issubset(features.columns)
+    assert features["candidate_feature_version"].eq(CANDIDATE_FEATURE_VERSION).all()
     assert pd.to_datetime(features["date"]).max() < pd.Timestamp(
         report["split"]["holdout_start"]
     )

@@ -1,0 +1,78 @@
+{
+  "protocol": "hs300_expanding5_purge20_embargo5_holdout_v1",
+  "config_hash": "5a25efafe5c095009383e1d510c8bca2e47990afb249de2815b2e089075ee7cd",
+  "all_date_count": 3074,
+  "development_date_count": 2591,
+  "development_start": "2014-01-02",
+  "development_end": "2024-08-23",
+  "holdout_start": "2024-08-26",
+  "holdout_date_count": 483,
+  "holdout_date_hash": "e0e47656433a1ae1351e62a150fadf2716175c0246ed6bc21b566ccb459d8c31",
+  "folds": [
+    {
+      "fold_id": 0,
+      "train_start": "2014-01-02",
+      "train_end": "2018-03-02",
+      "train_dates": 1016,
+      "purge_start": "2018-03-05",
+      "purge_end": "2018-03-30",
+      "purge_dates": 20,
+      "validation_start": "2018-04-02",
+      "validation_end": "2019-07-05",
+      "validation_dates": 307,
+      "embargo_dates": 5
+    },
+    {
+      "fold_id": 1,
+      "train_start": "2014-01-02",
+      "train_end": "2019-06-14",
+      "train_dates": 1328,
+      "purge_start": "2019-06-17",
+      "purge_end": "2019-07-12",
+      "purge_dates": 20,
+      "validation_start": "2019-07-15",
+      "validation_end": "2020-10-20",
+      "validation_dates": 307,
+      "embargo_dates": 5
+    },
+    {
+      "fold_id": 2,
+      "train_start": "2014-01-02",
+      "train_end": "2020-09-21",
+      "train_dates": 1635,
+      "purge_start": "2020-09-22",
+      "purge_end": "2020-10-27",
+      "purge_dates": 20,
+      "validation_start": "2020-10-28",
+      "validation_end": "2022-01-26",
+      "validation_dates": 307,
+      "embargo_dates": 5
+    },
+    {
+      "fold_id": 3,
+      "train_start": "2014-01-02",
+      "train_end": "2022-01-05",
+      "train_dates": 1942,
+      "purge_start": "2022-01-06",
+      "purge_end": "2022-02-09",
+      "purge_dates": 20,
+      "validation_start": "2022-02-10",
+      "validation_end": "2023-05-16",
+      "validation_dates": 307,
+      "embargo_dates": 5
+    },
+    {
+      "fold_id": 4,
+      "train_start": "2014-01-02",
+      "train_end": "2023-04-20",
+      "train_dates": 2249,
+      "purge_start": "2023-04-21",
+      "purge_end": "2023-05-23",
+      "purge_dates": 20,
+      "validation_start": "2023-05-24",
+      "validation_end": "2024-08-23",
+      "validation_dates": 307,
+      "embargo_dates": 0
+    }
+  ]
+}

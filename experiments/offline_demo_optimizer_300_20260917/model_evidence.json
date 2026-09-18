@@ -1,0 +1,12 @@
+{
+  "coefficients": [
+    0.0003937036465561458,
+    0.004488045513006657
+  ],
+  "estimator": "numpy.linalg.lstsq",
+  "fit_label_end_at": "2010-10-04T01:30:00+00:00",
+  "horizon": 5,
+  "seed": 20260917,
+  "synthetic_only": true,
+  "training_rows": 57000
+}

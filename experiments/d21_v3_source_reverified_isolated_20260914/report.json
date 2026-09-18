@@ -1,0 +1,10 @@
+{
+  "status": "SOURCE_REVERIFICATION_FAILED",
+  "holdout_read": false,
+  "labels_read": false,
+  "economic_gate_evaluated": false,
+  "started_at": "2026-09-14T06:52:21.446886+00:00",
+  "error_type": "HDF5ExtError",
+  "completed_at": "2026-09-14T06:52:31.760039+00:00",
+  "code_sha256": "17f4e3adcac0251d6d307d179c65a0fe63e15045934a7501643cdd8e60e88124"
+}

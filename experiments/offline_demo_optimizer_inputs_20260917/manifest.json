@@ -1,0 +1,11 @@
+{
+  "artifact_kind": "OFFLINE_PORTFOLIO_RESEARCH_INPUTS",
+  "schema_version": "1.0",
+  "production_allowed": false,
+  "holdout_read": false,
+  "data_role": "synthetic",
+  "score_manifest": "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\experiments\\offline_demo_optimizer_300_20260917\\manifest.json",
+  "date": "2013-06-17",
+  "fold_id": "synthetic_frozen_1",
+  "sha256": "01ebfdd95265d82efb3e6f70c048ee12e3c3b51715ad1d137a94894e8882a109"
+}

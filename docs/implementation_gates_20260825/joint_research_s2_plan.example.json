@@ -1,0 +1,23 @@
+{
+  "protocol_id": "JOINT_RESEARCH_S2",
+  "hypothesis_id": "H4_5D_GROUP_COMPLEMENTARITY_STEPWISE_V1",
+  "design_approved": true,
+  "execution_frozen": false,
+  "feature_ids": [],
+  "feature_manifest_hash": "",
+  "feature_contract_hash": "",
+  "data_fingerprint": "",
+  "split_fingerprint": "",
+  "config_fingerprint": "",
+  "implementation_hash": "",
+  "signal_output": "",
+  "freeze_id": "",
+  "risk_policy_hash": "",
+  "concentration_policy_hash": "",
+  "max_outer_scopes": 5,
+  "max_trials_per_scope": 480,
+  "max_total_trials": 2400,
+  "ledger_directory": "",
+  "horizon": 5,
+  "trade_universe": "PIT_HS300"
+}

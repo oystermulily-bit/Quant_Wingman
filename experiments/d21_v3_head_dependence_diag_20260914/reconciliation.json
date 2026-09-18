@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "tolerance": 1e-10,
+  "errors": {
+    "net_return": 0.0,
+    "gross_return": 0.0,
+    "nav": 0.0,
+    "cash_weight": 0.0,
+    "holding_count": 0.0,
+    "turnover": 0.0,
+    "transaction_cost": 0.0,
+    "stock_daily_contribution_sum": 6.83481049534862e-16,
+    "A_linked_total_error": 4.163336342344337e-15,
+    "D_linked_total_error": 8.881784197001252e-16
+  },
+  "original_reports_unchanged": true,
+  "holdout_read": false
+}

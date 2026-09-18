@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>quant_w1ngman · 离线股票配置</title>
+  <link rel="stylesheet" href="/static/portfolio.css?v=3" />
+  <script src="/static/portfolio.js?v=3" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="page-header">
+      <a class="brand" href="/" aria-label="工作台首页"><span class="brand-mark" aria-hidden="true">w</span><span>quant_w1ngman<small>RESEARCH WORKSPACE</small></span></a>
+      <a class="back-link" href="/">工作台首页 <span aria-hidden="true">↗</span></a>
+    </header>
+    <main>
+      <section class="hero">
+        <div><p class="eyebrow">OFFLINE PORTFOLIO LAB</p><h1>从全池评分，到你的候选组合。</h1><p class="hero-copy">查看已保存的历史评分，选择股票，保存白名单，再生成受约束的配置模拟。</p></div>
+        <span class="badge warning">离线模拟 · 未验证</span>
+      </section>
+      <div class="notice"><span class="notice-icon" aria-hidden="true">i</span><p><strong>本页展示离线研究结果，不下单。</strong> 全池分数经历史样本外收益校准后，结合相关性风险和交易成本配置。合成示例不是真实沪深300行情；分数与预期收益均不是上涨概率。</p></div>
+      <div id="message" class="message" role="status" aria-live="polite" hidden></div>
+
+      <section class="panel source-panel" aria-labelledby="sourceTitle">
+        <div class="panel-heading"><div><span class="step-number">01</span><h2 id="sourceTitle">选择历史评分</h2></div><span id="dataRole" class="badge">尚未加载</span></div>
+        <div class="source-fields">
+          <label class="field bundle-field"><span>研究数据包</span><select id="bundleSelect"><option value="">正在加载数据包…</option></select></label>
+          <label class="field"><span>历史评分日期</span><select id="dateSelect" disabled><option value="">先选择数据包</option></select></label>
+          <label class="field"><span>验证折</span><select id="foldSelect" disabled><option value="">—</option></select></label>
+          <button id="reloadScores" class="button secondary" type="button" disabled>重新载入</button>
+        </div>
+        <p id="snapshotMeta" class="helper">日期来自数据包已保存的评分，不代表今日实时评分。</p>
+        <p id="scoreSource" class="helper">评分来自数据包，不在本页重新拟合或预测新日期。</p>
+        <p id="analysisStatus" class="helper">等待收益校准与风险证据。</p>
+        <details class="import-box"><summary>配置算法回放复核</summary><p id="validationSummary" class="helper">读取当前快照的复核记录…</p><pre id="validationDetails" class="audit-details"></pre></details>
+        <details class="import-box"><summary>配置证据与导入</summary><p class="helper">证据必须绑定当前评分日期、模型、公式和数据版本；缺少证据时不生成配置。</p><div class="inline-form"><label class="field"><span>配置证据 manifest 路径</span><input id="analysisPath" type="text" autocomplete="off" placeholder="experiments/offline_demo_…/manifest.json" /></label><button id="importAnalysis" class="button secondary" type="button">导入配置证据</button></div><pre id="analysisDetails" class="audit-details"></pre></details>
+        <ul id="sourceWarnings" class="warning-list" hidden></ul>
+        <details class="import-box"><summary>导入本地研究数据包</summary><div class="inline-form"><label class="field"><span>本机 manifest 文件路径</span><input id="manifestPath" type="text" placeholder="例如 C:\research\bundle\manifest.json" autocomplete="off" /></label><button id="importBundle" class="button secondary" type="button">导入数据包</button></div><p class="helper">读取这台服务器上的本地文件。导入后仍按数据包的实际数据类型和股票数量展示。</p></details>
+      </section>
+
+      <div class="workspace">
+        <section class="panel stocks-panel" aria-labelledby="stocksTitle">
+          <div class="panel-heading"><div><span class="step-number">02</span><h2 id="stocksTitle">全池股票与白名单</h2></div><span id="universeBadge" class="badge">等待评分</span></div>
+          <div class="metrics-strip"><div><span>全量股票</span><strong id="memberCount">—</strong></div><div><span>有效评分</span><strong id="validCount">—</strong></div><div><span>已选股票</span><strong id="selectedCount">0</strong></div></div>
+          <div class="table-toolbar"><label class="search-field"><span class="sr-only">搜索股票代码</span><input id="stockSearch" type="search" placeholder="搜索股票代码" autocomplete="off" /></label><button id="selectVisible" class="button quiet" type="button" disabled>勾选当前结果</button><button id="clearSelection" class="button quiet" type="button" disabled>清空选择</button></div>
+          <p id="tableCaption" class="table-caption">按当期公式评分从高到低展示全量股票；缺分股票保留在末尾。</p>
+          <div class="stock-table-wrap"><table class="stock-table"><thead><tr><th scope="col">选择</th><th scope="col">全池排名</th><th scope="col">股票代码</th><th id="scoreColumn" scope="col" class="numeric">公式组合评分 ↓</th><th scope="col">状态</th><th scope="col">行业（可选）</th></tr></thead><tbody id="stockRows"><tr><td colspan="6" class="empty-cell">加载历史评分后开始选择。</td></tr></tbody></table></div>
+          <div class="table-footer"><span id="visibleCount">0 只股票</span><span>勾选不会改变全池排名</span></div>
+        </section>
+
+        <aside class="sidebar">
+          <section class="panel" aria-labelledby="whitelistTitle">
+            <div class="panel-heading"><div><span class="step-number">03</span><h2 id="whitelistTitle">保存你的白名单</h2></div></div>
+            <label class="field"><span>白名单名称</span><input id="whitelistName" type="text" maxlength="100" value="我的候选组合" /></label>
+            <div class="save-actions"><button id="saveWhitelist" class="button primary" type="button" disabled>保存白名单</button><button id="saveAsNew" class="button secondary" type="button" disabled>另存为新名单</button></div>
+            <p id="saveState" class="helper">勾选股票后保存，方案将绑定这个名单版本和历史评分快照。</p>
+            <div class="section-rule"></div>
+            <label class="field"><span>读取已保存白名单</span><select id="savedWhitelistSelect"><option value="">选择一个已保存名单</option></select></label>
+            <button id="restoreWhitelist" class="button secondary full-width" type="button" disabled>读取名单与原评分快照</button>
+          </section>
+
+          <section class="panel" aria-labelledby="constraintsTitle">
+            <div class="panel-heading"><div><span class="step-number">04</span><h2 id="constraintsTitle">设置模拟条件</h2></div></div>
+            <div class="constraint-chips"><span>单股 ≤ 5%</span><span>单行业 ≤ 30%</span><span>所选目标均 &gt; 0</span></div>
+            <p id="capacityNote" class="helper">自选 5 只股票，按单股上限最多配置 25%。未填行业的股票统一计入同一个「未知行业」。</p>
+            <div class="two-fields"><label class="field"><span>股票仓位预算上限（%）</span><input id="marketBudget" type="number" min="0" max="100" step="1" value="100" /></label><label class="field"><span>账户资金（可选）</span><input id="accountValue" type="number" min="0.01" step="0.01" placeholder="用于费用、容量与股数" /></label></div>
+            <div class="two-fields"><label class="field"><span>每只最低目标（%，必填）</span><input id="minimumWeight" type="number" min="0.0001" max="5" step="0.01" placeholder="请指定正权重" /></label><label class="field"><span>年化波动上限（%）</span><input id="volatilityCap" type="number" min="0.1" max="100" step="0.1" value="12" /></label></div>
+            <p class="helper">最低目标由你指定；建议区间下限允许为 0。若无法让全部所选股票同时满足正目标与风险约束，将报告不可行。</p>
+            <p id="boundsHint" class="helper" aria-live="polite"></p>
+            <label class="field"><span>区间效用容忍度（基点）</span><input id="rangeTolerance" type="number" min="0" max="100" step="0.1" value="1" /></label>
+            <p class="helper">1 基点 = 账户净值的 0.01%。限定本期模型效用相对推荐方案最多下降多少；越大，允许的区间越宽。只影响区间，不改变推荐目标。</p>
+            <label class="field"><span>当前持仓</span><select id="holdingsMode"><option value="unknown">未提供持仓，仅生成目标权重</option><option value="cash">当前空仓（100% 现金）</option><option value="provided">填写当前持仓</option></select></label>
+            <div id="holdingsEditor" hidden><label class="field"><span>每行：代码, 权重%, 行业, 可买, 可卖, 股数</span><textarea id="holdingsText" rows="5" spellcheck="false" placeholder="000001.SZ, 8, 银行, true, false, 1000"></textarea></label><p class="helper">后四项可留空。股数与证据价格、账户净值必须一致才生成股数预览；白名单外旧仓也参与风险检查。</p></div>
+            <label class="checkbox-field"><input id="assumeTradable" type="checkbox" /><span>仅模拟：假设其余股票均可交易</span></label>
+            <p class="helper">手填的买卖阻塞优先；未假设且无执行信息时，只展示计划差额。</p>
+            <details class="cost-settings"><summary>交易成本与调仓规则</summary><p class="helper">默认沿用项目参考成本，已含滑点；使用分项费用后不再叠加总费率。</p><div class="two-fields"><label class="field"><span>买入总成本（%）</span><input id="buyCost" type="number" min="0" max="10" step="0.001" value="0.076" /></label><label class="field"><span>卖出总成本（%）</span><input id="sellCost" type="number" min="0" max="10" step="0.001" value="0.126" /></label></div>
+              <label class="checkbox-field"><input id="explicitCosts" type="checkbox" /><span>使用分项费用替换上述总费率</span></label>
+              <div id="costComponents" hidden class="two-fields">
+                <label class="field"><span>佣金（%）</span><input id="commissionRate" type="number" min="0" max="10" step="0.001" value="0.025" /></label>
+                <label class="field"><span>过户费（%）</span><input id="transferRate" type="number" min="0" max="10" step="0.001" value="0.001" /></label>
+                <label class="field"><span>卖出税费（%）</span><input id="sellTaxRate" type="number" min="0" max="10" step="0.001" value="0.05" /></label>
+                <label class="field"><span>每边滑点（%）</span><input id="slippageRate" type="number" min="0" max="10" step="0.001" value="0.05" /></label>
+                <label class="field"><span>每单最低佣金（元）</span><input id="minimumCommission" type="number" min="0" max="10000" step="1" value="5" /></label>
+              </div><div class="two-fields"><label class="field"><span>风险厌恶系数</span><input id="riskAversion" type="number" min="0.01" max="100" step="0.1" value="3" /></label><label class="field"><span>主动调仓阈值（百分点）</span><input id="noTradeBand" type="number" min="0" max="5" step="0.1" value="0.5" /></label></div>
+            </details>
+            <button id="generatePlan" class="button primary full-width generate" type="button" disabled>生成离线配置方案 <span aria-hidden="true">→</span></button>
+            <p id="planPrerequisite" class="helper">先保存当前白名单。</p>
+          </section>
+        </aside>
+      </div>
+
+      <section class="panel plan-panel" aria-labelledby="planTitle">
+        <div class="panel-heading"><div><span class="step-number">05</span><h2 id="planTitle">配置与调仓模拟</h2></div><button id="downloadPlan" class="button secondary" type="button" disabled>下载方案 JSON</button></div>
+        <div id="planEmpty" class="plan-empty"><span aria-hidden="true">↗</span><h3>让选择成为一份可核对的方案</h3><p>保存白名单并生成方案后，查看目标权重、现金和调仓差额。</p></div>
+        <div id="planResult" hidden>
+          <div class="plan-summary"><div class="cash-card"><span>目标现金比例</span><strong id="cashWeight">—</strong><div class="allocation-bar" aria-hidden="true"><span id="stockBar"></span></div><small id="allocationLabel">—</small></div><div class="plan-facts"><p id="planIdentity"></p><p id="holdingSummary"></p><p id="executionSummary"></p><p id="costSummary"></p></div></div>
+          <ul id="planWarnings" class="warning-list" hidden></ul>
+          <div class="optimizer-facts"><p id="utilitySummary"></p><p id="riskSummary"></p><p id="stressSummary"></p><p id="reviewSummary"></p></div>
+          <section class="allocation-explanation" aria-labelledby="allocationWhy"><h3 id="allocationWhy">权重为何这样分配</h3><ul id="allocationReasons"></ul><p id="parameterComparison" aria-live="polite"></p><p id="intervalSummary"></p></section>
+          <div class="plan-table-wrap"><table><thead><tr><th scope="col">股票 / 行业</th><th scope="col" class="numeric">预期收益 / 标准误</th><th scope="col" class="numeric">当前</th><th scope="col" class="numeric">推荐目标</th><th scope="col" class="numeric">建议区间</th><th scope="col" class="numeric">计划差额</th><th scope="col">动作</th><th scope="col">执行检查</th><th scope="col" class="numeric">模拟可执行差额</th><th scope="col" class="numeric">模拟执行后持仓</th><th scope="col" class="numeric">模拟买卖股数</th></tr></thead><tbody id="planRows"></tbody></table></div>
+          <p class="helper">区间固定其余股票的推荐目标、由现金吸收单股变化，遵守最低目标、行业、预算、波动与资金约束。各股区间不能任意混用，组合调整须重新计算；区间不是置信区间或成交承诺。推荐目标以调仓前净值计量，实际执行受阻或取整后未买入，不代表推荐目标为零。</p>
+          <details><summary>版本与方案审计</summary><pre id="planAudit" class="audit-details"></pre></details>
+          <div class="section-rule"></div><h3>记录采纳与后续观察</h3><p class="helper">从方案创建时开始留档，保留原名单版本。合成历史方案的人工记录仅用于测试，不能作为真实前向投资业绩。</p>
+          <div class="source-fields"><label class="field"><span>记录类型</span><select id="eventKind"><option value="adopted">采纳方案</option><option value="declined">未采纳</option><option value="execution">执行观察</option><option value="valuation">账户净值观察</option><option value="note">备注</option></select></label><label class="field"><span>观察净值（仅净值记录）</span><input id="eventEquity" type="number" min="0.01" step="0.01" /></label><label class="field"><span>备注</span><input id="eventNote" maxlength="2000" type="text" /></label><button id="recordEvent" class="button secondary" type="button">记录当前观察</button></div><p id="eventSummary" class="helper"></p><ul id="forwardEvents" class="event-list"></ul>
+        </div>
+      </section>
+    </main>
+    <footer class="page-footer"><span>quant_w1ngman / OFFLINE RESEARCH</span><span>历史快照 · 名单版本 · 明确现金</span></footer>
+  </div>
+</body>
+</html>

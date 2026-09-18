@@ -1,0 +1,5 @@
+[
+  {
+    "expression": "intercept + beta * SYNTHETIC_AR_FEATURE"
+  }
+]

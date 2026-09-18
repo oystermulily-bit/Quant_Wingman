@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-18T05:58:28.086446+00:00",
+  "passed": true,
+  "main_tex": "main.tex",
+  "project_root": "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\output\\pdf\\Wingman论文\\latex",
+  "source_sha256": "033161b8d1540036a8549cc0243bf004bf9bc33c9be2c52313d2ac0d7726bffd",
+  "compiled_source_sha256": "033161b8d1540036a8549cc0243bf004bf9bc33c9be2c52313d2ac0d7726bffd",
+  "post_build_source_sha256": "033161b8d1540036a8549cc0243bf004bf9bc33c9be2c52313d2ac0d7726bffd",
+  "pdf_sha256": "3750926eeaf6c50841a905ba00e208d5fa9e88ed1266ab25e941ad04fbc36b43",
+  "project_manifest_sha256": "a7277be4cc94b98a7e79957f0b1e6894dd52e2c0e27ab55c4d91fcc40ba307a2",
+  "engine": "xelatex",
+  "tools": {
+    "latexmk": {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Roaming\\LaTeX-Codex\\TinyTeX\\bin\\windows\\latexmk.EXE",
+      "version": "Initial Win CP for (console input, console output, system): (CP936, CP936, CP936)"
+    },
+    "xelatex": {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Roaming\\LaTeX-Codex\\TinyTeX\\bin\\windows\\xelatex.EXE",
+      "version": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)"
+    }
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\Administrator\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Roaming\\LaTeX-Codex\\TinyTeX\\bin\\windows\\latexmk.EXE",
+        "-norc",
+        "-gg",
+        "-xelatex",
+        "-e",
+        "$xelatex = 'xelatex -no-shell-escape %O %S'",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-outdir=build",
+        "main.tex"
+      ],
+      "cwd": "C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\output\\pdf\\Wingman论文\\latex",
+      "returncode": 0,
+      "duration_seconds": 5.641
+    }
+  ],
+  "warnings": [],
+  "allowed_warnings": [],
+  "warning_override": {
+    "patterns": [],
+    "reason": null
+  },
+  "issues": [],
+  "reproduce": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe C:\\Users\\Administrator\\Documents\\Codex\\2026-09-03\\y\\work\\package-20260903\\math-modeling-skill-2.0.2\\tools\\latex\\scripts\\latex_paper.py build C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\output\\pdf\\Wingman论文\\latex\\main.tex --engine xelatex --timeout 180 --publish C:\\Users\\Administrator\\Documents\\Codex\\2026-07-31\\yue-2\\quant_w1ngman\\output\\pdf\\Wingman论文\\Wingman系统设计论文.pdf --overwrite"
+}

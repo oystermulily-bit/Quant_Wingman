@@ -1,0 +1,7 @@
+{
+  "pid": 39348,
+  "stage3r": "STAGE3R_D21_V3_COMPLETED",
+  "stage4r": "D21_V3_FAILED",
+  "holdout_read": false,
+  "stage5_allowed": false
+}

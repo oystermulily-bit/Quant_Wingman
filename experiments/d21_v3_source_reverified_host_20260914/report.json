@@ -1,0 +1,19 @@
+{
+  "status": "REFERENCE_SOURCE_REVERIFIED",
+  "holdout_read": false,
+  "labels_read": false,
+  "economic_gate_evaluated": false,
+  "started_at": "2026-09-14T06:53:34.995550+00:00",
+  "original_values_and_membership_match": true,
+  "rows": 173896,
+  "request_count": 18,
+  "sdk_version": "1.1.9",
+  "request_manifest_sha256": "cd7bd55848ff1f2e5400223decc0b66fd5c1c1fab29d9e2af1ba3d9839ea937b",
+  "original_input_sha256": "05a7599b487e8a0597b8d3c9e28ec19b76f2f8bf52d990fb5eaf503b1f9fcd8b",
+  "row_lineage_sha256": "f2b79e6af65a9069c0161b10dad01385beb599e30a8e63c5876dc3b646192b92",
+  "native_announcement_verified": false,
+  "timing_policy": "D05_D06_DERIVED_POLICY",
+  "note": "Fresh requests verify equivalent Development inputs; these are not reconstructed old request times.",
+  "completed_at": "2026-09-14T06:57:03.722008+00:00",
+  "code_sha256": "89f9ceb53a2bef94aed4fdbc071f5ad37f08ddee94c0d841605be25cde27f581"
+}
